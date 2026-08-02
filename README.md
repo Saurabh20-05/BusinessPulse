@@ -1,75 +1,225 @@
-# BusinessPulse — Business Analytics & Forecast Dashboard
+# BusinessPulse
 
-A full-stack analytics dashboard built for a Week 3 Software Engineering internship
-project, using an Olist-style e-commerce dataset.
+BusinessPulse is an interactive business analytics dashboard built to analyze historical business data, monitor key performance indicators (KPIs), and forecast future business trends. The project uses the Olist Brazilian E-commerce dataset and combines data analysis, visualization, and machine learning to provide meaningful business insights through an intuitive web interface.
 
-## Stack
-- **Backend:** Python, FastAPI, Pandas, NumPy, Scikit-learn
-- **Frontend:** React (Vite), Tailwind CSS, React Router, Axios, Recharts
+---
 
-## Project structure
+## Features
+
+### Historical Analytics
+- Monthly revenue analysis
+- Monthly order trends
+- Revenue by product category
+- Top-performing categories
+- Payment method distribution
+- Customer distribution by state
+- Review score distribution
+- Product price distribution
+- Revenue vs. Orders comparison
+- Correlation heatmap
+
+### Current Dashboard
+- Total revenue
+- Total orders
+- Total customers
+- Total products
+- Average review score
+- Average payment value
+- Top-selling category
+- Top seller
+- Most used payment method
+- Recent orders table
+- Top categories table
+
+### Forecast & Predictions
+- Revenue forecasting
+- Order forecasting
+- Customer forecasting
+- Linear Regression model
+- Historical vs Predicted trend visualization
+- Model evaluation using MAE and R² Score
+
+---
+
+## Project Architecture
+
 ```
-backend/
-  app/
-    routes/       API endpoints (dashboard, historical, current, forecast, charts)
-    services/      business logic (KPI calculations, chart data prep)
-    ml/            forecasting models
-    utils/         data loading & cleaning
-    data/          CSV dataset + generator script
-  main.py          -> actually app/main.py, FastAPI app entrypoint
-  requirements.txt
-
-frontend/
-  src/
-    components/    Navbar, Sidebar, Footer, StatCard, ChartCard, DataTable, etc.
-    charts/         Recharts wrapper components (line, bar, pie, scatter, histogram, area, heatmap)
-    pages/          Home, Dashboard (with 3 tabs)
-    services/       Axios API client
+BusinessPulse
+│
+├── backend
+│   ├── app
+│   │   ├── routes
+│   │   ├── services
+│   │   ├── ml
+│   │   ├── utils
+│   │   └── main.py
+│   └── data
+│
+├── frontend
+│   ├── src
+│   │   ├── components
+│   │   ├── pages
+│   │   ├── services
+│   │   └── App.jsx
+│
+└── README.md
 ```
 
-## Dataset
-The real Olist dataset from Kaggle isn't downloadable from this environment, so
-`backend/app/data/generate_dataset.py` generates a synthetic dataset that mirrors
-Olist's schema (customers, sellers, products, orders, order_items, payments, reviews),
-with a built-in seasonal/upward trend so the forecasting charts have real signal.
-The CSVs are already generated and included in `backend/app/data/`.
+---
 
-To regenerate them:
-```
-cd backend/app/data
-python generate_dataset.py
-```
-
-## Running locally
-
-### Backend
-```
-cd backend
-pip install -r requirements.txt
-uvicorn app.main:app --reload --port 8000
-```
-API docs available at http://127.0.0.1:8000/docs
+## Technology Stack
 
 ### Frontend
+- React
+- React Router
+- Axios
+- Recharts
+- Tailwind CSS
+- Lucide React
+
+### Backend
+- FastAPI
+- Pandas
+- NumPy
+- Scikit-learn
+- Uvicorn
+
+### Machine Learning
+- Linear Regression
+- Moving Average Forecasting
+
+### Dataset
+- Olist Brazilian E-commerce Public Dataset
+
+---
+
+## Data Processing
+
+The backend performs the following preprocessing steps before generating analytics:
+
+- Loads all CSV files
+- Cleans missing values
+- Converts date columns
+- Merges multiple tables
+- Removes cancelled orders
+- Creates monthly business data
+- Calculates total item value (Product Price + Freight)
+- Caches processed datasets for faster API responses
+
+---
+
+## API Endpoints
+
+| Endpoint | Description |
+|----------|-------------|
+| `/dashboard` | Dashboard summary |
+| `/historical` | Historical analytics |
+| `/current` | Current business dashboard |
+| `/forecast` | Forecast overview |
+| `/charts` | Individual chart APIs |
+
+---
+
+## Machine Learning
+
+BusinessPulse uses a Linear Regression model to forecast:
+
+- Future Revenue
+- Future Orders
+- Future Customers
+
+The model is evaluated using:
+
+- Mean Absolute Error (MAE)
+- R² Score
+
+---
+
+## Dashboard Visualizations
+
+The project includes multiple interactive visualizations such as:
+
+- Line Charts
+- Bar Charts
+- Pie Charts
+- Scatter Charts
+- Correlation Heatmap
+- Data Tables
+- KPI Cards
+
+---
+
+## Installation
+
+### Backend
+
+```bash
+cd backend
+
+python -m venv venv
+
+# Windows
+venv\Scripts\activate
+
+# Linux / macOS
+source venv/bin/activate
+
+pip install -r requirements.txt
+
+uvicorn app.main:app --reload
 ```
+
+---
+
+### Frontend
+
+```bash
 cd frontend
+
 npm install
+
 npm run dev
 ```
-App available at http://127.0.0.1:5173
 
-The frontend expects the API at `http://127.0.0.1:8000` (see `frontend/.env`).
+---
 
-## API routes
-- `GET /` — health check
-- `GET /dashboard` — combined summary (KPIs, revenue trend, revenue forecast)
-- `GET /historical` — all Historical Analytics chart data
-- `GET /current` — KPI cards + recent orders + top categories tables
-- `GET /forecast` — revenue, orders, customer forecasts
-- `GET /forecast/revenue`, `/forecast/orders`, `/forecast/customers`
-- `GET /charts/revenue`, `/charts/orders`, `/charts/categories`, `/charts/payments`, `/charts/reviews`, `/charts/heatmap`
+## Project Workflow
 
-## Notes
-- No authentication is implemented — "Sign In" in the navbar is a UI placeholder only, per project scope.
-- Forecasting uses a simple linear regression on monthly aggregates (plus a moving-average
-  baseline in the ML module) — intentionally simple, as specified for this project.
+```
+CSV Dataset
+      │
+      ▼
+Data Loading & Cleaning
+      │
+      ▼
+Data Processing
+      │
+      ▼
+Business Analytics
+      │
+      ▼
+Machine Learning Forecasting
+      │
+      ▼
+FastAPI REST APIs
+      │
+      ▼
+React Dashboard
+```
+
+---
+
+## Future Improvements
+
+- User authentication
+- Export reports (PDF/Excel)
+- Interactive filters
+- Additional forecasting models
+- Live database integration
+- Business report generation
+
+---
+
+## License
+
+This project is intended for educational and learning purposes.
