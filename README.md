@@ -209,17 +209,6 @@ React Dashboard
 
 ---
 
-## Future Improvements
-
-- User authentication
-- Export reports (PDF/Excel)
-- Interactive filters
-- Additional forecasting models
-- Live database integration
-- Business report generation
-
----
-
 ## License
 
 This project is intended for educational and learning purposes.
