@@ -2,7 +2,10 @@ from fastapi import APIRouter
 
 from app.services import kpi_service
 
-router = APIRouter(prefix="/current", tags=["Current Dashboard"])
+router = APIRouter(
+    prefix="/current", 
+    tags=["Current Dashboard"]
+)
 
 
 

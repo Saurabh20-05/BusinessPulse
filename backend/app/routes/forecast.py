@@ -2,7 +2,10 @@ from fastapi import APIRouter
 
 from app.ml import forecast_models
 
-router = APIRouter(prefix="/forecast", tags=["Forecast"])
+router = APIRouter(
+    prefix="/forecast", 
+    tags=["Forecast"]
+)
 
 
 

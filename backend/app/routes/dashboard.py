@@ -3,7 +3,10 @@ from fastapi import APIRouter
 from app.services import kpi_service, chart_service
 from app.ml import forecast_models
 
-router = APIRouter(prefix="/dashboard", tags=["Dashboard"])
+router = APIRouter(
+    prefix="/dashboard", 
+    tags=["Dashboard"]
+)
 
 
 

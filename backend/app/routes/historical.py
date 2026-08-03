@@ -2,7 +2,10 @@ from fastapi import APIRouter
 
 from app.services import chart_service
 
-router = APIRouter(prefix="/historical", tags=["Historical Analytics"])
+router = APIRouter(
+    prefix="/historical", 
+    tags=["Historical Analytics"]
+)
 
 
 

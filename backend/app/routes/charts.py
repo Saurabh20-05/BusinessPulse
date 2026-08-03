@@ -2,7 +2,10 @@ from fastapi import APIRouter
 
 from app.services import chart_service
 
-router = APIRouter(prefix="/charts", tags=["Charts"])
+router = APIRouter(
+    prefix="/charts", 
+    tags=["Charts"]
+)
 
 
 

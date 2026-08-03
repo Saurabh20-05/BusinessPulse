@@ -161,35 +161,19 @@ def get_full_dataset():
     df = raw["order_items"]
 
 
-    df = df.merge(
-        raw["orders"],
-        on="order_id",
-        how="left",
-    )
+    df = df.merge(raw["orders"],on="order_id",how="left",)
 
 
-    df = df.merge(
-        raw["products"],
-        on="product_id",
-        how="left",
-    )
+    df = df.merge(raw["products"],on="product_id",how="left",)
 
 
-    df = df.merge(
-        raw["sellers"],
-        on="seller_id",
-        how="left",
-    )
+    df = df.merge(raw["sellers"],on="seller_id",how="left",)
 
 
-    df = df.merge(
-        raw["customers"],
-        on="customer_id",
-        how="left",
-    )
+    df = df.merge(raw["customers"],on="customer_id",how="left",)
 
 
-
+    # REMOVE CANCELLED ORDERES
     df = df[df["order_status"] != "canceled"].copy()
 
 

@@ -1,3 +1,6 @@
+
+
+
 import numpy as np
 
 
@@ -48,6 +51,7 @@ def monthly_revenue():
 
     df = get_full_dataset()
 
+    # CREATE monthly_revenue where we store
     monthly_revenue = df.groupby("order_month")["item_total"].sum()
     monthly_revenue = monthly_revenue.sort_index()
 
@@ -149,11 +153,7 @@ def customers_by_state():
     df = get_full_dataset()
 
 
-    state_counts = (
-        df.drop_duplicates(subset="customer_id")
-        .groupby("customer_state")["customer_id"]
-        .count()
-    )
+    state_counts = (df.drop_duplicates(subset="customer_id").groupby("customer_state")["customer_id"].count())
 
     state_counts = state_counts.sort_values(ascending=False)
 
@@ -205,8 +205,8 @@ def price_distribution(bins=10):
     hist, edges = np.histogram(prices, bins=bins)
 
 
-    price_data = []
 
+    price_data = []
 
     for i in range(len(hist)):
 
@@ -236,14 +236,8 @@ def revenue_vs_orders():
     df = get_full_dataset()
 
 
-    monthly_data = df.groupby("order_month").agg(
-        orders=("order_id", "nunique"),
-        revenue=("item_total", "sum"),
-    )
-
-
+    monthly_data = df.groupby("order_month").agg(orders=("order_id", "nunique"),revenue=("item_total", "sum"),)
     monthly_data = monthly_data.sort_index()
-
 
 
     return [
@@ -255,6 +249,94 @@ def revenue_vs_orders():
 
         for month, row in monthly_data.iterrows()
     ]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -287,10 +369,7 @@ def correlation_heatmap():
 
 
 
-    order_level = df.groupby("order_id").agg(
-        price=("price", "sum"),
-        freight_value=("freight_value", "sum"),
-    )
+    order_level = df.groupby("order_id").agg(price=("price", "sum"),freight_value=("freight_value", "sum"),)
 
 
     order_level = order_level.reset_index()

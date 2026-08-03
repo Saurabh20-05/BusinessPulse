@@ -1,3 +1,5 @@
+
+
 from app.utils.data_loader import (
     get_full_dataset,
     get_payments_with_orders,
@@ -83,15 +85,9 @@ def get_kpis():
         "total_products": total_products,
         "avg_review_score": round(avg_review_score, 2),
         "avg_payment_value": round(avg_payment_value, 2),
-        "top_selling_category": CATEGORY_TRANSLATIONS.get(
-    top_category,
-    top_category.replace("_", " ").title(),
-),
+        "top_selling_category": CATEGORY_TRANSLATIONS.get(top_category,top_category.replace("_", " ").title(),),
         "top_seller": top_seller,
-        "top_payment_method": PAYMENT_TRANSLATIONS.get(
-    top_payment_method,
-    top_payment_method.replace("_", " ").title(),
-),
+        "top_payment_method": PAYMENT_TRANSLATIONS.get(top_payment_method,top_payment_method.replace("_", " ").title(),),
     }
 
 
@@ -110,30 +106,24 @@ def get_recent_orders(limit=10):
     df = get_full_dataset()
 
 
-    recent_orders = df.sort_values(
-        "order_purchase_timestamp",
-        ascending=False,
-    )
-
-
-
+    recent_orders = df.sort_values("order_purchase_timestamp",ascending=False,)
     recent_orders = recent_orders.drop_duplicates(subset="order_id")
     recent_orders = recent_orders.head(limit)
 
 
     records = []
+    # THIS STores FINAL API response
 
 
 
     for _, row in recent_orders.iterrows():
         records.append(
+        # adds in the list created above as separate dictionaries each for one order
+
             {
                 "order_id": row["order_id"],
                 "customer_state": row["customer_state"],
-                "category": CATEGORY_TRANSLATIONS.get(
-    row["product_category_name"],
-    row["product_category_name"].replace("_", " ").title(),
-),
+                "category": CATEGORY_TRANSLATIONS.get(row["product_category_name"],row["product_category_name"].replace("_", " ").title(),),
                 "amount": round(float(row["item_total"]), 2),
                 "status": row["order_status"],
                 "date": row["order_purchase_timestamp"].strftime("%Y-%m-%d"),
@@ -158,36 +148,24 @@ def get_top_categories_table(limit=10):
     df = get_full_dataset()
 
 
-    category_summary = df.groupby("product_category_name").agg(
-        orders=("order_id", "nunique"),
-        revenue=("item_total", "sum"),
-    )
+    category_summary = df.groupby("product_category_name").agg(orders=("order_id", "nunique"),revenue=("item_total", "sum"),)
 
 
     category_summary = category_summary.reset_index()
-    category_summary = category_summary.sort_values(
-        "revenue",
-        ascending=False,
-    )
-
-
+    category_summary = category_summary.sort_values("revenue",ascending=False,)
     category_summary = category_summary.head(limit)
 
 
     records = []
 
-
-
     for _, row in category_summary.iterrows():
         records.append(
-    {
-        "category": CATEGORY_TRANSLATIONS.get(
-            row["product_category_name"],
-            row["product_category_name"].replace("_", " ").title(),
-        ),
-        "orders": int(row["orders"]),
-        "revenue": round(float(row["revenue"]), 2),
-    }
-)
+            
+            {
+                "category": CATEGORY_TRANSLATIONS.get(row["product_category_name"],row["product_category_name"].replace("_", " ").title(),),
+                "orders": int(row["orders"]),
+                "revenue": round(float(row["revenue"]), 2),
+            }
+        )
 
     return records

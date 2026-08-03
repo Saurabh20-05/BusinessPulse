@@ -40,6 +40,7 @@ app.include_router(charts.router)
 
 def root():
 
+    # below info will be shown when we will visit the backend link http://localhost:8000/
     return {
         "message": "BusinessPulse API is running",
         "version": "1.0.0",
