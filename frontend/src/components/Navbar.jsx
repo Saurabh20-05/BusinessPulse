@@ -1,3 +1,4 @@
+
 import { Link, useLocation } from "react-router-dom";
 
 
@@ -37,14 +38,8 @@ function Navbar() {
         <nav className="hidden sm:flex items-center gap-10">
           {navigationLinks.map((link) => {
             const isActive = location.pathname === link.path;
-
-            
-            
-            
             
             return (
-              
-              
               
               <Link
                 key={link.path}
@@ -60,7 +55,6 @@ function Navbar() {
               
               </Link>
             
-          
           );
           })}
         </nav>

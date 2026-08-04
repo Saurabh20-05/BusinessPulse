@@ -53,11 +53,12 @@ const PIE_COLORS = [
 function HistoricalAnalytics() {
 
   const [historicalData, setHistoricalData] = useState(null);
+  // STATE VAIRABLE
 
   const [error, setError] = useState(null);
 
 
-
+  // TO PERFORM SIDE EFFECTS = FETCH DATA FROM  BACKEND
   useEffect(() => {
     getHistoricalAnalytics()
       .then((response) => {
@@ -82,32 +83,43 @@ function HistoricalAnalytics() {
 
 
 
-  const topRevenueCategories =
-  historicalData.revenue_by_category.slice(0, 6);
+  const topRevenueCategories = historicalData.revenue_by_category.slice(0, 6);
 
   console.log(historicalData.top_categories);
+
+
+
+
 
   return (
     
     <div className="grid grid-cols-1 xl:grid-cols-2 gap-10 fade-in">
 
-            <ChartCard
-            title="Monthly Revenue"
-        
-            description="Monthly revenue."
-      >
+
+      <ChartCard
+      title="Monthly Revenue"  
+      description="Monthly revenue.">
+
+
+
         <ResponsiveContainer width="100%" height={420}>
+
+
           <LineChart data={historicalData.monthly_revenue}>
+            
+            
             <CartesianGrid
-    stroke="#d9dee8"
-    strokeDasharray="3 3"
-/>
+            stroke="#d9dee8"
+            strokeDasharray="3 3"
+           />
+
            <XAxis
-    dataKey="month"
-    axisLine={{ stroke: "#374151", strokeWidth: 1.5 }}
-    tickLine={false}
-    tick={{ fontSize:12 }}
-/>
+           dataKey="month"
+           axisLine={{ stroke: "#374151", strokeWidth: 1.5 }}
+           tickLine={false}
+           tick={{ fontSize:12 }}
+           />
+           
             <YAxis
     axisLine={{ stroke: "#374151", strokeWidth: 1.5 }}
     tickLine={false}
@@ -120,9 +132,19 @@ function HistoricalAnalytics() {
               stroke="#2563eb"
               strokeWidth={2}
             />
+
+
           </LineChart>
         </ResponsiveContainer>
       </ChartCard>
+
+
+
+
+
+
+
+
 
       <ChartCard
         title="Monthly Orders"
@@ -155,6 +177,19 @@ function HistoricalAnalytics() {
       </ChartCard>
 
       
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
             <ChartCard
@@ -212,6 +247,23 @@ function HistoricalAnalytics() {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
       <ChartCard
   title="Revenue by Category"
   description="Top 10 product categories by revenue."
@@ -244,6 +296,22 @@ function HistoricalAnalytics() {
     </PieChart>
   </ResponsiveContainer>
 </ChartCard>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -313,6 +381,24 @@ function HistoricalAnalytics() {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
       <ChartCard
   title="Payment Methods"
   description="Payment method distribution."
@@ -342,6 +428,28 @@ function HistoricalAnalytics() {
     </PieChart>
   </ResponsiveContainer>
 </ChartCard>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -381,6 +489,18 @@ function HistoricalAnalytics() {
         </ResponsiveContainer>
       </ChartCard>
 
+
+
+
+
+
+
+
+
+
+
+
+
       <ChartCard
         title="Revenue vs Orders"
         description="Revenue compared with orders."
@@ -411,6 +531,16 @@ function HistoricalAnalytics() {
           </ScatterChart>
         </ResponsiveContainer>
       </ChartCard>
+
+
+
+
+
+
+
+
+
+
             <ChartCard
         title="Correlation Heatmap"
         description="Correlation between business metrics."

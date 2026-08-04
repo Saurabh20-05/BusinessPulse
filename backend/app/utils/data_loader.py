@@ -1,5 +1,6 @@
 
 import os
+
 import pandas as pd
 
 
@@ -155,6 +156,8 @@ def get_full_dataset():
     if "full" in _cache:
         return _cache["full"]
 
+    
+
     raw = get_raw_tables()
 
 
@@ -177,16 +180,10 @@ def get_full_dataset():
     df = df[df["order_status"] != "canceled"].copy()
 
 
-    df["order_month"] = (
-        df["order_purchase_timestamp"]
-        .dt.to_period("M")
-        .astype(str)
-    )
+    df["order_month"] = (df["order_purchase_timestamp"].dt.to_period("M").astype(str))
 
 
-    df["item_total"] = (
-        df["price"] + df["freight_value"]
-    )
+    df["item_total"] = (df["price"] + df["freight_value"])
 
     _cache["full"] = df
 
@@ -207,6 +204,7 @@ def get_full_dataset():
 
 
 def get_payments_with_orders():
+
     if "payments_full" in _cache:
         return _cache["payments_full"]
 
@@ -243,6 +241,7 @@ def get_payments_with_orders():
 
 
 def get_reviews_with_orders():
+    
     if "reviews_full" in _cache:
         return _cache["reviews_full"]
 

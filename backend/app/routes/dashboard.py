@@ -1,3 +1,6 @@
+
+
+
 from fastapi import APIRouter
 
 from app.services import kpi_service, chart_service
@@ -11,7 +14,7 @@ router = APIRouter(
 
 
 
-
+# /dashboard
 @router.get("")
 
 def get_dashboard_summary():

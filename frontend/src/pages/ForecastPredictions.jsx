@@ -29,6 +29,10 @@ import { getForecastOverview } from "../services/api";
 function ForecastChart({ historical, predicted }) {
   const lastPoint = historical[historical.length - 1];
 
+
+
+
+
   const chartData = [
     ...historical.map((item) => ({
       month: item.month,
@@ -49,8 +53,16 @@ function ForecastChart({ historical, predicted }) {
     })),
   ];
 
+
+
+
+
+
+
   return (
     <ResponsiveContainer width="100%" height={300}>
+  
+  
       <LineChart
   data={chartData}
   margin={{
@@ -100,9 +112,18 @@ function ForecastChart({ historical, predicted }) {
 
 
 
+
+
+
+
+
 function ForecastPredictions() {
   const [forecastData, setForecastData] = useState(null);
   const [error, setError] = useState(null);
+
+
+
+
 
   useEffect(() => {
     getForecastOverview()
@@ -114,16 +135,34 @@ function ForecastPredictions() {
       });
   }, []);
 
+
+
+
+
+
   if (error) {
     return <p className="text-sm text-rose-600">{error}</p>;
   }
+
+
+
+
+
+
 
   if (!forecastData) {
     return <Loader label="Loading forecast data..." />;
   }
 
+
+
   return (
-    <div className="grid gap-5 fade-in">
+  
+  
+  <div className="grid gap-5 fade-in">
+  
+  
+  
       <ChartCard
         title="Revenue Forecast"
         description="Revenue forecast for the next 4 months."
@@ -135,7 +174,15 @@ function ForecastPredictions() {
 />
 
 
+
+
       </ChartCard>
+
+
+
+
+
+
 
       <ChartCard
         title="Order Forecast"
@@ -150,6 +197,15 @@ function ForecastPredictions() {
 
 
       </ChartCard>
+
+
+
+
+
+
+
+
+
 
       <ChartCard
         title="Customer Forecast"

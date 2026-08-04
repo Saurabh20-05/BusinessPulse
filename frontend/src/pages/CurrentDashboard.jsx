@@ -15,12 +15,19 @@ import {
   Wallet,
 } from "lucide-react";
 
+
 import StatCard from "../components/StatCard";
 import ChartCard from "../components/ChartCard";
 import DataTable from "../components/DataTable";
 import Loader from "../components/Loader";
 
+
+
+
+
 import { getCurrentDashboard } from "../services/api";
+
+
 
 const formatCurrency = (value) => {
   return new Intl.NumberFormat("pt-BR", {
@@ -29,9 +36,14 @@ const formatCurrency = (value) => {
   }).format(value);
 };
 
+
+
 function CurrentDashboard() {
   const [dashboardData, setDashboardData] = useState(null);
   const [error, setError] = useState(null);
+
+
+
 
   useEffect(() => {
     getCurrentDashboard()
@@ -43,15 +55,32 @@ function CurrentDashboard() {
       });
   }, []);
 
+
+
+
   if (error) {
     return <p className="text-sm text-rose-600">{error}</p>;
   }
+
+
+
 
   if (!dashboardData) {
     return <Loader label="Loading dashboard data..." />;
   }
 
   const { kpis, recent_orders, top_categories } = dashboardData;
+
+
+
+
+
+
+
+
+
+
+
 
   const statCards = [
     {
@@ -110,15 +139,44 @@ function CurrentDashboard() {
     },
   ];
 
+
+
+
+
+
+
+
+
+
   return (
+
+
+
+
+
     <div className="fade-in space-y-6">
+
+
+
+
+
       <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {statCards.map((stat) => (
           <StatCard key={stat.label} {...stat} />
         ))}
       </div>
 
+
+
+
       <div className="grid lg:grid-cols-2 gap-5">
+
+
+
+
+
+
+
         <ChartCard
           title="Recent Orders"
           description="Recently placed orders."
@@ -128,17 +186,18 @@ function CurrentDashboard() {
               { key: "order_id", label: "Order ID" },
               { key: "customer_state", label: "State" },
               { key: "category", label: "Category" },
-              {
-                key: "amount",
-                label: "Amount",
-                render: (value) => formatCurrency(value),
-              },
+              {key: "amount",label: "Amount",render: (value) => formatCurrency(value),},
               { key: "status", label: "Status" },
               { key: "date", label: "Date" },
             ]}
             rows={recent_orders}
           />
         </ChartCard>
+
+
+
+
+
 
         <ChartCard
           title="Top Categories"
@@ -148,11 +207,7 @@ function CurrentDashboard() {
             columns={[
               { key: "category", label: "Category" },
               { key: "orders", label: "Orders" },
-              {
-                key: "revenue",
-                label: "Revenue",
-                render: (value) => formatCurrency(value),
-              },
+              {key: "revenue",label: "Revenue",render: (value) => formatCurrency(value),},
             ]}
             rows={top_categories}
           />

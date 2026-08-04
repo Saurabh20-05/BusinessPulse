@@ -1,3 +1,5 @@
+
+
 from fastapi import APIRouter
 
 from app.ml import forecast_models
@@ -22,7 +24,7 @@ def get_forecast_overview():
 
 
 
-
+# /forecast/revenue
 @router.get("/revenue")
 
 def get_revenue_forecast():

@@ -103,6 +103,7 @@ def get_kpis():
 
 def get_recent_orders(limit=10):
 
+
     df = get_full_dataset()
 
 
@@ -117,6 +118,7 @@ def get_recent_orders(limit=10):
 
 
     for _, row in recent_orders.iterrows():
+        
         records.append(
         # adds in the list created above as separate dictionaries each for one order
 
