@@ -25,8 +25,11 @@ import Loader from "../components/Loader";
 
 
 
-import { getCurrentDashboard } from "../services/api";
-
+import {
+  getKPIs,
+  getRecentOrders,
+  getCurrentTopCategories,
+} from "../services/api";
 
 
 const formatCurrency = (value) => {
@@ -46,14 +49,22 @@ function CurrentDashboard() {
 
 
   useEffect(() => {
-    getCurrentDashboard()
-      .then((response) => {
-        setDashboardData(response);
-      })
-      .catch(() => {
-        setError("Failed to load dashboard data.");
+  Promise.all([
+    getKPIs(),
+    getRecentOrders(),
+    getCurrentTopCategories(),
+  ])
+    .then(([kpis, recentOrders, topCategories]) => {
+      setDashboardData({
+        kpis,
+        recent_orders: recentOrders,
+        top_categories: topCategories,
       });
-  }, []);
+    })
+    .catch(() => {
+      setError("Failed to load dashboard data.");
+    });
+}, []);
 
 
 

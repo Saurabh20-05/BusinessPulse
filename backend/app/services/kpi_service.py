@@ -1,10 +1,11 @@
 
 
-from app.utils.data_loader import (
-    get_full_dataset,
-    get_payments_with_orders,
-    get_reviews_with_orders,
+from app.repositories.sales_repository import (
+    get_dataset,
+    get_payments,
+    get_reviews,
 )
+
 
 
 
@@ -43,11 +44,11 @@ PAYMENT_TRANSLATIONS = {
 def get_kpis():
 
 
-    df = get_full_dataset()
+    df = get_dataset()
 
-    payments = get_payments_with_orders()
+    payments = get_payments()
 
-    reviews = get_reviews_with_orders()
+    reviews = get_reviews()
 
 
 
@@ -104,7 +105,7 @@ def get_kpis():
 def get_recent_orders(limit=10):
 
 
-    df = get_full_dataset()
+    df = get_dataset()
 
 
     recent_orders = df.sort_values("order_purchase_timestamp",ascending=False,)
@@ -118,7 +119,7 @@ def get_recent_orders(limit=10):
 
 
     for _, row in recent_orders.iterrows():
-        
+
         records.append(
         # adds in the list created above as separate dictionaries each for one order
 
@@ -147,7 +148,7 @@ def get_recent_orders(limit=10):
 
 def get_top_categories_table(limit=10):
 
-    df = get_full_dataset()
+    df = get_dataset()
 
 
     category_summary = df.groupby("product_category_name").agg(orders=("order_id", "nunique"),revenue=("item_total", "sum"),)

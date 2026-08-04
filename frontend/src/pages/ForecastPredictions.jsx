@@ -15,8 +15,11 @@ import {
 } from "recharts";
 
 
-import { getForecastOverview } from "../services/api";
-
+import {
+  getRevenueForecast,
+  getOrdersForecast,
+  getCustomersForecast,
+} from "../services/api";
 
 
 
@@ -126,14 +129,22 @@ function ForecastPredictions() {
 
 
   useEffect(() => {
-    getForecastOverview()
-      .then((response) => {
-        setForecastData(response);
-      })
-      .catch(() => {
-        setError("Failed to load forecast data.");
+  Promise.all([
+    getRevenueForecast(),
+    getOrdersForecast(),
+    getCustomersForecast(),
+  ])
+    .then(([revenue, orders, customers]) => {
+      setForecastData({
+        revenue,
+        orders,
+        customers,
       });
-  }, []);
+    })
+    .catch(() => {
+      setError("Failed to load forecast data.");
+    });
+}, []);
 
 
 
@@ -208,8 +219,8 @@ function ForecastPredictions() {
 
 
       <ChartCard
-        title="Customer Forecast"
-        description="Customer forecast for the next 4 months."
+        title="Customer Satisfaction Forecast"
+        description="Average customer review score forecast for the next 4 months"
       >
 
 

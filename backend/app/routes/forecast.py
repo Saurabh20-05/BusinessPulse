@@ -1,56 +1,101 @@
-
-
 from fastapi import APIRouter
 
-from app.ml import forecast_models
+from app.services import forecast_service
+
+from app.schemas.forecast import ForecastResponse
 
 router = APIRouter(
-    prefix="/forecast", 
-    tags=["Forecast"]
+    prefix="/forecast",
+    tags=["Forecast"],
 )
 
 
-
-
-@router.get("")
-
-def get_forecast_overview():
-
-    return {
-        "revenue": forecast_models.forecast_revenue(),
-        "orders": forecast_models.forecast_orders(),
-        "customers": forecast_models.forecast_customers(),
+@router.get(
+    "/revenue",
+    response_model=ForecastResponse,
+    summary="Revenue Forecast",
+    description="Predicts future monthly revenue.",
+    status_code=200,
+    responses={
+        200: {
+            "description": "Revenue forecast generated successfully.",
+            "content": {
+                "application/json": {
+                    "example": {
+                        "model_used": "Linear Regression",
+                        "historical": [
+                            {
+                                "month": "2018-06",
+                                "value": 248754.12
+                            }
+                        ],
+                        "predicted": [
+                            {
+                                "month": "2018-09",
+                                "value": 261438.55
+                            },
+                            {
+                                "month": "2018-10",
+                                "value": 269782.12
+                            }
+                        ],
+                        "metrics": {
+                            "mae": 10234.62,
+                            "r2": 0.91
+                        }
+                    }
+                }
+            }
+        }
     }
-
-
-
-# /forecast/revenue
-@router.get("/revenue")
-
+)
 def get_revenue_forecast():
-
-    return forecast_models.forecast_revenue()
-
+    return forecast_service.forecast_revenue()
 
 
 
 
 
-@router.get("/orders")
 
+
+
+
+
+
+
+@router.get(
+    "/orders",
+    response_model=ForecastResponse,
+    summary="Orders Forecast",
+    description="Predicts future monthly orders",
+    responses={
+        200: {
+            "description": "Orders forecast generated successfully."
+        },
+    500:{
+        "description":"Internal Server Error."
+    }
+    },
+    status_code=200,
+)
 def get_orders_forecast():
-
-    return forecast_models.forecast_orders()
-
+    return forecast_service.forecast_orders()
 
 
-
-
-
-
-
-@router.get("/customers")
-
+@router.get(
+    "/customers",
+    response_model=ForecastResponse,
+    summary="Customer Satisfaction Forecast",
+    description="Predicts future average customer review score.",
+    responses={
+        200: {
+            "description": "Customer forecast generated successfully."
+        },
+    500:{
+        "description":"Internal Server Error."
+    }
+    },
+    status_code=200,
+)
 def get_customer_forecast():
-
-    return forecast_models.forecast_customers()
+    return forecast_service.forecast_customers()

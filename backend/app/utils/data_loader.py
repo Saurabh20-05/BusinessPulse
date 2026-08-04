@@ -175,6 +175,12 @@ def get_full_dataset():
 
     df = df.merge(raw["customers"],on="customer_id",how="left",)
 
+    df = df.merge(
+    raw["reviews"][["order_id", "review_score"]],
+    on="order_id",
+    how="left",
+)
+
 
     # REMOVE CANCELLED ORDERES
     df = df[df["order_status"] != "canceled"].copy()
@@ -241,7 +247,7 @@ def get_payments_with_orders():
 
 
 def get_reviews_with_orders():
-    
+
     if "reviews_full" in _cache:
         return _cache["reviews_full"]
 
