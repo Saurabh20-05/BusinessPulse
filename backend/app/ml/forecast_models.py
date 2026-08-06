@@ -1,3 +1,7 @@
+
+
+
+
 import pandas as pd
 
 from sklearn.metrics import mean_absolute_error, r2_score
@@ -5,53 +9,61 @@ from sklearn.metrics import mean_absolute_error, r2_score
 from app.utils.data_loader import get_full_dataset
 
 
+
 FORECAST_MONTHS = 4
+
+
+
+
 
 
 def get_revenue_series():
 
     df = get_full_dataset()
 
-    series = (
-        df.groupby("order_month")["item_total"]
-        .sum()
-        .sort_index()
-    )
+    series = (df.groupby("order_month")["item_total"].sum().sort_index())
 
     series = series[series > 0]
 
     return series
+
+
+
+
 
 
 def get_orders_series():
 
     df = get_full_dataset()
 
-    # Average Order Value per Month
-    series = (
-        df.groupby("order_month")["item_total"]
-        .mean()
-        .sort_index()
-    )
+    series = (df.groupby("order_month")["item_total"].mean().sort_index())
 
     series = series[series > 0]
 
     return series
 
 
+
+
+
+
+
+
 def get_customer_series():
 
     df = get_full_dataset()
 
-    review_series = (
-        df.groupby("order_month")["review_score"]
-        .mean()
-        .sort_index()
-    )
+    review_series = (df.groupby("order_month")["review_score"].mean().sort_index())
 
     review_series = review_series.dropna()
 
     return review_series
+
+
+
+
+
+
 
 
 def get_future_months(series):
@@ -64,18 +76,25 @@ def get_future_months(series):
     ]
 
 
+
+
+
+
+
 def calculate_metrics(actual, predicted):
 
     return {
-        "mae": round(
-            float(mean_absolute_error(actual, predicted)),
-            2,
-        ),
-        "r2": round(
-            float(r2_score(actual, predicted)),
-            3,
-        ),
+        "mae": round(float(mean_absolute_error(actual, predicted)),2,),
+        "r2": round(float(r2_score(actual, predicted)),3,),
     }
+
+
+
+
+
+
+
+
 
 
 def prepare_response(
@@ -89,6 +108,7 @@ def prepare_response(
 
     historical = [
         {
+            
             "month": month,
             "value": round(float(value), 2),
         }

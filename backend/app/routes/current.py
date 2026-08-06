@@ -1,3 +1,7 @@
+
+
+
+
 from fastapi import APIRouter
 
 from app.services import kpi_service
@@ -6,10 +10,16 @@ from app.schemas.kpi import KPIResponse
 from app.schemas.order import RecentOrder
 from app.schemas.category import TopCategory
 
+
 router = APIRouter(
     prefix="/current",
     tags=["Current Dashboard"],
 )
+
+
+
+
+
 
 
 @router.get(
@@ -49,7 +59,6 @@ def get_kpis():
 
 
 
-
 @router.get(
     "/recent-orders",
     response_model=list[RecentOrder],
@@ -67,6 +76,14 @@ def get_kpis():
 )
 def get_recent_orders():
     return kpi_service.get_recent_orders()
+
+
+
+
+
+
+
+
 
 
 @router.get(

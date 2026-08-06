@@ -31,17 +31,10 @@ CATEGORY_TRANSLATIONS = {
 
 
 
-
-
-
-
-
-
 def monthly_revenue():
 
 
     df = get_dataset()
-    # CREATE monthly_revenue where we store
     monthly_revenue = df.groupby("order_month")["item_total"].sum()
     monthly_revenue = monthly_revenue.sort_index()
 

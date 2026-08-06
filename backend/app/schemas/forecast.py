@@ -1,9 +1,14 @@
+
+
+
 from pydantic import BaseModel, Field
 
 
 class ForecastPoint(BaseModel):
     month: str
     value: float
+
+
 
 
 class ForecastMetrics(BaseModel):
@@ -15,6 +20,12 @@ class ForecastMetrics(BaseModel):
     r2: float = Field(
         description="Coefficient of Determination"
     )
+
+
+
+
+
+
 
 
 class ForecastResponse(BaseModel):

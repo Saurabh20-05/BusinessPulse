@@ -27,16 +27,12 @@ def correlation_heatmap():
 
     payments = get_payments()
 
-    payments = payments[
-        ["order_id", "payment_value", "payment_installments"]
-    ]
+    payments = payments[["order_id", "payment_value", "payment_installments"]]
 
 
     reviews = get_reviews()
 
-    reviews = reviews[
-        ["order_id", "review_score"]
-    ]
+    reviews = reviews[["order_id", "review_score"]]
 
 
 

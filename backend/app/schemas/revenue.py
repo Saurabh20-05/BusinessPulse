@@ -1,4 +1,8 @@
+
+
 from pydantic import BaseModel, Field
+
+
 
 
 class MonthlyRevenue(BaseModel):
@@ -9,6 +13,8 @@ class MonthlyRevenue(BaseModel):
     revenue: float = Field(
         description="Revenue in Brazilian Real"
     )
+
+
 
 
 class RevenueVsOrders(BaseModel):

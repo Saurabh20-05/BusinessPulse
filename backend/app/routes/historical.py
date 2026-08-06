@@ -1,3 +1,10 @@
+
+
+
+
+
+
+
 from fastapi import APIRouter
 
 from app.services import (
@@ -21,10 +28,25 @@ from app.schemas.payment import PaymentDistribution
 from app.schemas.customer import CustomerByState
 from app.schemas.review import ReviewDistribution
 
+
+
+
+
+
+
+
+
+
 router = APIRouter(
     prefix="/historical",
     tags=["Historical Analytics"],
 )
+
+
+
+
+
+
 
 
 @router.get(
@@ -58,6 +80,9 @@ router = APIRouter(
 )
 def get_monthly_revenue():
     return revenue_service.monthly_revenue()
+
+
+
 
 
 
@@ -139,6 +164,17 @@ def get_revenue_by_category():
     return category_service.revenue_by_category()
 
 
+
+
+
+
+
+
+
+
+
+
+
 @router.get(
     "/top-categories",
     response_model=list[CategoryRevenue],
@@ -156,6 +192,19 @@ def get_revenue_by_category():
 )
 def get_top_categories():
     return category_service.top_categories()
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 @router.get(
@@ -218,6 +267,18 @@ def get_customers_by_state():
     return customer_service.customers_by_state()
 
 
+
+
+
+
+
+
+
+
+
+
+
+
 @router.get(
     "/review-distribution",
     response_model=list[ReviewDistribution],
@@ -234,7 +295,24 @@ def get_customers_by_state():
     status_code=200,
 )
 def get_review_distribution():
+
     return review_service.review_score_distribution()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 @router.get(
@@ -255,6 +333,21 @@ def get_price_distribution():
     return price_service.price_distribution()
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 @router.get(
     "/revenue-vs-orders",
     response_model=list[RevenueVsOrders],
@@ -272,6 +365,20 @@ def get_price_distribution():
 )
 def get_revenue_vs_orders():
     return revenue_service.revenue_vs_orders()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 @router.get(

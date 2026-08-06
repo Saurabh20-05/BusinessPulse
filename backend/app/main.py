@@ -1,43 +1,68 @@
+
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.routes import historical, current, forecast
 
+from app.exceptions import register_exception_handlers
+
+
+
+
+
 app = FastAPI(
     title="BusinessPulse API",
     version="1.0.0",
     summary="Business Analytics and Forecasting API",
+
     description="""
-## BusinessPulse API
 
-BusinessPulse is a Business Analytics Dashboard developed using FastAPI, React and Machine Learning.
+    ## BusinessPulse API
+    
+    BusinessPulse is a Business Analytics Dashboard developed using FastAPI, React and Machine Learning.
 
-### Features
+    ### Features
 
-- Historical Analytics
-- Current Business KPIs
-- Revenue Forecasting
-- Order Forecasting
-- Customer Forecasting
-- Interactive Dashboard Support
+    - Historical Analytics
+    - Current Business KPIs
+    - Revenue Forecasting
+    - Order Forecasting
+    - Customer Forecasting
+    - Interactive Dashboard Support
 
-### Technologies
+    ### Technologies
 
-- FastAPI
-- Pandas
-- Scikit-Learn
-- React
-- Recharts
-- Olist Brazilian E-Commerce Dataset
-""",
+    - FastAPI
+    - Pandas
+    - Scikit-Learn
+    - React
+    - Recharts
+    - Olist Brazilian E-Commerce Dataset
+    """,
+
+
     contact={
         "name": "Saurabh",
-        "email": "your-email@example.com",
+        "email": "saurabh200805@gmail.com",
     },
+
+
     license_info={
         "name": "MIT License",
     },
+
+    
 )
+register_exception_handlers(app)
+
+
+
+
+
+
+
+
 
 app.add_middleware(
     CORSMiddleware,

@@ -1,3 +1,5 @@
+
+
 from app.ml.linear_forecast import (
     forecast as linear_forecast,
 )
@@ -11,12 +13,21 @@ from app.ml.polynomial_forecast import (
 )
 
 
+
+
+
 def forecast_revenue():
     return linear_forecast()
 
 
+
+
+
 def forecast_orders():
     return random_forest_forecast()
+
+
+
 
 
 def forecast_customers():

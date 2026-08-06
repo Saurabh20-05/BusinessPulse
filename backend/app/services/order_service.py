@@ -1,13 +1,5 @@
 
 
-
-
-
-
-
-
-
-
 from app.repositories.sales_repository import get_dataset
 
 

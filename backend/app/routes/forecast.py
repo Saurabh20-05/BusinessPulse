@@ -1,13 +1,28 @@
+
+
+
+
+
+
 from fastapi import APIRouter
 
 from app.services import forecast_service
 
 from app.schemas.forecast import ForecastResponse
 
+
+
+
 router = APIRouter(
     prefix="/forecast",
     tags=["Forecast"],
 )
+
+
+
+
+
+
 
 
 @router.get(
@@ -80,6 +95,19 @@ def get_revenue_forecast():
 )
 def get_orders_forecast():
     return forecast_service.forecast_orders()
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 @router.get(
