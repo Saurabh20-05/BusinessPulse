@@ -49,6 +49,7 @@ function HistoricalAnalytics() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
+    // Load all historical data needed by the charts
     Promise.all([
       getMonthlyRevenue(),
       getMonthlyOrders(),
@@ -74,6 +75,7 @@ function HistoricalAnalytics() {
           revenueVsOrders,
           correlationHeatmap,
         ]) => {
+          // Keep all chart data together for the dashboard
           setHistoricalData({
             monthly_revenue: monthlyRevenue,
             monthly_orders: monthlyOrders,
@@ -86,7 +88,7 @@ function HistoricalAnalytics() {
             revenue_vs_orders: revenueVsOrders,
             correlation_heatmap: correlationHeatmap,
           });
-        }
+        },
       )
       .catch(() => {
         setError("Failed to load historical data.");
@@ -94,35 +96,22 @@ function HistoricalAnalytics() {
   }, []);
 
   if (error) {
-    return (
-      <p className="text-sm text-rose-600">
-        {error}
-      </p>
-    );
+    return <p className="text-sm text-rose-600">{error}</p>;
   }
 
   if (!historicalData) {
-    return (
-      <Loader label="Loading historical data..." />
-    );
+    return <Loader label="Loading historical data..." />;
   }
 
-  const topRevenueCategories =
-    historicalData.revenue_by_category.slice(0, 6);
+  // Show only the top categories in the pie chart
+  const topRevenueCategories = historicalData.revenue_by_category.slice(0, 6);
 
   return (
-    <div className="grid grid-cols-1 xl:grid-cols-2 gap-10 fade-in">
-
-      <ChartCard
-        title="Monthly Revenue"
-        description="Monthly revenue."
-      >
-        <ResponsiveContainer width="100%" height={420}>
+    <div className="grid grid-cols-1 xl:grid-cols-2 gap-4 fade-in">
+      <ChartCard title="Monthly Revenue" description="Monthly revenue.">
+        <ResponsiveContainer width="100%" height={260}>
           <LineChart data={historicalData.monthly_revenue}>
-            <CartesianGrid
-              stroke="#d9dee8"
-              strokeDasharray="3 3"
-            />
+            <CartesianGrid stroke="#d9dee8" strokeDasharray="3 3" />
 
             <XAxis
               dataKey="month"
@@ -155,16 +144,10 @@ function HistoricalAnalytics() {
         </ResponsiveContainer>
       </ChartCard>
 
-      <ChartCard
-        title="Monthly Orders"
-        description="Monthly orders."
-      >
-        <ResponsiveContainer width="100%" height={300}>
+      <ChartCard title="Monthly Orders" description="Monthly orders.">
+        <ResponsiveContainer width="100%" height={240}>
           <BarChart data={historicalData.monthly_orders}>
-            <CartesianGrid
-              stroke="#d9dee8"
-              strokeDasharray="3 3"
-            />
+            <CartesianGrid stroke="#d9dee8" strokeDasharray="3 3" />
 
             <XAxis
               dataKey="month"
@@ -187,10 +170,7 @@ function HistoricalAnalytics() {
 
             <Tooltip content={<CustomTooltip />} />
 
-            <Bar
-              dataKey="orders"
-              fill="#2563eb"
-            />
+            <Bar dataKey="orders" fill="#2563eb" />
           </BarChart>
         </ResponsiveContainer>
       </ChartCard>
@@ -199,7 +179,7 @@ function HistoricalAnalytics() {
         title="Top Categories"
         description="Top categories by revenue."
       >
-        <ResponsiveContainer width="100%" height={360}>
+        <ResponsiveContainer width="100%" height={260}>
           <BarChart
             data={historicalData.top_categories}
             layout="vertical"
@@ -211,10 +191,7 @@ function HistoricalAnalytics() {
             }}
             barCategoryGap={14}
           >
-            <CartesianGrid
-              stroke="#d9dee8"
-              strokeDasharray="3 3"
-            />
+            <CartesianGrid stroke="#d9dee8" strokeDasharray="3 3" />
 
             <XAxis
               type="number"
@@ -238,10 +215,7 @@ function HistoricalAnalytics() {
               tick={{ fontSize: 12 }}
             />
 
-            <Tooltip
-              cursor={{ fill: "#eff6ff" }}
-              content={<CustomTooltip />}
-            />
+            <Tooltip cursor={{ fill: "#eff6ff" }} content={<CustomTooltip />} />
 
             <Bar
               dataKey="revenue"
@@ -257,7 +231,7 @@ function HistoricalAnalytics() {
         title="Revenue by Category"
         description="Top 10 product categories by revenue."
       >
-        <ResponsiveContainer width="100%" height={360}>
+        <ResponsiveContainer width="100%" height={260}>
           <PieChart>
             <Pie
               data={topRevenueCategories}
@@ -268,23 +242,14 @@ function HistoricalAnalytics() {
               innerRadius={55}
               outerRadius={110}
               paddingAngle={3}
-              label={({ percent }) =>
-                `${(percent * 100).toFixed(0)}%`
-              }
+              label={({ percent }) => `${(percent * 100).toFixed(0)}%`}
             >
-              {topRevenueCategories.map(
-                (_, index) => (
-                  <Cell
-                    key={index}
-                    fill={
-                      PIE_COLORS[
-                        index %
-                          PIE_COLORS.length
-                      ]
-                    }
-                  />
-                )
-              )}
+              {topRevenueCategories.map((_, index) => (
+                <Cell
+                  key={index}
+                  fill={PIE_COLORS[index % PIE_COLORS.length]}
+                />
+              ))}
             </Pie>
 
             <Tooltip content={<CustomTooltip />} />
@@ -292,25 +257,13 @@ function HistoricalAnalytics() {
         </ResponsiveContainer>
       </ChartCard>
 
-
-
-
-
-
-
-
-
-      
       <ChartCard
         title="Customers by State"
         description="Customer distribution by state."
       >
-        <ResponsiveContainer width="100%" height={300}>
+        <ResponsiveContainer width="100%" height={240}>
           <BarChart data={historicalData.customers_by_state}>
-            <CartesianGrid
-              stroke="#d9dee8"
-              strokeDasharray="3 3"
-            />
+            <CartesianGrid stroke="#d9dee8" strokeDasharray="3 3" />
 
             <XAxis
               dataKey="state"
@@ -333,24 +286,15 @@ function HistoricalAnalytics() {
 
             <Tooltip content={<CustomTooltip />} />
 
-            <Bar
-              dataKey="customers"
-              fill="#60a5fa"
-            />
+            <Bar dataKey="customers" fill="#60a5fa" />
           </BarChart>
         </ResponsiveContainer>
       </ChartCard>
 
-      <ChartCard
-        title="Review Scores"
-        description="Review score distribution."
-      >
-        <ResponsiveContainer width="100%" height={300}>
+      <ChartCard title="Review Scores" description="Review score distribution.">
+        <ResponsiveContainer width="100%" height={240}>
           <BarChart data={historicalData.review_distribution}>
-            <CartesianGrid
-              stroke="#d9dee8"
-              strokeDasharray="3 3"
-            />
+            <CartesianGrid stroke="#d9dee8" strokeDasharray="3 3" />
 
             <XAxis
               dataKey="score"
@@ -373,10 +317,7 @@ function HistoricalAnalytics() {
 
             <Tooltip content={<CustomTooltip />} />
 
-            <Bar
-              dataKey="count"
-              fill="#2563eb"
-            />
+            <Bar dataKey="count" fill="#2563eb" />
           </BarChart>
         </ResponsiveContainer>
       </ChartCard>
@@ -385,7 +326,7 @@ function HistoricalAnalytics() {
         title="Payment Methods"
         description="Payment method distribution."
       >
-        <ResponsiveContainer width="100%" height={260}>
+        <ResponsiveContainer width="100%" height={240}>
           <PieChart>
             <Pie
               data={historicalData.payment_distribution}
@@ -397,26 +338,17 @@ function HistoricalAnalytics() {
               outerRadius={80}
               paddingAngle={3}
             >
-              {historicalData.payment_distribution.map(
-                (_, index) => (
-                  <Cell
-                    key={index}
-                    fill={
-                      PIE_COLORS[
-                        index % PIE_COLORS.length
-                      ]
-                    }
-                  />
-                )
-              )}
+              {historicalData.payment_distribution.map((_, index) => (
+                <Cell
+                  key={index}
+                  fill={PIE_COLORS[index % PIE_COLORS.length]}
+                />
+              ))}
             </Pie>
 
             <Tooltip content={<CustomTooltip />} />
 
-            <Legend
-              verticalAlign="bottom"
-              height={36}
-            />
+            <Legend verticalAlign="bottom" height={36} />
           </PieChart>
         </ResponsiveContainer>
       </ChartCard>
@@ -425,12 +357,9 @@ function HistoricalAnalytics() {
         title="Price Distribution"
         description="Product price distribution."
       >
-        <ResponsiveContainer width="100%" height={300}>
+        <ResponsiveContainer width="100%" height={240}>
           <BarChart data={historicalData.price_distribution}>
-            <CartesianGrid
-              stroke="#d9dee8"
-              strokeDasharray="3 3"
-            />
+            <CartesianGrid stroke="#d9dee8" strokeDasharray="3 3" />
 
             <XAxis
               dataKey="range"
@@ -453,10 +382,7 @@ function HistoricalAnalytics() {
 
             <Tooltip content={<CustomTooltip />} />
 
-            <Bar
-              dataKey="count"
-              fill="#93c5fd"
-            />
+            <Bar dataKey="count" fill="#93c5fd" />
           </BarChart>
         </ResponsiveContainer>
       </ChartCard>
@@ -466,12 +392,9 @@ function HistoricalAnalytics() {
         description="Revenue compared with orders."
         className="xl:col-span-2"
       >
-        <ResponsiveContainer width="100%" height={300}>
+        <ResponsiveContainer width="100%" height={240}>
           <ScatterChart>
-            <CartesianGrid
-              stroke="#d9dee8"
-              strokeDasharray="3 3"
-            />
+            <CartesianGrid stroke="#d9dee8" strokeDasharray="3 3" />
 
             <XAxis
               type="number"
@@ -503,18 +426,15 @@ function HistoricalAnalytics() {
         description="Correlation between business metrics."
       >
         {(() => {
-          const labels =
-            historicalData.correlation_heatmap.labels;
+          const labels = historicalData.correlation_heatmap.labels;
 
-          const matrix =
-            historicalData.correlation_heatmap.matrix;
+          const matrix = historicalData.correlation_heatmap.matrix;
 
           const values = {};
 
+          // Turn the matrix into values we can look up for each cell
           matrix.forEach((item) => {
-            values[
-              `${item.y}-${item.x}`
-            ] = item.value;
+            values[`${item.y}-${item.x}`] = item.value;
           });
 
           return (
@@ -522,13 +442,10 @@ function HistoricalAnalytics() {
               <table className="w-full border border-slate-300 text-sm text-center">
                 <thead>
                   <tr>
-                    <th className="border p-3"></th>
+                    <th className="border p-2"></th>
 
                     {labels.map((label) => (
-                      <th
-                        key={label}
-                        className="border p-3"
-                      >
+                      <th key={label} className="border p-2">
                         {label}
                       </th>
                     ))}
@@ -538,20 +455,11 @@ function HistoricalAnalytics() {
                 <tbody>
                   {labels.map((row) => (
                     <tr key={row}>
-                      <th className="border p-3">
-                        {row}
-                      </th>
+                      <th className="border p-2">{row}</th>
 
                       {labels.map((column) => (
-                        <td
-                          key={column}
-                          className="border p-3"
-                        >
-                          {(
-                            values[
-                              `${row}-${column}`
-                            ] ?? 0
-                          ).toFixed(2)}
+                        <td key={column} className="border p-2">
+                          {(values[`${row}-${column}`] ?? 0).toFixed(2)}
                         </td>
                       ))}
                     </tr>

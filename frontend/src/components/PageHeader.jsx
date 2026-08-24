@@ -1,27 +1,10 @@
-
-
 function PageHeader({ title, subtitle }) {
-  
   return (
-    
-    
-    <div className="mb-8">
-      
-      
-      <h1 className="text-4xl font-bold text-slate-900">
-        {title}
-      </h1>
+    <div className="mb-5">
+      <h1 className="text-3xl font-bold text-slate-900">{title}</h1>
 
-      {subtitle && (
-        <p className="mt-2 text-lg text-slate-600">
-          {subtitle}
-        </p>
-      )}
-    
-    
+      {subtitle && <p className="mt-1 text-base text-slate-600">{subtitle}</p>}
     </div>
-  
-
   );
 }
 

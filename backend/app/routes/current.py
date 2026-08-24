@@ -1,25 +1,17 @@
-
-
-
-
-from fastapi import APIRouter
+from fastapi import APIRouter, Depends
 
 from app.services import kpi_service
 
 from app.schemas.kpi import KPIResponse
 from app.schemas.order import RecentOrder
 from app.schemas.category import TopCategory
-
+from app.utils.auth import get_authenticated_user
 
 router = APIRouter(
     prefix="/current",
     tags=["Current Dashboard"],
+    dependencies=[Depends(get_authenticated_user)],
 )
-
-
-
-
-
 
 
 @router.get(
@@ -42,21 +34,17 @@ router = APIRouter(
                         "avg_payment_value": 154.10,
                         "top_selling_category": "Beauty & Health",
                         "top_seller": "4869f7a5dfa277a7dca6462dcf3b52b",
-                        "top_payment_method": "Credit Card"
+                        "top_payment_method": "Credit Card",
                     }
                 }
-            }
+            },
         }
-    }
+    },
 )
+
+# Fetch the main numbers shown on the dashboard
 def get_kpis():
     return kpi_service.get_kpis()
-
-
-
-
-
-
 
 
 @router.get(
@@ -65,25 +53,15 @@ def get_kpis():
     summary="Recent Orders",
     description="Returns the latest customer orders with their details.",
     responses={
-        200: {
-            "description": "Recent orders retrieved successfully."
-        },
-    500:{
-        "description":"Internal Server Error."
-    }
+        200: {"description": "Recent orders retrieved successfully."},
+        500: {"description": "Internal Server Error."},
     },
     status_code=200,
 )
+
+# Get the latest orders to show in the dashboard
 def get_recent_orders():
     return kpi_service.get_recent_orders()
-
-
-
-
-
-
-
-
 
 
 @router.get(
@@ -92,12 +70,8 @@ def get_recent_orders():
     summary="Top Categories",
     description="Returns the highest revenue generating product categories along with revenue and total orders.",
     responses={
-        200: {
-            "description": "Top categories retrieved successfully."
-        },
-    500:{
-        "description":"Internal Server Error."
-    }
+        200: {"description": "Top categories retrieved successfully."},
+        500: {"description": "Internal Server Error."},
     },
     status_code=200,
 )

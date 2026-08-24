@@ -1,9 +1,6 @@
+from typing import Annotated
 
-
-
-
-
-
+from fastapi import Depends
 
 from fastapi import APIRouter
 
@@ -29,24 +26,14 @@ from app.schemas.customer import CustomerByState
 from app.schemas.review import ReviewDistribution
 
 
+from app.utils.auth import get_authenticated_user
 
-
-
-
-
-
-
-
+# All historical analytics require a logged-in user
 router = APIRouter(
     prefix="/historical",
     tags=["Historical Analytics"],
+    dependencies=[Depends(get_authenticated_user)],
 )
-
-
-
-
-
-
 
 
 @router.get(
@@ -61,34 +48,17 @@ router = APIRouter(
             "content": {
                 "application/json": {
                     "example": [
-                        {
-                            "month": "2017-01",
-                            "revenue": 145230.75
-                        },
-                        {
-                            "month": "2017-02",
-                            "revenue": 162985.40
-                        }
+                        {"month": "2017-01", "revenue": 145230.75},
+                        {"month": "2017-02", "revenue": 162985.40},
                     ]
                 }
-            }
+            },
         },
-        500: {
-            "description": "Internal Server Error"
-        }
-    }
+        500: {"description": "Internal Server Error"},
+    },
 )
-def get_monthly_revenue():
+def monthly_revenue():
     return revenue_service.monthly_revenue()
-
-
-
-
-
-
-
-
-
 
 
 @router.get(
@@ -103,35 +73,17 @@ def get_monthly_revenue():
             "content": {
                 "application/json": {
                     "example": [
-                        {
-                            "month": "2017-01",
-                            "orders": 748
-                        },
-                        {
-                            "month": "2017-02",
-                            "orders": 912
-                        }
+                        {"month": "2017-01", "orders": 748},
+                        {"month": "2017-02", "orders": 912},
                     ]
                 }
-            }
+            },
         },
-        500: {
-            "description": "Internal Server Error"
-        }
-    }
+        500: {"description": "Internal Server Error"},
+    },
 )
 def get_monthly_orders():
     return order_service.monthly_orders()
-
-
-
-
-
-
-
-
-
-
 
 
 @router.get(
@@ -146,33 +98,16 @@ def get_monthly_orders():
             "content": {
                 "application/json": {
                     "example": [
-                        {
-                            "category": "Beauty & Health",
-                            "revenue": 285694.45
-                        },
-                        {
-                            "category": "Sports & Leisure",
-                            "revenue": 254321.87
-                        }
+                        {"category": "Beauty & Health", "revenue": 285694.45},
+                        {"category": "Sports & Leisure", "revenue": 254321.87},
                     ]
                 }
-            }
+            },
         }
-    }
+    },
 )
 def get_revenue_by_category():
     return category_service.revenue_by_category()
-
-
-
-
-
-
-
-
-
-
-
 
 
 @router.get(
@@ -181,30 +116,13 @@ def get_revenue_by_category():
     summary="Top Categories",
     description="Returns the highest revenue generating product categories.",
     responses={
-        200: {
-            "description": "Top categories retrieved successfully."
-        },
-    500:{
-        "description":"Internal Server Error."
-    }
+        200: {"description": "Top categories retrieved successfully."},
+        500: {"description": "Internal Server Error."},
     },
     status_code=200,
 )
 def get_top_categories():
     return category_service.top_categories()
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 @router.get(
@@ -219,33 +137,18 @@ def get_top_categories():
             "content": {
                 "application/json": {
                     "example": [
-                        {
-                            "payment_type": "Credit Card",
-                            "count": 75863
-                        },
-                        {
-                            "payment_type": "Bank Slip",
-                            "count": 19784
-                        }
+                        {"payment_type": "Credit Card", "count": 75863},
+                        {"payment_type": "Bank Slip", "count": 19784},
                     ]
                 }
-            }
+            },
         }
-    }
+    },
 )
 def get_payment_distribution():
+
+    # Get payment counts for the chart
     return payment_service.payment_method_distribution()
-
-
-
-
-
-
-
-
-
-
-
 
 
 @router.get(
@@ -254,29 +157,13 @@ def get_payment_distribution():
     summary="Customers by State",
     description="Returns the number of customers in each state.",
     responses={
-        200: {
-            "description": "Customer distribution by state retrieved successfully."
-        },
-    500:{
-        "description":"Internal Server Error."
-    }
+        200: {"description": "Customer distribution by state retrieved successfully."},
+        500: {"description": "Internal Server Error."},
     },
     status_code=200,
 )
 def get_customers_by_state():
     return customer_service.customers_by_state()
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 @router.get(
@@ -285,12 +172,8 @@ def get_customers_by_state():
     summary="Review Distribution",
     description="Returns the distribution of customer review scores.",
     responses={
-        200: {
-            "description": "Review score distribution retrieved successfully."
-        },
-    500:{
-        "description":"Internal Server Error."
-    }
+        200: {"description": "Review score distribution retrieved successfully."},
+        500: {"description": "Internal Server Error."},
     },
     status_code=200,
 )
@@ -299,53 +182,18 @@ def get_review_distribution():
     return review_service.review_score_distribution()
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 @router.get(
     "/price-distribution",
     summary="Price Distribution",
     description="Returns the histogram of product prices divided into bins.",
     responses={
-        200: {
-            "description": "Price distribution retrieved successfully."
-        },
-    500:{
-        "description":"Internal Server Error."
-    }
+        200: {"description": "Price distribution retrieved successfully."},
+        500: {"description": "Internal Server Error."},
     },
     status_code=200,
 )
 def get_price_distribution():
     return price_service.price_distribution()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 @router.get(
@@ -354,12 +202,8 @@ def get_price_distribution():
     summary="Revenue vs Orders",
     description="Returns monthly revenue alongside total orders for comparison.",
     responses={
-        200: {
-            "description": "Revenue vs Orders data retrieved successfully."
-        },
-    500:{
-        "description":"Internal Server Error."
-    }
+        200: {"description": "Revenue vs Orders data retrieved successfully."},
+        500: {"description": "Internal Server Error."},
     },
     status_code=200,
 )
@@ -367,33 +211,17 @@ def get_revenue_vs_orders():
     return revenue_service.revenue_vs_orders()
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 @router.get(
     "/correlation-heatmap",
     summary="Correlation Heatmap",
     description="Returns correlation values between important business metrics for visualization as a heatmap.",
     responses={
-        200: {
-            "description": "Correlation matrix retrieved successfully."
-        },
-    500:{
-        "description":"Internal Server Error."
-    }
+        200: {"description": "Correlation matrix retrieved successfully."},
+        500: {"description": "Internal Server Error."},
     },
     status_code=200,
 )
 def get_correlation_heatmap():
+
+    # Return the metric correlations used to build the heatmap
     return heatmap_service.correlation_heatmap()

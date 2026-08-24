@@ -1,9 +1,4 @@
-function StatCard({
-  label,
-  value,
-  icon: Icon,
-  accent = "primary",
-}) {
+function StatCard({ label, value, icon: Icon, accent = "primary" }) {
   const accentColors = {
     primary: "bg-primary-50 text-primary-600",
     green: "bg-emerald-50 text-emerald-600",
@@ -11,44 +6,23 @@ function StatCard({
     rose: "bg-rose-50 text-rose-600",
   };
 
-
-
-
   return (
-    
-    
-    <div className="flex items-center justify-between rounded-xl border border-slate-200 bg-white p-5 shadow-card">
-      
-      
-      <div>
-        
-        
-        <p className="text-xs font-medium text-slate-500">
-          {label}
-        </p>
+    <div className="flex items-center justify-between rounded-lg border border-slate-200 bg-white p-3 shadow-card">
+      <div className="min-w-0">
+        <p className="text-[11px] font-medium text-slate-500">{label}</p>
 
-        
-        <p className="mt-1.5 text-xl font-semibold text-slate-900">
+        <p className="mt-0.5 text-base font-semibold text-slate-900 truncate">
           {value}
         </p>
-      
-      
       </div>
 
-      
-      
-      
       {Icon && (
-        
         <div
-          className={`flex h-10 w-10 items-center justify-center rounded-lg ${accentColors[accent]}`}
+          className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-lg ${accentColors[accent]}`}
         >
-          <Icon size={19} />
+          <Icon size={16} />
         </div>
-      
       )}
-    
-    
     </div>
   );
 }

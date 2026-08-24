@@ -1,12 +1,6 @@
-
-
-
 import numpy as np
 
 from app.repositories.sales_repository import get_dataset
-
-
-
 
 CATEGORY_TRANSLATIONS = {
     "beleza_saude": "Beauty & Health",
@@ -22,23 +16,13 @@ CATEGORY_TRANSLATIONS = {
 }
 
 
-
-
-
-
-
-
-
-
-
 def monthly_revenue():
 
-
     df = get_dataset()
+
+    # Add up all sales for each month
     monthly_revenue = df.groupby("order_month")["item_total"].sum()
     monthly_revenue = monthly_revenue.sort_index()
-
-
 
     return [
         {"month": month, "revenue": round(float(revenue), 2)}
@@ -46,24 +30,16 @@ def monthly_revenue():
     ]
 
 
-
-
-
-
-
-
-
-
-
-
 def revenue_vs_orders():
 
     df = get_dataset()
 
-
-    monthly_data = df.groupby("order_month").agg(orders=("order_id", "nunique"),revenue=("item_total", "sum"),)
+    # Keep revenue and order count together for each month
+    monthly_data = df.groupby("order_month").agg(
+        orders=("order_id", "nunique"),
+        revenue=("item_total", "sum"),
+    )
     monthly_data = monthly_data.sort_index()
-
 
     return [
         {
@@ -71,12 +47,5 @@ def revenue_vs_orders():
             "orders": int(row["orders"]),
             "revenue": round(float(row["revenue"]), 2),
         }
-
         for month, row in monthly_data.iterrows()
     ]
-
-
-
-
-
-

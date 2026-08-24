@@ -1,8 +1,5 @@
-
-
-
-
 from pydantic import BaseModel
+
 
 class HeatmapPoint(BaseModel):
     x: str
@@ -15,4 +12,4 @@ class HeatmapResponse(BaseModel):
     matrix: list[HeatmapPoint]
 
 
-response_model=HeatmapResponse
+response_model = HeatmapResponse

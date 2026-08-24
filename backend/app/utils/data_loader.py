@@ -1,9 +1,6 @@
-
 import os
 
 import pandas as pd
-
-
 
 DATA_DIR = os.path.join(os.path.dirname(os.path.dirname(__file__)), "data")
 
@@ -11,20 +8,10 @@ DATA_DIR = os.path.join(os.path.dirname(os.path.dirname(__file__)), "data")
 _cache = {}
 
 
-
-
-
-
 def _read(file_name):
     file_path = os.path.join(DATA_DIR, file_name)
 
     return pd.read_csv(file_path)
-
-
-
-
-
-
 
 
 def _load_raw():
@@ -37,7 +24,6 @@ def _load_raw():
     payments = _read("olist_payments.csv")
     reviews = _read("olist_reviews.csv")
 
-
     date_columns = [
         "order_purchase_timestamp",
         "order_approved_at",
@@ -46,36 +32,22 @@ def _load_raw():
         "order_estimated_delivery_date",
     ]
 
-
-
-
-
-
+    # Convert the date columns once when the data is loaded
     for column in date_columns:
         orders[column] = pd.to_datetime(
             orders[column],
             errors="coerce",
         )
 
-
-
-
-
-
-
     order_items["shipping_limit_date"] = pd.to_datetime(
         order_items["shipping_limit_date"],
         errors="coerce",
     )
 
-
-
     review_dates = [
         "review_creation_date",
         "review_answer_timestamp",
     ]
-
-
 
     for column in review_dates:
         reviews[column] = pd.to_datetime(
@@ -83,30 +55,14 @@ def _load_raw():
             errors="coerce",
         )
 
-
-
-
-
-
-
-
-
-
-
-
+    # Remove rows missing the fields needed for the joins
     orders = orders.dropna(subset=["order_id", "customer_id"])
 
+    order_items = order_items.dropna(subset=["order_id", "product_id", "price"])
 
-    order_items = order_items.dropna(
-        subset=["order_id", "product_id", "price"]
+    products["product_category_name"] = products["product_category_name"].fillna(
+        "unknown"
     )
-
-
-    products["product_category_name"] = (
-        products["product_category_name"]
-        .fillna("unknown")
-    )
-
 
     return {
         "customers": customers,
@@ -119,36 +75,13 @@ def _load_raw():
     }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 def get_raw_tables():
 
+    # Load the CSV files only once and reuse them
     if "raw" not in _cache:
         _cache["raw"] = _load_raw()
 
     return _cache["raw"]
-
-
-
-
-
-
-
-
-
-
 
 
 def get_full_dataset():
@@ -156,69 +89,10 @@ def get_full_dataset():
     if "full" in _cache:
         return _cache["full"]
 
-    
-
     raw = get_raw_tables()
 
-
+    # Combine the main tables into one dataset for the dashboard
     df = raw["order_items"]
-
-
-    df = df.merge(raw["orders"],on="order_id",how="left",)
-
-
-    df = df.merge(raw["products"],on="product_id",how="left",)
-
-
-    df = df.merge(raw["sellers"],on="seller_id",how="left",)
-
-
-    df = df.merge(raw["customers"],on="customer_id",how="left",)
-
-    df = df.merge(
-    raw["reviews"][["order_id", "review_score"]],
-    on="order_id",
-    how="left",
-)
-
-
-    # REMOVE CANCELLED ORDERES
-    df = df[df["order_status"] != "canceled"].copy()
-
-
-    df["order_month"] = (df["order_purchase_timestamp"].dt.to_period("M").astype(str))
-
-
-    df["item_total"] = (df["price"] + df["freight_value"])
-
-    _cache["full"] = df
-
-    return df
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-def get_payments_with_orders():
-
-    if "payments_full" in _cache:
-        return _cache["payments_full"]
-
-    raw = get_raw_tables()
-
-
-    df = raw["payments"]
-
 
     df = df.merge(
         raw["orders"],
@@ -226,6 +100,58 @@ def get_payments_with_orders():
         how="left",
     )
 
+    df = df.merge(
+        raw["products"],
+        on="product_id",
+        how="left",
+    )
+
+    df = df.merge(
+        raw["sellers"],
+        on="seller_id",
+        how="left",
+    )
+
+    df = df.merge(
+        raw["customers"],
+        on="customer_id",
+        how="left",
+    )
+
+    df = df.merge(
+        raw["reviews"][["order_id", "review_score"]],
+        on="order_id",
+        how="left",
+    )
+
+    # REMOVE CANCELLED ORDERES
+    df = df[df["order_status"] != "canceled"].copy()
+
+    # Add the month and total value used by the analytics
+    df["order_month"] = df["order_purchase_timestamp"].dt.to_period("M").astype(str)
+
+    df["item_total"] = df["price"] + df["freight_value"]
+
+    _cache["full"] = df
+
+    return df
+
+
+def get_payments_with_orders():
+
+    # Reuse the processed payment data if it is already loaded
+    if "payments_full" in _cache:
+        return _cache["payments_full"]
+
+    raw = get_raw_tables()
+
+    df = raw["payments"]
+
+    df = df.merge(
+        raw["orders"],
+        on="order_id",
+        how="left",
+    )
 
     df = df[df["order_status"] != "canceled"].copy()
 
@@ -234,28 +160,15 @@ def get_payments_with_orders():
     return df
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 def get_reviews_with_orders():
 
+    # Reuse the processed review data if it is already loaded
     if "reviews_full" in _cache:
         return _cache["reviews_full"]
 
     raw = get_raw_tables()
 
-
     df = raw["reviews"]
-
 
     df = df.merge(
         raw["orders"],

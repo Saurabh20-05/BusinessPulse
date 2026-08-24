@@ -1,12 +1,10 @@
-
-
 from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse
 
 
-
 def register_exception_handlers(app: FastAPI):
 
+    # Return a consistent response for unexpected server errors
     @app.exception_handler(Exception)
     async def global_exception_handler(
         request: Request,

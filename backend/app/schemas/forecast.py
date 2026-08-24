@@ -1,6 +1,3 @@
-
-
-
 from pydantic import BaseModel, Field
 
 
@@ -9,23 +6,11 @@ class ForecastPoint(BaseModel):
     value: float
 
 
-
-
 class ForecastMetrics(BaseModel):
 
-    mae: float = Field(
-        description="Mean Absolute Error"
-    )
+    mae: float = Field(description="Mean Absolute Error")
 
-    r2: float = Field(
-        description="Coefficient of Determination"
-    )
-
-
-
-
-
-
+    r2: float = Field(description="Coefficient of Determination")
 
 
 class ForecastResponse(BaseModel):
