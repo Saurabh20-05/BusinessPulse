@@ -12,9 +12,14 @@ from app.ml.forecast_models import (
 MODEL_NAME = "Polynomial Regression (Degree 2)"
 
 
-def forecast():
+async def forecast(dataset_id="olist", user_id=None):
 
-    series = get_customer_series()
+    series = await get_customer_series(dataset_id, user_id)
+
+    if len(series) < 2:
+        raise ValueError(
+            "At least 2 months of customer data are required for forecasting."
+        )
 
     # Use the month position as the input value
     x = np.arange(len(series)).reshape(-1, 1)
@@ -48,8 +53,8 @@ def forecast():
     # Review scores should not be negative
     future_prediction = np.clip(
         future_prediction,
-        0,
-        None,
+        1,
+        5,
     )
 
     return prepare_response(

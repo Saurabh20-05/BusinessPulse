@@ -11,9 +11,14 @@ from app.ml.forecast_models import (
 MODEL_NAME = "Random Forest Regressor"
 
 
-def forecast():
+async def forecast(dataset_id="olist", user_id=None):
 
-    series = get_orders_series()
+    series = await get_orders_series(dataset_id, user_id)
+
+    if len(series) < 2:
+        raise ValueError(
+            "At least 2 months of order data are required for forecasting."
+        )
 
     # Use the month number to train the model
     x = np.arange(len(series)).reshape(-1, 1)

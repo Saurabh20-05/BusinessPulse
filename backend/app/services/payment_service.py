@@ -8,9 +8,12 @@ PAYMENT_TRANSLATIONS = {
 }
 
 
-def payment_method_distribution():
+async def payment_method_distribution(dataset_id="olist", user_id=None):
 
-    payments = get_payments()
+    payments = await get_payments(
+        dataset_id,
+        user_id,
+    )
 
     # Count how often each payment method was used
     payment_counts = payments["payment_type"].value_counts()

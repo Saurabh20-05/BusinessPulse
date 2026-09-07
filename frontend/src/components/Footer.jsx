@@ -1,15 +1,28 @@
 function Footer() {
   return (
-    <footer className="border-t border-blue-200 bg-white">
-      <div className="flex items-center justify-between px-8 py-5">
-        <span className="text-base font-semibold">
-          BusinessPulse &copy; {new Date().getFullYear()}
-        </span>
+    <footer className="border-t border-slate-200 bg-white">
+      <div className="flex items-center justify-between px-6 py-4">
+        {/* Left */}
+        <div>
+          <p className="text-sm font-semibold text-slate-900">
+            BusinessPulse
+          </p>
 
-        <p className="text-sm text-slate-400">
-          Business Analytics Dashboard using the Olist Brazilian E-commerce
-          Dataset
-        </p>
+          <p className="mt-0.5 text-xs text-slate-500">
+            Business Analytics & Forecasting Platform
+          </p>
+        </div>
+
+        {/* Right */}
+        <div className="text-right">
+          <p className="text-xs text-slate-500">
+            Analyze · Monitor · Forecast
+          </p>
+
+          <p className="mt-0.5 text-xs text-slate-400">
+            © {new Date().getFullYear()} BusinessPulse
+          </p>
+        </div>
       </div>
     </footer>
   );

@@ -43,8 +43,14 @@ router = APIRouter(
 )
 
 # Fetch the main numbers shown on the dashboard
-def get_kpis():
-    return kpi_service.get_kpis()
+async def get_kpis(
+    dataset_id: str = "olist",
+    current_user: dict = Depends(get_authenticated_user),
+):
+    return await kpi_service.get_kpis(
+        dataset_id,
+        current_user["id"],
+    )
 
 
 @router.get(
@@ -60,10 +66,17 @@ def get_kpis():
 )
 
 # Get the latest orders to show in the dashboard
-def get_recent_orders():
-    return kpi_service.get_recent_orders()
+async def get_recent_orders(
+    dataset_id: str = "olist",
+    current_user: dict = Depends(get_authenticated_user),
+):
+    return await kpi_service.get_recent_orders(
+        dataset_id=dataset_id,
+        user_id=current_user["id"],
+    )
 
 
+# Return the categories performing best by revenue
 @router.get(
     "/top-categories",
     response_model=list[TopCategory],
@@ -75,5 +88,11 @@ def get_recent_orders():
     },
     status_code=200,
 )
-def get_top_categories():
-    return kpi_service.get_top_categories_table()
+async def get_top_categories(
+    dataset_id: str = "olist",
+    current_user: dict = Depends(get_authenticated_user),
+):
+    return await kpi_service.get_top_categories_table(
+        dataset_id=dataset_id,
+        user_id=current_user["id"],
+    )

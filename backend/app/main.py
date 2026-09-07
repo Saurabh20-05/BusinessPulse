@@ -5,8 +5,11 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.database.mongodb import client
-from app.routes import historical, current, forecast, auth
+from app.routes import historical, current, forecast, auth, insights, data_quality
 from app.exceptions import register_exception_handlers
+
+
+from app.routes import dataset
 
 
 @asynccontextmanager
@@ -72,10 +75,10 @@ register_exception_handlers(app)
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
-    "http://localhost:5173",
-    "http://127.0.0.1:5173",
-    "https://business-pulse-five.vercel.app",
-],
+        "http://localhost:5173",
+        "http://127.0.0.1:5173",
+        "https://business-pulse-five.vercel.app",
+    ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -86,6 +89,12 @@ app.include_router(historical.router)
 app.include_router(current.router)
 app.include_router(forecast.router)
 app.include_router(auth.router)
+
+app.include_router(dataset.router)
+
+app.include_router(insights.router)
+
+app.include_router(data_quality.router)
 
 
 @app.get(
@@ -100,5 +109,3 @@ def root():
         "version": "1.0.0",
         "docs": "/docs",
     }
-
-# main.py

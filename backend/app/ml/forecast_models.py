@@ -8,9 +8,23 @@ FORECAST_MONTHS = 4
 
 
 # Get total revenue for each month
-def get_revenue_series():
+async def get_revenue_series(dataset_id="olist", user_id=None):
+    df = await get_full_dataset(dataset_id, user_id)
 
-    df = get_full_dataset()
+    if dataset_id != "olist":
+        if "date" not in df.columns or "revenue" not in df.columns:
+            return pd.Series(dtype=float)
+
+        df["date"] = pd.to_datetime(
+            df["date"],
+            errors="coerce",
+        )
+
+        series = df.groupby(df["date"].dt.to_period("M"))["revenue"].sum().sort_index()
+
+        series = series[series > 0]
+
+        return series
 
     series = df.groupby("order_month")["item_total"].sum().sort_index()
 
@@ -19,12 +33,26 @@ def get_revenue_series():
     return series
 
 
-# Get the average order value for each month
-def get_orders_series():
+# Get the total number of orders for each month
+async def get_orders_series(dataset_id="olist", user_id=None):
+    df = await get_full_dataset(dataset_id, user_id)
 
-    df = get_full_dataset()
+    if dataset_id != "olist":
+        if "date" not in df.columns or "orders" not in df.columns:
+            return pd.Series(dtype=float)
 
-    series = df.groupby("order_month")["item_total"].mean().sort_index()
+        df["date"] = pd.to_datetime(
+            df["date"],
+            errors="coerce",
+        )
+
+        series = df.groupby(df["date"].dt.to_period("M"))["orders"].sum().sort_index()
+
+        series = series[series > 0]
+
+        return series
+
+    series = df.groupby("order_month")["order_id"].nunique().sort_index()
 
     series = series[series > 0]
 
@@ -32,9 +60,25 @@ def get_orders_series():
 
 
 # Track the average customer review score by month
-def get_customer_series():
+async def get_customer_series(dataset_id="olist", user_id=None):
+    df = await get_full_dataset(dataset_id, user_id)
 
-    df = get_full_dataset()
+    if dataset_id != "olist":
+        if "date" not in df.columns or "customers" not in df.columns:
+            return pd.Series(dtype=float)
+
+        df["date"] = pd.to_datetime(
+            df["date"],
+            errors="coerce",
+        )
+
+        series = (
+            df.groupby(df["date"].dt.to_period("M"))["customers"].sum().sort_index()
+        )
+
+        series = series[series > 0]
+
+        return series
 
     review_series = df.groupby("order_month")["review_score"].mean().sort_index()
 
@@ -77,7 +121,7 @@ def prepare_response(
 
     historical = [
         {
-            "month": month,
+            "month": str(month),
             "value": round(float(value), 2),
         }
         for month, value in series.items()

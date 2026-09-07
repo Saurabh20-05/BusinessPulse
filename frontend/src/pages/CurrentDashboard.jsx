@@ -33,10 +33,17 @@ const formatCurrency = (value) => {
 function CurrentDashboard() {
   const [dashboardData, setDashboardData] = useState(null);
   const [error, setError] = useState(null);
+  const [datasetId, setDatasetId] = useState(
+    () => localStorage.getItem("selected_dataset") || "olist",
+  );
 
   useEffect(() => {
     // Load all dashboard sections together
-    Promise.all([getKPIs(), getRecentOrders(), getCurrentTopCategories()])
+    Promise.all([
+      getKPIs(datasetId),
+      getRecentOrders(datasetId),
+      getCurrentTopCategories(datasetId),
+    ])
       .then(([kpis, recentOrders, topCategories]) => {
         // Keep the API results together for the dashboard
         setDashboardData({
@@ -48,7 +55,7 @@ function CurrentDashboard() {
       .catch(() => {
         setError("Failed to load dashboard data.");
       });
-  }, []);
+  }, [datasetId]);
 
   if (error) {
     return <p className="text-sm text-rose-600">{error}</p>;
@@ -81,19 +88,28 @@ function CurrentDashboard() {
     },
     {
       label: "Total Products",
-      value: kpis.total_products.toLocaleString(),
+      value:
+        kpis.total_products !== null && kpis.total_products !== undefined
+          ? kpis.total_products.toLocaleString()
+          : "N/A",
       icon: Package,
       accent: "rose",
     },
     {
       label: "Average Review",
-      value: `${kpis.avg_review_score} / 5`,
+      value:
+        kpis.avg_review_score !== null && kpis.avg_review_score !== undefined
+          ? `${kpis.avg_review_score} / 5`
+          : "N/A",
       icon: Star,
       accent: "primary",
     },
     {
       label: "Average Payment",
-      value: formatCurrency(kpis.avg_payment_value),
+      value:
+        kpis.avg_payment_value !== null && kpis.avg_payment_value !== undefined
+          ? formatCurrency(kpis.avg_payment_value)
+          : "N/A",
       icon: Wallet,
       accent: "green",
     },
@@ -104,7 +120,7 @@ function CurrentDashboard() {
       accent: "amber",
     },
     {
-      label: "Top Seller",
+      label: "Top Product",
       value: kpis.top_seller,
       icon: Store,
       accent: "rose",

@@ -12,13 +12,13 @@ from app.ml.polynomial_forecast import (
 
 
 # Pick the model used for each type of forecast
-def forecast_revenue():
-    return linear_forecast()
+async def forecast_revenue(dataset_id="olist", user_id=None):
+    return await linear_forecast(dataset_id, user_id)
 
 
-def forecast_orders():
-    return random_forest_forecast()
+async def forecast_orders(dataset_id="olist", user_id=None):
+    return await random_forest_forecast(dataset_id, user_id)
 
 
-def forecast_customers():
-    return polynomial_forecast()
+async def forecast_customers(dataset_id="olist", user_id=None):
+    return await polynomial_forecast(dataset_id, user_id)

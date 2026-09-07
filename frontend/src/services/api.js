@@ -23,7 +23,7 @@ api.interceptors.request.use(
   },
 );
 
-//   Handle Authentication Errors
+// Handle authentication errors
 
 api.interceptors.response.use(
   (response) => {
@@ -45,57 +45,131 @@ api.interceptors.response.use(
 
 //   Current Dashboard
 
-export const getKPIs = () =>
-  api.get("/current/kpis").then((response) => response.data);
+export const getKPIs = (datasetId = "olist") =>
+  api
+    .get("/current/kpis", {
+      params: { dataset_id: datasetId },
+    })
+    .then((response) => response.data);
 
-export const getRecentOrders = () =>
-  api.get("/current/recent-orders").then((response) => response.data);
+export const getRecentOrders = (datasetId = "olist") =>
+  api
+    .get("/current/recent-orders", {
+      params: { dataset_id: datasetId },
+    })
+    .then((response) => response.data);
 
-export const getCurrentTopCategories = () =>
-  api.get("/current/top-categories").then((response) => response.data);
+export const getCurrentTopCategories = (datasetId = "olist") =>
+  api
+    .get("/current/top-categories", {
+      params: { dataset_id: datasetId },
+    })
+    .then((response) => response.data);
 
 //   Historical Analytics
 
-export const getMonthlyRevenue = () =>
-  api.get("/historical/monthly-revenue").then((response) => response.data);
+export const getMonthlyRevenue = (datasetId = "olist") =>
+  api
+    .get("/historical/monthly-revenue", {
+      params: {
+        dataset_id: datasetId,
+      },
+    })
+    .then((response) => response.data);
 
-export const getMonthlyOrders = () =>
-  api.get("/historical/monthly-orders").then((response) => response.data);
+export const getMonthlyOrders = (datasetId = "olist") =>
+  api
+    .get("/historical/monthly-orders", {
+      params: {
+        dataset_id: datasetId,
+      },
+    })
+    .then((response) => response.data);
 
-export const getRevenueByCategory = () =>
-  api.get("/historical/revenue-by-category").then((response) => response.data);
+export const getRevenueByCategory = (datasetId = "olist") =>
+  api
+    .get("/historical/revenue-by-category", {
+      params: {
+        dataset_id: datasetId,
+      },
+    })
+    .then((response) => response.data);
 
-export const getHistoricalTopCategories = () =>
-  api.get("/historical/top-categories").then((response) => response.data);
+export const getHistoricalTopCategories = (datasetId = "olist") =>
+  api
+    .get("/historical/top-categories", {
+      params: {
+        dataset_id: datasetId,
+      },
+    })
+    .then((response) => response.data);
 
-export const getPaymentDistribution = () =>
-  api.get("/historical/payment-distribution").then((response) => response.data);
+export const getPaymentDistribution = (datasetId = "olist") =>
+  api
+    .get("/historical/payment-distribution", {
+      params: {
+        dataset_id: datasetId,
+      },
+    })
+    .then((response) => response.data);
 
-export const getCustomersByState = () =>
-  api.get("/historical/customers-by-state").then((response) => response.data);
+export const getCustomersByState = (datasetId = "olist") =>
+  api
+    .get("/historical/customers-by-state", {
+      params: { dataset_id: datasetId },
+    })
+    .then((response) => response.data);
 
-export const getReviewDistribution = () =>
-  api.get("/historical/review-distribution").then((response) => response.data);
+export const getReviewDistribution = (datasetId = "olist") =>
+  api
+    .get("/historical/review-distribution", {
+      params: { dataset_id: datasetId },
+    })
+    .then((response) => response.data);
 
-export const getPriceDistribution = () =>
-  api.get("/historical/price-distribution").then((response) => response.data);
+export const getPriceDistribution = (datasetId = "olist") =>
+  api
+    .get("/historical/price-distribution", {
+      params: { dataset_id: datasetId },
+    })
+    .then((response) => response.data);
 
-export const getRevenueVsOrders = () =>
-  api.get("/historical/revenue-vs-orders").then((response) => response.data);
+export const getRevenueVsOrders = (datasetId = "olist") =>
+  api
+    .get("/historical/revenue-vs-orders", {
+      params: { dataset_id: datasetId },
+    })
+    .then((response) => response.data);
 
-export const getCorrelationHeatmap = () =>
-  api.get("/historical/correlation-heatmap").then((response) => response.data);
+export const getCorrelationHeatmap = (datasetId = "olist") =>
+  api
+    .get("/historical/correlation-heatmap", {
+      params: { dataset_id: datasetId },
+    })
+    .then((response) => response.data);
 
 //   Forecast
 
-export const getRevenueForecast = () =>
-  api.get("/forecast/revenue").then((response) => response.data);
+export const getRevenueForecast = (datasetId = "olist") =>
+  api
+    .get("/forecast/revenue", {
+      params: { dataset_id: datasetId },
+    })
+    .then((response) => response.data);
 
-export const getOrdersForecast = () =>
-  api.get("/forecast/orders").then((response) => response.data);
+export const getOrdersForecast = (datasetId = "olist") =>
+  api
+    .get("/forecast/orders", {
+      params: { dataset_id: datasetId },
+    })
+    .then((response) => response.data);
 
-export const getCustomersForecast = () =>
-  api.get("/forecast/customers").then((response) => response.data);
+export const getCustomersForecast = (datasetId = "olist") =>
+  api
+    .get("/forecast/customers", {
+      params: { dataset_id: datasetId },
+    })
+    .then((response) => response.data);
 
 //   Authentication
 
@@ -107,5 +181,52 @@ export const loginUser = (credentials) =>
 
 export const getCurrentUser = () =>
   api.get("/auth/me").then((response) => response.data);
+
+// Dataset management
+export const uploadDataset = (file) => {
+  const formData = new FormData();
+
+  formData.append("file", file);
+
+  return api.post("/dataset/upload", formData);
+};
+
+export const configureDataset = (datasetId, mapping) => {
+  return api.post("/dataset/configure", {
+    dataset_id: datasetId,
+    mapping,
+  });
+};
+
+export const getMyDatasets = () => {
+  return api.get("/dataset");
+};
+
+export const deleteDataset = (datasetId) => {
+  return api.delete(`/dataset/${datasetId}`);
+};
+
+export const previewDataset = (datasetId) => {
+  return api.get(`/dataset/${datasetId}/preview`);
+};
+
+// Business insights
+export const getBusinessInsights = (datasetId = "olist") => {
+  return api.get("/insights", {
+    params: {
+      dataset_id: datasetId,
+    },
+  });
+};
+
+// Data quality
+export const getDataQuality = (datasetId = "olist") =>
+  api
+    .get("/data-quality", {
+      params: {
+        dataset_id: datasetId,
+      },
+    })
+    .then((response) => response.data);
 
 export default api;

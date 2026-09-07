@@ -11,17 +11,23 @@ from app.ml.forecast_models import (
 MODEL_NAME = "Linear Regression"
 
 
-def forecast():
+async def forecast(dataset_id="olist", user_id=None):
 
-    series = get_revenue_series()
+    series = await get_revenue_series(dataset_id, user_id)
 
-    # Use month numbers as the input for the model
+    if len(series) < 2:
+        raise ValueError(
+            "At least 2 months of revenue data are required for forecasting."
+        )
+
+    # Use the month index as the input for the model
     x = np.arange(len(series)).reshape(-1, 1)
     y = series.values
 
     model = LinearRegression()
     model.fit(x, y)
 
+    # Check how well the model fits the existing data
     historical_prediction = model.predict(x)
 
     metrics = calculate_metrics(
@@ -29,7 +35,7 @@ def forecast():
         historical_prediction,
     )
 
-    # Create the next 4 months for forecasting
+    # Predict revenue for the next four months
     future_x = np.arange(
         len(series),
         len(series) + 4,

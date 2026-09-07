@@ -2,6 +2,8 @@ import os
 
 import pandas as pd
 
+from app.repositories import dataset_repository
+
 DATA_DIR = os.path.join(os.path.dirname(os.path.dirname(__file__)), "data")
 
 
@@ -84,7 +86,18 @@ def get_raw_tables():
     return _cache["raw"]
 
 
-def get_full_dataset():
+async def get_full_dataset(dataset_id="olist", user_id=None):
+
+    if dataset_id != "olist":
+        dataset = await dataset_repository.find_dataset_by_id(
+            dataset_id,
+            user_id,
+        )
+
+        if not dataset:
+            raise ValueError("Dataset not found.")
+
+        return pd.DataFrame(dataset["normalized_data"])
 
     if "full" in _cache:
         return _cache["full"]

@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, HTTPException
 
 from app.services import forecast_service
 
@@ -13,6 +13,7 @@ router = APIRouter(
 )
 
 
+# Generate a forecast for future monthly revenue
 @router.get(
     "/revenue",
     response_model=ForecastResponse,
@@ -38,12 +39,23 @@ router = APIRouter(
         }
     },
 )
-def get_revenue_forecast():
+async def get_revenue_forecast(
+    dataset_id: str = "olist",
+    current_user: dict = Depends(get_authenticated_user),
+):
+    try:
+        return await forecast_service.forecast_revenue(
+            dataset_id,
+            current_user["id"],
+        )
+    except ValueError as e:
+        raise HTTPException(
+            status_code=400,
+            detail=str(e),
+        )
 
-    # Generate the revenue prediction using the forecast service
-    return forecast_service.forecast_revenue()
 
-
+# Generate a forecast for future monthly orders
 @router.get(
     "/orders",
     response_model=ForecastResponse,
@@ -55,10 +67,23 @@ def get_revenue_forecast():
     },
     status_code=200,
 )
-def get_orders_forecast():
-    return forecast_service.forecast_orders()
+async def get_orders_forecast(
+    dataset_id: str = "olist",
+    current_user: dict = Depends(get_authenticated_user),
+):
+    try:
+        return await forecast_service.forecast_orders(
+            dataset_id,
+            current_user["id"],
+        )
+    except ValueError as e:
+        raise HTTPException(
+            status_code=400,
+            detail=str(e),
+        )
 
 
+# Generate a forecast for future average customer satisfaction
 @router.get(
     "/customers",
     response_model=ForecastResponse,
@@ -70,7 +95,21 @@ def get_orders_forecast():
     },
     status_code=200,
 )
-def get_customer_forecast():
+async def get_customer_forecast(
+    dataset_id: str = "olist",
+    current_user: dict = Depends(get_authenticated_user),
+):
 
-    # Generate the forecast based on past customer review scores
-    return forecast_service.forecast_customers()
+    try:
+
+        return await forecast_service.forecast_customers(
+            dataset_id,
+            current_user["id"],
+        )
+
+    except ValueError as e:
+
+        raise HTTPException(
+            status_code=400,
+            detail=str(e),
+        )

@@ -47,20 +47,27 @@ const PIE_COLORS = [
 function HistoricalAnalytics() {
   const [historicalData, setHistoricalData] = useState(null);
   const [error, setError] = useState(null);
+  const [datasetId, setDatasetId] = useState("olist");
 
   useEffect(() => {
+
+    const savedDataset = localStorage.getItem("selected_dataset");
+
+if (savedDataset) {
+  setDatasetId(savedDataset);
+}
     // Load all historical data needed by the charts
     Promise.all([
-      getMonthlyRevenue(),
-      getMonthlyOrders(),
-      getRevenueByCategory(),
-      getHistoricalTopCategories(),
-      getPaymentDistribution(),
-      getCustomersByState(),
-      getReviewDistribution(),
-      getPriceDistribution(),
-      getRevenueVsOrders(),
-      getCorrelationHeatmap(),
+      getMonthlyRevenue(datasetId),
+      getMonthlyOrders(datasetId),
+      getRevenueByCategory(datasetId),
+      getHistoricalTopCategories(datasetId),
+      getPaymentDistribution(datasetId),
+      getCustomersByState(datasetId),
+      getReviewDistribution(datasetId),
+      getPriceDistribution(datasetId),
+      getRevenueVsOrders(datasetId),
+      getCorrelationHeatmap(datasetId),
     ])
       .then(
         ([
@@ -93,7 +100,7 @@ function HistoricalAnalytics() {
       .catch(() => {
         setError("Failed to load historical data.");
       });
-  }, []);
+  }, [datasetId]);
 
   if (error) {
     return <p className="text-sm text-rose-600">{error}</p>;
