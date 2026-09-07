@@ -2,7 +2,7 @@
 
 ### Business Analytics & Forecasting Platform
 
-BusinessPulse is a full-stack business analytics platform that transforms e-commerce data into actionable insights through **historical analytics, current KPI monitoring, and machine-learning-based forecasting**.
+BusinessPulse is a full-stack business analytics platform that transforms e-commerce data into actionable insights through **historical analytics, current KPI monitoring, data quality analysis, business insights, and machine-learning-based forecasting**.
 
 The platform supports both the built-in **Olist Brazilian E-Commerce dataset** and **user-uploaded CSV datasets**, allowing users to upload, map, analyze, and forecast their own business data.
 
@@ -57,9 +57,55 @@ Monitor important business KPIs through a centralized dashboard.
 
 ---
 
+### 🧹 Data Quality
+
+Review the selected dataset for common data-quality issues before relying on its results.
+
+- Overall data quality score
+- Missing value checks
+- Duplicate row checks
+- Invalid date checks
+- Negative value checks
+- Column-level quality details
+- Quality status for each check
+- Dataset-specific quality analysis
+
+---
+
+### 💡 Business Insights
+
+BusinessPulse generates automated, human-readable observations from the selected business dataset.
+
+Insights can highlight:
+
+- Business performance patterns
+- Revenue trends
+- Order trends
+- Category performance
+- Customer-related patterns
+- Review-related observations
+- Important business changes
+- Dataset-aware business observations
+
+---
+
+### 👤 Profile
+
+The profile area provides account and dataset information in one place.
+
+- User name and email
+- Account status
+- Uploaded dataset count
+- Currently selected dataset
+- Quick access to Dashboard
+- Quick access to Insights
+- Quick access to Dataset Management
+
+---
+
 ### 🔮 Forecast & Predictions
 
-Predict future business performance using multiple machine-learning models.
+Predict future business performance and customer satisfaction using multiple machine-learning models.
 
 Forecasting is available for:
 
@@ -111,9 +157,13 @@ Save Dataset
     ↓
 Select Dataset
     ↓
+Data Quality
+    ↓
 Historical Analytics
     ↓
 Current KPIs
+    ↓
+Business Insights
     ↓
 Forecasting
 ```
@@ -132,6 +182,9 @@ Forecasting
 - Built-in Olist dataset
 - Custom dataset analysis
 - Dataset-aware forecasting
+- Data quality analysis
+- Business insights
+- User-specific dataset access
 
 Each authenticated user can access their own uploaded datasets.
 
@@ -207,9 +260,11 @@ The route layer handles HTTP requests and API endpoints.
 routes/
 ├── auth.py
 ├── current.py
+├── data_quality.py
 ├── dataset.py
 ├── forecast.py
-└── historical.py
+├── historical.py
+└── insights.py
 ```
 
 Responsibilities:
@@ -231,10 +286,12 @@ services/
 ├── auth_service.py
 ├── category_service.py
 ├── customer_service.py
+├── data_quality_service.py
 ├── dataset_data_service.py
 ├── dataset_service.py
 ├── forecast_service.py
 ├── heatmap_service.py
+├── insights_service.py
 ├── kpi_service.py
 ├── order_service.py
 ├── payment_service.py
@@ -292,6 +349,7 @@ The database layer manages:
 - Uploaded datasets
 - Dataset metadata
 - Normalized dataset information
+- User-specific dataset records
 
 ---
 
@@ -473,6 +531,9 @@ Column Mapping
 Data Normalization
      │
      ▼
+Data Quality Analysis
+     │
+     ▼
 Business Metrics
      │
      ├── Historical Analytics
@@ -487,7 +548,9 @@ The data-processing layer handles tasks such as:
 - Mapping user-defined columns
 - Renaming fields into standardized fields
 - Data transformation
+- Data quality analysis
 - Preparing business metrics
+- Preparing business insights
 - Preparing forecasting data
 
 ---
@@ -616,9 +679,21 @@ Provides detailed analysis of historical business performance.
 
 Displays business KPIs, recent orders, categories, and operational metrics.
 
+### Data Quality
+
+Reviews the selected dataset for missing values, duplicate rows, invalid dates, negative values, and column-level quality issues.
+
+### Business Insights
+
+Provides automated business observations based on the selected dataset and its performance metrics.
+
+### Profile
+
+Displays account information, uploaded dataset count, the currently selected dataset, and quick access to key areas of the platform.
+
 ### Forecast Predictions
 
-Displays machine-learning-based predictions for future business trends.
+Displays machine-learning-based predictions for future business trends and customer satisfaction.
 
 ---
 
@@ -636,6 +711,8 @@ The platform includes:
 - KPI cards
 - Data tables
 - Historical vs. predicted charts
+- Data quality summaries
+- Business insight cards
 
 ---
 
@@ -836,7 +913,6 @@ BusinessPulse/
 │   │   ├── exceptions.py
 │   │   └── main.py
 │   │
-│   ├── .env
 │   ├── .gitignore
 │   └── requirements.txt
 │
@@ -882,6 +958,18 @@ BusinessPulse/
 │
 └── README.md
 ```
+
+---
+
+# 🌐 Deployment
+
+BusinessPulse is deployed as a full-stack application.
+
+- Frontend: Vercel
+- Backend: Render
+- Database: MongoDB
+- Production source: GitHub `main` branch
+- Frontend and backend deployments are connected to the GitHub repository
 
 ---
 
@@ -943,7 +1031,7 @@ MONGODB_DATABASE=BusinessPulse
 
 JWT_SECRET_KEY=your_secret_key
 JWT_ALGORITHM=HS256
-ACCESS_TOKEN_EXPIRE_MINUTES=30
+JWT_EXPIRE_MINUTES=60
 ```
 
 Use your own secure values for production environments.
@@ -1058,11 +1146,13 @@ BusinessPulse provides a single platform where users can:
 3. Explore business patterns and relationships.
 4. Upload and analyze custom datasets.
 5. Map and normalize uploaded CSV data.
-6. Forecast future revenue, orders, and customers.
-7. Compare historical and predicted trends.
-8. Access functionality through structured REST APIs.
-9. Secure application resources using authentication and authorization.
-10. Maintain a modular and scalable codebase.
+6. Check dataset quality before relying on analytics.
+7. Generate automated business insights.
+8. Forecast future revenue, orders, and customer satisfaction.
+9. Compare historical and predicted trends.
+10. Access functionality through structured REST APIs.
+11. Secure application resources using authentication and authorization.
+12. Maintain a modular and scalable codebase.
 
 ---
 
@@ -1102,12 +1192,15 @@ BusinessPulse provides a single platform where users can:
 - Dataset preview
 - Column mapping
 - Data normalization
+- Data quality analysis
 - Multiple dataset management
 
 ### Analytics
 
 - Historical business analytics
 - KPI monitoring
+- Data quality analysis
+- Automated business insights
 - Interactive charts
 - Data tables
 - Correlation analysis
@@ -1119,7 +1212,7 @@ BusinessPulse provides a single platform where users can:
 - Random Forest Regression
 - Revenue forecasting
 - Order forecasting
-- Customer forecasting
+- Customer satisfaction forecasting
 - MAE
 - R² Score
 
@@ -1136,9 +1229,13 @@ Bring Business Data
         ↓
 Process & Normalize It
         ↓
+Check Data Quality
+        ↓
 Analyze Historical Performance
         ↓
 Monitor Current KPIs
+        ↓
+Generate Business Insights
         ↓
 Generate Future Predictions
         ↓
@@ -1151,7 +1248,6 @@ Make Data-Driven Decisions
 
 Potential future improvements include:
 
-- Cloud deployment
 - Automated model selection
 - Advanced forecasting models
 - Role-based access control
