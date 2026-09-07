@@ -33,34 +33,54 @@ app = FastAPI(
     version="1.0.0",
     summary="Business Analytics and Forecasting API",
     description=dedent("""
-    ## BusinessPulse API
+## BusinessPulse API
 
-    BusinessPulse is a Business Analytics Dashboard developed using FastAPI, React and Machine Learning.
+BusinessPulse is a business analytics and forecasting platform built with FastAPI, React, MongoDB, Pandas, and Machine Learning.
 
-    ### Features
+It allows authenticated users to analyze business performance, upload their own datasets, check data quality, discover business insights, and generate forecasts.
 
-    - Historical Analytics
-    - Current Business KPIs
-    - Revenue Forecasting
-    - Order Forecasting
-    - Customer Forecasting
-    - User Authentication
-    - JWT Authentication
-    - MongoDB User Management
-    - Interactive Dashboard Support
+### Features
 
-    ### Technologies
+- Historical Business Analytics
+- Current Business KPIs
+- Revenue Analysis
+- Order Analysis
+- Category Performance
+- Payment Distribution
+- Customer Distribution
+- Review Analysis
+- Revenue vs Orders Analysis
+- Correlation Analysis
+- Revenue Forecasting
+- Order Forecasting
+- Customer Satisfaction Forecasting
+- Custom Dataset Upload
+- Dataset Column Mapping
+- Dataset Management
+- Data Quality Analysis
+- Automated Business Insights
+- User Authentication
+- JWT Authentication
+- MongoDB User Management
 
-    - FastAPI
-    - Pandas
-    - Scikit-Learn
-    - PyMongo
-    - MongoDB
-    - JWT
-    - React
-    - Recharts
-    - Olist Brazilian E-Commerce Dataset
-    """),
+### Dataset Support
+
+BusinessPulse supports the built-in Olist Brazilian E-Commerce Dataset and user-uploaded CSV datasets.
+
+Uploaded datasets can be mapped to BusinessPulse standard fields before being used for analytics, data quality checks, insights, and forecasting.
+
+### Technologies
+
+- FastAPI
+- React
+- MongoDB
+- PyMongo
+- Pandas
+- Scikit-Learn
+- JWT
+- Recharts
+- Olist Brazilian E-Commerce Dataset
+"""),
     contact={
         "name": "Saurabh",
         "email": "saurabh200805@gmail.com",

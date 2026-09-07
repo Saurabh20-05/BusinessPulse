@@ -201,7 +201,7 @@ function Dataset() {
               </h2>
 
               <div className="mt-1.5 inline-flex items-center rounded-full bg-primary-50 px-3 py-1 text-xs font-medium text-primary-600">
-                ✦&nbsp; Built-in business dataset
+                Built-in business dataset
               </div>
             </div>
           </div>
@@ -243,7 +243,7 @@ function Dataset() {
               </h2>
 
               <div className="mt-1.5 inline-flex items-center rounded-full bg-violet-50 px-3 py-1 text-xs font-medium text-violet-600">
-                ✦&nbsp; Upload your own business data
+                Upload your own business data
               </div>
             </div>
           </div>
