@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 import {
   uploadDataset,
@@ -11,6 +12,8 @@ import {
 import ColumnMapper from "../components/ColumnMapper";
 
 function Dataset() {
+  const { t } = useTranslation();
+
   const [file, setFile] = useState(null);
   const [dataset, setDataset] = useState(null);
   const [mapping, setMapping] = useState({});
@@ -29,9 +32,7 @@ function Dataset() {
   };
 
   const handleDeleteDataset = async (datasetId, filename) => {
-    const confirmed = window.confirm(
-      `Are you sure you want to delete "${filename}"?`,
-    );
+    const confirmed = window.confirm(t("deleteConfirmation", { filename }));
 
     if (!confirmed) {
       return;
@@ -49,10 +50,10 @@ function Dataset() {
         setSelectedDataset(null);
       }
 
-      showNotification("Dataset deleted successfully.");
+      showNotification(t("datasetDeleted"));
     } catch (error) {
       showNotification(
-        error.response?.data?.detail || "Failed to delete dataset.",
+        error.response?.data?.detail || t("failedToDeleteDataset"),
         "error",
       );
     }
@@ -67,7 +68,7 @@ function Dataset() {
     } catch (error) {
       console.error("Failed to preview dataset:", error);
 
-      showNotification("Failed to load dataset preview.", "error");
+      showNotification(t("failedToLoadPreview"), "error");
     }
   };
 
@@ -103,12 +104,12 @@ function Dataset() {
       setDataset(response.data);
       setFile(null);
 
-      showNotification("Dataset uploaded successfully.");
+      showNotification(t("datasetUploaded"));
     } catch (error) {
       console.error("Upload failed:", error);
 
       showNotification(
-        error.response?.data?.detail || "Dataset upload failed.",
+        error.response?.data?.detail || t("datasetUploadFailed"),
         "error",
       );
     }
@@ -120,12 +121,12 @@ function Dataset() {
     try {
       await configureDataset(dataset.dataset_id, mapping);
 
-      showNotification("Column mapping saved successfully.");
+      showNotification(t("columnMappingSaved"));
     } catch (error) {
       console.error("Mapping failed:", error);
 
       showNotification(
-        error.response?.data?.detail || "Failed to save column mapping.",
+        error.response?.data?.detail || t("failedToSaveMapping"),
         "error",
       );
     }
@@ -135,14 +136,14 @@ function Dataset() {
     localStorage.setItem("selected_dataset", "olist");
     setSelectedDataset("olist");
 
-    showNotification("Olist Dataset selected successfully.");
+    showNotification(t("olistSelected"));
   };
 
   const handleSelectDataset = (datasetId, filename) => {
     setSelectedDataset(datasetId);
     localStorage.setItem("selected_dataset", datasetId);
 
-    showNotification(`${filename} selected successfully.`);
+    showNotification(t("datasetSelected", { filename }));
   };
 
   const selectedDatasetName =
@@ -171,17 +172,17 @@ function Dataset() {
       {/* Page Header */}
       <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
         <div>
-          <h1 className="text-2xl font-semibold text-slate-900">Dataset</h1>
+          <h1 className="text-2xl font-semibold text-slate-900">
+            {t("datasetPage")}
+          </h1>
 
-          <p className="mt-1 text-sm text-slate-500">
-            Choose the data source you want to analyze.
-          </p>
+          <p className="mt-1 text-sm text-slate-500">{t("datasetSubtitle")}</p>
         </div>
 
         {selectedDataset && (
           <div className="inline-flex w-fit items-center gap-2 rounded-full border border-emerald-200 bg-emerald-50 px-4 py-2 text-sm font-medium text-emerald-700">
             <span className="h-2 w-2 rounded-full bg-emerald-500" />
-            Using: {selectedDatasetName}
+            {t("using")}: {selectedDatasetName}
           </div>
         )}
       </div>
@@ -197,25 +198,24 @@ function Dataset() {
 
             <div className="min-w-0">
               <h2 className="text-xl font-semibold text-slate-900">
-                Olist Dataset
+                {t("builtInDataset")}
               </h2>
 
               <div className="mt-1.5 inline-flex items-center rounded-full bg-primary-50 px-3 py-1 text-xs font-medium text-primary-600">
-                Built-in business dataset
+                {t("builtInDataset")}
               </div>
             </div>
           </div>
 
           <p className="mt-5 max-w-xl text-sm leading-6 text-slate-500">
-            Analyze the built-in Olist Brazilian E-Commerce dataset with
-            BusinessPulse analytics, current KPIs, and forecasting features.
+            {t("builtInDescription")}
           </p>
 
           <div className="mt-6 border-t border-slate-200 pt-5">
             <div className="flex items-center justify-between gap-4">
               <div className="inline-flex items-center rounded-lg bg-slate-100 px-3 py-2">
                 <p className="text-sm font-medium text-slate-600">
-                  Ready to analyze
+                  {t("readyToAnalyze")}
                 </p>
               </div>
 
@@ -223,7 +223,7 @@ function Dataset() {
                 onClick={handleSelectOlist}
                 className="inline-flex items-center gap-2 rounded-lg bg-primary-600 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-primary-700"
               >
-                Use Olist Dataset
+                {t("useOlistDataset")}
                 <span className="text-base">→</span>
               </button>
             </div>
@@ -239,18 +239,17 @@ function Dataset() {
 
             <div className="min-w-0">
               <h2 className="text-xl font-semibold text-slate-900">
-                Upload Dataset
+                {t("uploadDataset")}
               </h2>
 
               <div className="mt-1.5 inline-flex items-center rounded-full bg-violet-50 px-3 py-1 text-xs font-medium text-violet-600">
-                Upload your own business data
+                {t("uploadOwnData")}
               </div>
             </div>
           </div>
 
           <p className="mt-5 max-w-xl text-sm leading-6 text-slate-500">
-            Upload a CSV file containing your business or sales data and map its
-            columns to BusinessPulse fields.
+            {t("uploadDescription")}
           </p>
 
           <div className="mt-5 rounded-xl border border-dashed border-slate-300 bg-slate-50 p-4">
@@ -268,7 +267,7 @@ function Dataset() {
                 </span>
 
                 <span className="ml-3 text-xs font-medium text-emerald-600">
-                  Ready
+                  {t("ready")}
                 </span>
               </div>
             )}
@@ -280,7 +279,7 @@ function Dataset() {
               disabled={!file}
               className="inline-flex items-center gap-2 rounded-lg bg-primary-600 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-primary-700 disabled:cursor-not-allowed disabled:opacity-40"
             >
-              Upload CSV
+              {t("uploadCsv")}
               <span className="text-base">→</span>
             </button>
           </div>
@@ -293,7 +292,7 @@ function Dataset() {
           <div className="flex flex-col gap-2 border-b border-slate-200 px-6 py-5 sm:flex-row sm:items-center sm:justify-between">
             <div>
               <h2 className="text-lg font-semibold text-slate-900">
-                Dataset Preview
+                {t("datasetPreview")}
               </h2>
 
               <p className="mt-1 text-sm text-slate-500">{dataset.filename}</p>
@@ -301,11 +300,11 @@ function Dataset() {
 
             <div className="flex gap-2">
               <span className="rounded-full bg-slate-100 px-3 py-1 text-xs font-medium text-slate-600">
-                {dataset.rows} rows
+                {t("rows", { rows: dataset.rows })}
               </span>
 
               <span className="rounded-full bg-slate-100 px-3 py-1 text-xs font-medium text-slate-600">
-                {dataset.columns.length} columns
+                {t("columns", { count: dataset.columns.length })}
               </span>
             </div>
           </div>
@@ -360,7 +359,7 @@ function Dataset() {
               onClick={handleSaveMapping}
               className="rounded-lg bg-primary-600 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-primary-700"
             >
-              Save Mapping
+              {t("saveMapping")}
             </button>
           </div>
         </div>
@@ -372,17 +371,17 @@ function Dataset() {
           <div className="flex items-center justify-between">
             <div>
               <h2 className="text-lg font-semibold text-slate-900">
-                Uploaded Datasets
+                {t("uploadedDatasets")}
               </h2>
 
               <p className="mt-1 text-sm text-slate-500">
-                Select a previously uploaded dataset to analyze.
+                {t("uploadedDatasetsDescription")}
               </p>
             </div>
 
             {datasets.length > 0 && (
               <span className="rounded-full bg-slate-100 px-3 py-1 text-xs font-medium text-slate-600">
-                {datasets.length} datasets
+                {t("datasets", { count: datasets.length })}
               </span>
             )}
           </div>
@@ -390,10 +389,10 @@ function Dataset() {
 
         {datasets.length === 0 ? (
           <div className="px-6 py-10 text-center">
-            <p className="text-sm text-slate-500">No uploaded datasets yet.</p>
+            <p className="text-sm text-slate-500">{t("noUploadedDatasets")}</p>
 
             <p className="mt-1 text-xs text-slate-400">
-              Upload a CSV above to get started.
+              {t("uploadCsvToGetStarted")}
             </p>
           </div>
         ) : (
@@ -435,14 +434,14 @@ function Dataset() {
                           : "bg-primary-600 text-white hover:bg-primary-700"
                       }`}
                     >
-                      {isSelected ? "Selected" : "Select"}
+                      {isSelected ? t("selected") : t("select")}
                     </button>
 
                     <button
                       onClick={() => handlePreviewDataset(item.dataset_id)}
                       className="rounded-lg border border-slate-300 bg-white px-4 py-2 text-sm font-medium text-slate-700 transition hover:bg-slate-50"
                     >
-                      Preview
+                      {t("preview")}
                     </button>
 
                     <button
@@ -451,7 +450,7 @@ function Dataset() {
                       }
                       className="rounded-lg bg-red-600 px-4 py-2 text-sm font-medium text-white transition hover:bg-red-700"
                     >
-                      Delete
+                      {t("delete")}
                     </button>
                   </div>
                 </div>
@@ -470,7 +469,8 @@ function Dataset() {
                   {previewData.filename}
                 </h2>
                 <p className="mt-1 text-sm text-slate-500">
-                  {previewData.rows} rows · {previewData.columns.length} columns
+                  {t("rows", { rows: previewData.rows })} ·{" "}
+                  {t("columns", { count: previewData.columns.length })}
                 </p>
               </div>
 
@@ -525,7 +525,7 @@ function Dataset() {
                 }}
                 className="rounded-lg bg-primary-600 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-primary-700"
               >
-                Close
+                {t("close")}
               </button>
             </div>
           </div>

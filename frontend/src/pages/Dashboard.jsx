@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { getMyDatasets } from "../services/api";
+import { useTranslation } from "react-i18next";
 
 import Sidebar from "../components/Sidebar";
 import Tabs from "../components/Tabs";
@@ -10,35 +11,36 @@ import HistoricalAnalytics from "./HistoricalAnalytics";
 import CurrentDashboard from "./CurrentDashboard";
 import ForecastPredictions from "./ForecastPredictions";
 
-const dashboardTabs = [
-  {
-    key: "historical",
-    label: "Historical Analytics",
-    subtitle: "Analyze historical sales, orders, and customer trends.",
-  },
-  {
-    key: "current",
-    label: "Current Dashboard",
-    subtitle: "Monitor important business KPIs in real time.",
-  },
-  {
-    key: "forecast",
-    label: "Forecast & Predictions",
-    subtitle: "Predict future sales, orders, and business growth.",
-  },
-];
-
 function Dashboard() {
+  const { t } = useTranslation();
 
-    const [selectedDatasetName, setSelectedDatasetName] =
-    useState("Olist Dataset");
+  const dashboardTabs = [
+    {
+      key: "historical",
+      label: t("historicalAnalytics"),
+      subtitle: t("historicalAnalyticsSubtitle"),
+    },
+    {
+      key: "current",
+      label: t("currentDashboard"),
+      subtitle: t("currentDashboardSubtitle"),
+    },
+    {
+      key: "forecast",
+      label: t("forecastPredictions"),
+      subtitle: t("forecastPredictionsSubtitle"),
+    },
+  ];
 
-      useEffect(() => {
+  const [selectedDatasetName, setSelectedDatasetName] =
+    useState(t("olistDataset"));
+
+  useEffect(() => {
     const loadSelectedDataset = async () => {
       const savedDataset = localStorage.getItem("selected_dataset");
 
       if (!savedDataset || savedDataset === "olist") {
-        setSelectedDatasetName("Olist Dataset");
+        setSelectedDatasetName(t("olistDataset"));
         return;
       }
 
@@ -46,27 +48,23 @@ function Dashboard() {
         const response = await getMyDatasets();
 
         const selected = response.data.find(
-          (dataset) => dataset.dataset_id === savedDataset
+          (dataset) => dataset.dataset_id === savedDataset,
         );
 
         if (selected) {
           setSelectedDatasetName(selected.filename);
         } else {
-          setSelectedDatasetName("Custom Dataset");
+          setSelectedDatasetName(t("customDataset"));
         }
       } catch (error) {
-        console.error(
-          "Failed to load selected dataset:",
-          error
-        );
+        console.error("Failed to load selected dataset:", error);
 
-        setSelectedDatasetName("Custom Dataset");
+        setSelectedDatasetName(t("customDataset"));
       }
     };
 
     loadSelectedDataset();
-  }, []);
-
+  }, [t]);
 
   const [searchParams] = useSearchParams();
 
@@ -75,30 +73,36 @@ function Dashboard() {
   const [activeTab, setActiveTab] = useState(
     dashboardTabs.some((tab) => tab.key === initialTab)
       ? initialTab
-      : "historical"
+      : "historical",
   );
 
   const currentTab = dashboardTabs.find(
-    (tab) => tab.key === activeTab
+    (tab) => tab.key === activeTab,
   );
 
   return (
-    <div className="bg-slate-200 min-h-screen">
-      <div className="w-full px-6 py-6 flex gap-6">
-        <Sidebar activeTab={activeTab} onSelect={setActiveTab} />
+    <div className="min-h-screen bg-slate-200">
+      <div className="flex w-full gap-6 px-6 py-6">
+        <Sidebar
+          activeTab={activeTab}
+          onSelect={setActiveTab}
+        />
 
-        <main className="flex-1 min-w-0">
+        <main className="min-w-0 flex-1">
           <Tabs
             tabs={dashboardTabs}
             activeTab={activeTab}
             onSelect={setActiveTab}
           />
 
-          <PageHeader title={currentTab.label} subtitle={currentTab.subtitle} />
+          <PageHeader
+            title={currentTab.label}
+            subtitle={currentTab.subtitle}
+          />
 
-                    <div className="mb-5 flex items-center justify-between rounded-xl border border-slate-200 bg-white px-4 py-3 shadow-sm">
+          <div className="mb-5 flex items-center justify-between rounded-xl border border-slate-200 bg-white px-4 py-3 shadow-sm">
             <span className="text-sm font-medium text-slate-500">
-              Data Source
+              {t("dataSource")}
             </span>
 
             <span className="rounded-full bg-primary-50 px-3 py-1 text-sm font-semibold text-primary-600">
@@ -107,11 +111,17 @@ function Dashboard() {
           </div>
 
           {/* Show only the section selected by the user */}
-          {activeTab === "historical" && <HistoricalAnalytics />}
+          {activeTab === "historical" && (
+            <HistoricalAnalytics />
+          )}
 
-          {activeTab === "current" && <CurrentDashboard />}
+          {activeTab === "current" && (
+            <CurrentDashboard />
+          )}
 
-          {activeTab === "forecast" && <ForecastPredictions />}
+          {activeTab === "forecast" && (
+            <ForecastPredictions />
+          )}
         </main>
       </div>
     </div>

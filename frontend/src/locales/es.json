@@ -1,0 +1,383 @@
+{
+  "home": "Inicio",
+  "dashboard": "Panel",
+  "dataset": "Conjunto de datos",
+  "insights": "Perspectivas",
+  "dataQuality": "Calidad de datos",
+  "profile": "Perfil",
+  "logout": "Cerrar sesión",
+  "login": "Iniciar sesión",
+  "signup": "Registrarse",
+  "signUp": "Registrarse",
+
+  "datasetPage": "Conjunto de datos",
+  "datasetSubtitle": "Elige la fuente de datos que quieres analizar.",
+  "builtInDataset": "Conjunto de datos empresarial integrado",
+  "builtInDescription": "Analiza el conjunto de datos integrado de comercio electrónico brasileño de Olist con las funciones de análisis, KPI actuales y previsión de BusinessPulse.",
+  "readyToAnalyze": "Listo para analizar",
+  "useOlistDataset": "Usar conjunto de datos de Olist",
+
+  "uploadDataset": "Cargar conjunto de datos",
+  "uploadOwnData": "Carga tus propios datos empresariales",
+  "uploadDescription": "Carga un archivo CSV que contenga tus datos empresariales o de ventas y asigna sus columnas a los campos de BusinessPulse.",
+  "uploadCsv": "Cargar CSV",
+  "ready": "Listo",
+  "using": "Usando",
+
+  "datasetPreview": "Vista previa del conjunto de datos",
+  "rows": "{{rows}} filas",
+  "columns": "{{count}} columnas",
+  "saveMapping": "Guardar asignación",
+
+  "uploadedDatasets": "Conjuntos de datos cargados",
+  "uploadedDatasetsDescription": "Selecciona un conjunto de datos cargado anteriormente para analizarlo.",
+  "datasets": "{{count}} conjuntos de datos",
+  "noUploadedDatasets": "Todavía no hay conjuntos de datos cargados.",
+  "uploadCsvToGetStarted": "Carga un CSV arriba para comenzar.",
+
+  "selected": "Seleccionado",
+  "select": "Seleccionar",
+  "preview": "Vista previa",
+  "delete": "Eliminar",
+  "close": "Cerrar",
+
+  "deleteConfirmation": "¿Seguro que quieres eliminar \"{{filename}}\"?",
+  "datasetDeleted": "Conjunto de datos eliminado correctamente.",
+  "failedToDeleteDataset": "No se pudo eliminar el conjunto de datos.",
+  "failedToLoadPreview": "No se pudo cargar la vista previa del conjunto de datos.",
+  "datasetUploaded": "Conjunto de datos cargado correctamente.",
+  "datasetUploadFailed": "No se pudo cargar el conjunto de datos.",
+  "columnMappingSaved": "Asignación de columnas guardada correctamente.",
+  "failedToSaveMapping": "No se pudo guardar la asignación de columnas.",
+  "olistSelected": "Conjunto de datos de Olist seleccionado correctamente.",
+  "datasetSelected": "{{filename}} seleccionado correctamente.",
+
+  "date": "Fecha",
+  "revenue": "Ingresos",
+  "orders": "Pedidos",
+  "customers": "Clientes",
+  "category": "Categoría",
+  "state": "Estado",
+  "paymentMethod": "Método de pago",
+  "reviewScore": "Puntuación de reseñas",
+  "price": "Precio",
+
+  "mapColumns": "Asignar columnas",
+  "mapColumnsDescription": "Relaciona las columnas de tu CSV con los campos de BusinessPulse.",
+  "selectColumn": "Seleccionar columna",
+
+  "homeHeroLabel": "Plataforma de Analítica Empresarial",
+  "homeHeroTitle": "Convierte los Datos Empresariales en",
+  "homeHeroTitleHighlight": "Mejores Decisiones",
+  "homeHeroDescription": "Analiza tus datos empresariales, supervisa el rendimiento, identifica problemas de datos y descubre información útil para tomar mejores decisiones.",
+  "exploreDashboard": "Explorar Panel",
+
+  "analyze": "Analizar",
+  "businessAnalytics": "Analítica Empresarial",
+  "businessAnalyticsDescription": "Explora ingresos, pedidos, clientes, categorías, pagos y reseñas.",
+  "exploreAnalytics": "Explorar Analítica",
+
+  "monitor": "Supervisar",
+  "currentDashboard": "Panel Actual",
+  "currentDashboardDescription": "Controla tus métricas empresariales más importantes en un solo lugar.",
+  "viewDashboard": "Ver Panel",
+
+  "understand": "Comprender",
+  "businessInsights": "Perspectivas Empresariales",
+  "businessInsightsDescription": "Obtén información clara de tus datos e identifica tendencias importantes.",
+  "viewInsights": "Ver Perspectivas",
+
+  "forecast": "Predecir",
+  "futurePredictions": "Predicciones Futuras",
+  "futurePredictionsDescription": "Utiliza el aprendizaje automático para estimar el rendimiento empresarial futuro.",
+  "viewForecast": "Ver Predicciones",
+
+  "knowYourData": "Conoce Tus Datos Antes de Analizarlos",
+  "dataQualityDescription": "Comprueba valores faltantes, duplicados, fechas no válidas y otros problemas de datos antes de tomar decisiones empresariales.",
+  "checkDataQuality": "Comprobar Calidad de Datos",
+
+  "onePlatform": "Una Plataforma. Información Completa.",
+  "fromDataToDecisions": "De los Datos a las Decisiones",
+  "aboutDescription": "BusinessPulse reúne analítica, calidad de datos, perspectivas y predicciones en un solo lugar para ayudarte a comprender el rendimiento y tomar mejores decisiones empresariales.",
+
+  "simpleWorkflow": "Flujo de Trabajo Sencillo",
+  "howBusinessPulseWorks": "Cómo Funciona BusinessPulse",
+  "workflowDescription": "Carga tus datos, prepáralos, comprueba su calidad y conviértelos en información empresarial útil.",
+
+  "uploadData": "Cargar Datos",
+  "uploadDataDescription": "Carga tus datos empresariales o de ventas como un archivo CSV.",
+
+  "mapColumnsHome": "Asignar Columnas",
+  "mapColumnsDescriptionHome": "Relaciona las columnas de tu conjunto de datos con los campos utilizados por BusinessPulse.",
+
+  "checkData": "Comprobar Datos",
+  "checkDataDescription": "Revisa los valores faltantes, duplicados y no válidos antes de analizar.",
+
+  "analyzeData": "Analizar",
+  "analyzeDataDescription": "Explora el rendimiento, las perspectivas y las predicciones de tus datos.",
+  "askYourData": "Pregunta a tus Datos",
+  "askYourDataDescription": "Haz preguntas en lenguaje natural sobre tu conjunto de datos empresarial seleccionado y obtén respuestas claras.",
+
+  "readyToGetStarted": "¿Listo para Empezar?",
+  "startExploringData": "Comienza a Explorar Tus Datos Empresariales",
+  "finalCtaDescription": "Carga tu conjunto de datos y utiliza BusinessPulse para comprender el rendimiento, descubrir información útil y planificar el futuro.",
+  "getStarted": "Comenzar",
+
+  "historicalAnalytics": "Análisis histórico",
+  "historicalAnalyticsSubtitle": "Analiza las ventas, los pedidos y las tendencias de clientes anteriores.",
+
+  "currentDashboardSubtitle": "Supervisa los KPI empresariales importantes en tiempo real.",
+
+  "forecastPredictions": "Pronósticos y predicciones",
+  "forecastPredictionsSubtitle": "Predice las ventas futuras, los pedidos y el crecimiento empresarial.",
+
+  "failedToLoadHistoricalData": "No se pudieron cargar los datos históricos.",
+  "loadingHistoricalData": "Cargando datos históricos...",
+
+  "monthlyRevenue": "Ingresos mensuales",
+  "monthlyRevenueDescription": "Ingresos mensuales.",
+
+  "monthlyOrders": "Pedidos mensuales",
+  "monthlyOrdersDescription": "Pedidos mensuales.",
+
+  "topCategories": "Principales categorías",
+  "topCategoriesDescription": "Principales categorías por ingresos.",
+
+  "revenueByCategory": "Ingresos por categoría",
+  "revenueByCategoryDescription": "Las 10 principales categorías de productos por ingresos.",
+
+  "customersByState": "Clientes por estado",
+  "customersByStateDescription": "Distribución de clientes por estado.",
+
+  "reviewScores": "Puntuaciones de reseñas",
+  "reviewScoresDescription": "Distribución de las puntuaciones de reseñas.",
+
+  "paymentMethods": "Métodos de pago",
+  "paymentMethodsDescription": "Distribución de los métodos de pago.",
+
+  "priceDistribution": "Distribución de precios",
+  "priceDistributionDescription": "Distribución de los precios de los productos.",
+
+  "revenueVsOrders": "Ingresos frente a pedidos",
+  "revenueVsOrdersDescription": "Ingresos comparados con los pedidos.",
+
+  "correlationHeatmap": "Mapa de correlación",
+  "correlationHeatmapDescription": "Correlación entre las métricas empresariales.",
+
+  "failedToLoadDashboardData": "No se pudieron cargar los datos del panel.",
+  "loadingDashboardData": "Cargando datos del panel...",
+
+  "totalRevenue": "Ingresos totales",
+  "totalOrders": "Pedidos totales",
+  "totalCustomers": "Clientes totales",
+  "totalProducts": "Productos totales",
+  "averageReview": "Reseña promedio",
+  "averagePayment": "Pago promedio",
+  "topCategory": "Categoría principal",
+  "topProduct": "Producto principal",
+
+  "recentOrders": "Pedidos recientes",
+  "recentOrdersDescription": "Pedidos realizados recientemente.",
+  "orderId": "ID del pedido",
+  "amount": "Importe",
+  "status": "Estado",
+
+  "failedToLoadForecastData": "No se pudieron cargar los datos de previsión.",
+  "loadingForecastData": "Cargando datos de previsión...",
+  "notEnoughHistoricalData": "No hay suficientes datos históricos disponibles para realizar la previsión.",
+
+  "revenueForecast": "Previsión de ingresos",
+  "revenueForecastDescription": "Previsión de ingresos para los próximos 4 meses.",
+
+  "orderForecast": "Previsión de pedidos",
+  "orderForecastDescription": "Previsión de pedidos para los próximos 4 meses.",
+
+  "customerSatisfactionForecast": "Previsión de satisfacción del cliente",
+  "customerSatisfactionForecastDescription": "Previsión de la puntuación media de las reseñas de clientes para los próximos 4 meses.",
+
+  "forecastControls": "Controles de previsión",
+  "forecastControlsDescription": "Elige qué quieres predecir y el modelo de aprendizaje automático que quieres utilizar.",
+  "predictionType": "Tipo de predicción",
+  "selectModel": "Seleccionar modelo",
+  "generateForecast": "Generar previsión",
+  "modelUsed": "Modelo utilizado",
+  "modelPerformance": "Rendimiento del modelo",
+  "modelPerformanceDescription": "Métricas de rendimiento calculadas a partir del modelo seleccionado.",
+  "meanAbsoluteError": "Error absoluto medio",
+  "rootMeanSquaredError": "Raíz del error cuadrático medio",
+  "coefficientOfDetermination": "Coeficiente de determinación",
+
+  "customerSatisfaction": "Satisfacción del cliente",
+  "linearRegression": "Regresión lineal",
+  "randomForestRegression": "Regresión de bosque aleatorio",
+  "polynomialRegression": "Regresión polinómica",
+
+  "businessIntelligence": "Inteligencia empresarial",
+  "businessInsightsPageDescription": "Descubre patrones, tendencias y oportunidades clave a partir de tus datos empresariales.",
+  "dataSource": "Fuente de datos",
+  "olistDataset": "Conjunto de datos de Olist",
+  "customDataset": "Conjunto de datos personalizado",
+  "keyFindings": "Hallazgos clave",
+  "keyFindingsDescription": "Patrones importantes identificados en el conjunto de datos seleccionado.",
+  "noInsightsAvailable": "No hay información disponible para este conjunto de datos.",
+
+  "failedToLoadDataQuality": "No se pudo cargar la información sobre la calidad de los datos.",
+  "loadingDataQuality": "Cargando calidad de los datos...",
+
+  "dataQualityPageSubtitle": "Revisa tus datos en busca de valores faltantes, duplicados o no válidos.",
+
+  "totalRows": "Filas totales",
+  "totalColumns": "Columnas totales",
+  "missingValues": "Valores faltantes",
+  "duplicateRows": "Filas duplicadas",
+  "invalidDates": "Fechas no válidas",
+  "negativeValues": "Valores negativos",
+
+  "dataQualityScore": "Puntuación de calidad de los datos",
+  "dataQualityScoreDescription": "Una vista rápida de qué tan limpios y confiables son tus datos.",
+
+  "excellent": "Excelente",
+  "good": "Bueno",
+  "worthChecking": "Vale la pena revisar",
+  "needsReview": "Requiere revisión",
+  "outOf100": "de 100",
+  "ofData": "de los datos",
+
+  "qualityExcellentMessage": "Tus datos se ven limpios y están listos para usar.",
+  "qualityGoodMessage": "Tus datos se ven bien, aunque hay algunas cosas que conviene revisar.",
+  "qualityNeedsReviewMessage": "Hay algunos problemas en tus datos que deberían revisarse.",
+
+  "qualityChecks": "Comprobaciones de calidad",
+  "qualityChecksDescription": "Una revisión rápida de los problemas de datos más comunes.",
+
+  "columnQuality": "Calidad de las columnas",
+  "columnQualityDescription": "Consulta de un vistazo el estado de cada columna.",
+
+  "column": "Columna",
+  "type": "Tipo",
+  "missing": "Faltantes",
+  "unique": "Únicos",
+
+  "revenueTrendTitle": "Tendencia de ingresos",
+  "revenueIncreasedMessage": "Los ingresos aumentaron un {{percentage}}% desde el inicio hasta el final del conjunto de datos.",
+  "revenueDecreasedMessage": "Los ingresos disminuyeron un {{percentage}}% desde el inicio hasta el final del conjunto de datos.",
+  "revenueStableMessage": "Los ingresos se mantuvieron estables desde el inicio hasta el final del conjunto de datos.",
+
+  "revenueGrowthAlertTitle": "Alerta de crecimiento de ingresos",
+  "revenueGrowthAlertMessage": "Los ingresos aumentaron un {{percentage}}%. El negocio muestra un fuerte crecimiento de los ingresos.",
+
+  "revenueDeclineAlertTitle": "Alerta de disminución de ingresos",
+  "revenueDeclineAlertMessage": "Los ingresos disminuyeron un {{percentage}}%. El negocio debería revisar el rendimiento reciente de las ventas e identificar los factores que contribuyen a la disminución.",
+
+  "topPerformingCategoryTitle": "Categoría con mejor rendimiento",
+  "topPerformingCategoryMessage": "{{category}} generó los mayores ingresos con {{revenue}} en ventas totales.",
+
+  "customerActivityTitle": "Actividad de clientes",
+  "customerActivityMessage": "El conjunto de datos contiene aproximadamente {{customers}} clientes.",
+
+  "customerSatisfactionTitle": "Satisfacción del cliente",
+  "customerSatisfactionStrongMessage": "La satisfacción del cliente es alta, con una puntuación media de reseñas de {{score}} sobre 5.",
+  "customerSatisfactionModerateMessage": "La satisfacción del cliente es moderada, con una puntuación media de reseñas de {{score}} sobre 5.",
+  "customerSatisfactionAttentionMessage": "La satisfacción del cliente requiere atención, con una puntuación media de reseñas de {{score}} sobre 5.",
+
+  "businessRecommendationTitle": "Recomendación empresarial",
+  "businessRecommendationStrongMessage": "Mantén la experiencia actual del cliente y continúa centrándote en la calidad del servicio.",
+  "businessRecommendationModerateMessage": "Concéntrate en mejorar la experiencia del cliente para aumentar la satisfacción general.",
+  "businessRecommendationAttentionMessage": "La satisfacción del cliente requiere atención. Revisa la calidad de los productos y servicios para identificar las principales causas de las bajas puntuaciones.",
+
+  "totalBusinessRevenueTitle": "Ingresos totales del negocio",
+  "totalBusinessRevenueMessage": "El conjunto de datos registra unos ingresos totales de {{revenue}}.",
+
+  "averageOrderValueTitle": "Valor medio del pedido",
+  "averageOrderValueMessage": "El valor medio del pedido es {{value}}.",
+
+  "mostUsedPaymentMethodTitle": "Método de pago más utilizado",
+  "mostUsedPaymentMethodMessage": "{{paymentMethod}} es el método de pago utilizado con mayor frecuencia en el conjunto de datos.",
+
+  "growthOpportunityTitle": "Oportunidad de crecimiento",
+  "growthOpportunityMessage": "{{category}} representa el {{percentage}}% de los ingresos totales. Esta categoría podría ser una buena candidata para recibir un mayor enfoque promocional.",
+
+  "businessAlertTitle": "Alerta empresarial",
+  "businessAlertMessage": "{{category}} representa el {{percentage}}% de los ingresos totales. El negocio depende en gran medida de esta categoría.",
+
+  "overallBusinessInterpretationTitle": "Interpretación general del negocio",
+  "interpretationTopCategory": "{{category}} es la categoría líder en ingresos y representa el {{percentage}}% de los ingresos totales.",
+  "interpretationRevenueIncreased": "Los ingresos aumentaron un {{percentage}}% desde el inicio hasta el final del conjunto de datos.",
+  "interpretationRevenueDeclined": "Los ingresos disminuyeron un {{percentage}}% desde el inicio hasta el final del conjunto de datos.",
+  "interpretationRevenueStable": "Los ingresos se mantuvieron estables desde el inicio hasta el final del conjunto de datos.",
+  "interpretationSatisfactionStrong": "La satisfacción del cliente se mantiene alta.",
+  "interpretationSatisfactionModerate": "La satisfacción del cliente es moderada y podría mejorarse.",
+  "interpretationSatisfactionAttention": "La satisfacción del cliente requiere atención.",
+
+  "failedToLoadProfile": "No se pudo cargar la información del perfil.",
+  "loadingProfile": "Cargando perfil...",
+
+  "profileSubtitle": "Administra tu cuenta y tu actividad en BusinessPulse.",
+  "profileCardDescription": "Tu cuenta de BusinessPulse.",
+  "businessPulseUser": "Usuario de BusinessPulse",
+
+  "personalInformation": "Información personal",
+  "accountDetails": "Detalles de tu cuenta.",
+  "fullName": "Nombre completo",
+  "emailAddress": "Dirección de correo electrónico",
+  "accountStatus": "Estado de la cuenta",
+  "active": "Activo",
+
+  "yourData": "Tus datos",
+  "yourDataDescription": "Tus conjuntos de datos y la fuente de datos actual.",
+  "currentDataset": "Conjunto de datos actual",
+
+  "quickActions": "Acciones rápidas",
+  "quickActionsDescription": "Accede rápidamente a las secciones de BusinessPulse que más utilizas.",
+  "manageDatasets": "Administrar conjuntos de datos",
+
+  "welcomeBack": "Bienvenido de nuevo",
+  "signInBusinessPulse": "Inicia sesión en tu cuenta de BusinessPulse",
+  "email": "Correo electrónico",
+  "enterYourEmail": "Introduce tu correo electrónico",
+  "password": "Contraseña",
+  "enterYourPassword": "Introduce tu contraseña",
+  "signingIn": "Iniciando sesión...",
+  "signIn": "Iniciar sesión",
+  "dontHaveAccount": "¿No tienes una cuenta?",
+  "invalidEmailPassword": "Correo electrónico o contraseña no válidos.",
+
+  "createAccount": "Crear cuenta",
+  "createBusinessPulseAccount": "Crea tu cuenta de BusinessPulse",
+  "name": "Nombre",
+  "enterYourName": "Introduce tu nombre",
+  "createPassword": "Crea una contraseña",
+  "creatingAccount": "Creando cuenta...",
+  "alreadyHaveAccount": "¿Ya tienes una cuenta?",
+  "unableToCreateAccount": "No se pudo crear la cuenta.",
+  "averageReviewScore": "Puntuación media de reseñas",
+
+  "aiAnalytics": "Análisis con IA",
+  "querySelectedDataset": "Haz preguntas sobre tu conjunto de datos seleccionado en lenguaje natural.",
+  "loadingDataset": "Cargando conjunto de datos...",
+  "noDatasetSelected": "No se ha seleccionado ningún conjunto de datos",
+  "selectedFromDataset": "Seleccionado del conjunto de datos",
+  "selectDatasetFirst": "Selecciona un conjunto de datos en la página de datos antes de usar el análisis con IA.",
+  "dataAnalysis": "Análisis de datos",
+  "askQuestionsSelectedDataset": "Haz preguntas sobre el conjunto de datos seleccionado.",
+  "startWithQuestion": "Empieza con una pregunta",
+  "askAboutData": "Pregunta sobre totales, promedios, cantidades, categorías u otros datos de tu conjunto de datos.",
+  "howManyRecords": "¿Cuántos registros hay en el conjunto de datos?",
+  "totalRevenueQuestion": "¿Cuáles son los ingresos totales?",
+  "averageRevenueQuestion": "¿Cuál es el ingreso promedio?",
+  "topCategoryQuestion": "¿Qué categoría generó más ingresos?",
+  "result": "Resultado",
+  "noMatchingData": "No se encontraron datos coincidentes.",
+  "processingQuestion": "Procesando tu pregunta...",
+  "askQuestionPlaceholder": "Haz una pregunta sobre tus datos...",
+  "selectDatasetPlaceholder": "Selecciona primero un conjunto de datos",
+  "processing": "Procesando",
+  "ask": "Preguntar",
+  "datasetUnavailable": "El conjunto de datos seleccionado ya no está disponible. Selecciona otro conjunto de datos desde la página de datos.",
+  "unableToLoadDataset": "No se pudo cargar el conjunto de datos.",
+  "unableToProcessQuestion": "No se pudo procesar la pregunta.",
+  "validate": "Validar",
+  "viewDataQuality": "Comprobar calidad de datos",
+  "aiAnalyticsDescription": "Haz preguntas sobre tus datos empresariales en lenguaje natural.",
+  "exploreAIAnalytics": "Explorar análisis con IA"
+}

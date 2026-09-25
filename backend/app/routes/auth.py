@@ -111,3 +111,4 @@ async def get_me(
 ):
     # Validate the token and get the logged-in user's details
     return await auth_service.get_current_user(token)
+

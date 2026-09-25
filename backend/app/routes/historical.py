@@ -5,14 +5,7 @@ from fastapi import Depends
 from fastapi import APIRouter
 
 from app.services import (
-    revenue_service,
-    order_service,
-    category_service,
-    payment_service,
-    customer_service,
     review_service,
-    price_service,
-    heatmap_service,
 )
 
 from app.schemas.revenue import (
@@ -27,6 +20,7 @@ from app.schemas.review import ReviewDistribution
 
 
 from app.utils.auth import get_authenticated_user
+from app.services import category_service, customer_service, heatmap_service, order_service, payment_service, price_service, revenue_service
 
 # All historical analytics require a logged-in user
 router = APIRouter(
@@ -292,3 +286,4 @@ async def get_correlation_heatmap(
         dataset_id,
         current_user["id"],
     )
+

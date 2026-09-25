@@ -25,3 +25,4 @@ async def get_authenticated_user(
 
     # Pass the token to the service
     return await get_current_user(token)
+

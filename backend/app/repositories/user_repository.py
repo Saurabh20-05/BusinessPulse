@@ -55,3 +55,4 @@ async def find_user_by_id(
             "_id": ObjectId(user_id),
         }
     )
+

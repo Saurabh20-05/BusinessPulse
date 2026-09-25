@@ -633,3 +633,4 @@ async def get_top_categories_table(
         )
 
     return records
+

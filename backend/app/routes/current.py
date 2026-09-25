@@ -96,3 +96,4 @@ async def get_top_categories(
         dataset_id=dataset_id,
         user_id=current_user["id"],
     )
+

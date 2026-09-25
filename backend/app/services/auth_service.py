@@ -122,3 +122,4 @@ async def get_current_user(
         "name": user["name"],
         "email": user["email"],
     }
+

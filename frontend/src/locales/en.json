@@ -1,0 +1,383 @@
+{
+  "home": "Home",
+  "dashboard": "Dashboard",
+  "dataset": "Dataset",
+  "insights": "Insights",
+  "dataQuality": "Data Quality",
+  "profile": "Profile",
+  "logout": "Logout",
+  "login": "Login",
+  "signup": "Sign Up",
+  "signUp": "Sign Up",
+
+  "datasetPage": "Dataset",
+  "datasetSubtitle": "Choose the data source you want to analyze.",
+  "builtInDataset": "Built-in Business Dataset",
+  "builtInDescription": "Analyze the built-in Olist Brazilian E-Commerce dataset with BusinessPulse analytics, current KPIs, and forecasting features.",
+  "readyToAnalyze": "Ready to analyze",
+  "useOlistDataset": "Use Olist Dataset",
+
+  "uploadDataset": "Upload Dataset",
+  "uploadOwnData": "Upload your own business data",
+  "uploadDescription": "Upload a CSV file containing your business or sales data and map its columns to BusinessPulse fields.",
+  "uploadCsv": "Upload CSV",
+  "ready": "Ready",
+  "using": "Using",
+
+  "datasetPreview": "Dataset Preview",
+  "rows": "{{rows}} rows",
+  "columns": "{{count}} columns",
+  "saveMapping": "Save Mapping",
+
+  "uploadedDatasets": "Uploaded Datasets",
+  "uploadedDatasetsDescription": "Select a previously uploaded dataset to analyze.",
+  "datasets": "{{count}} datasets",
+  "noUploadedDatasets": "No uploaded datasets yet.",
+  "uploadCsvToGetStarted": "Upload a CSV above to get started.",
+
+  "selected": "Selected",
+  "select": "Select",
+  "preview": "Preview",
+  "delete": "Delete",
+  "close": "Close",
+
+  "deleteConfirmation": "Are you sure you want to delete \"{{filename}}\"?",
+  "datasetDeleted": "Dataset deleted successfully.",
+  "failedToDeleteDataset": "Failed to delete dataset.",
+  "failedToLoadPreview": "Failed to load dataset preview.",
+  "datasetUploaded": "Dataset uploaded successfully.",
+  "datasetUploadFailed": "Dataset upload failed.",
+  "columnMappingSaved": "Column mapping saved successfully.",
+  "failedToSaveMapping": "Failed to save column mapping.",
+  "olistSelected": "Olist Dataset selected successfully.",
+  "datasetSelected": "{{filename}} selected successfully.",
+
+  "date": "Date",
+  "revenue": "Revenue",
+  "orders": "Orders",
+  "customers": "Customers",
+  "category": "Category",
+  "state": "State",
+  "paymentMethod": "Payment Method",
+  "reviewScore": "Review Score",
+  "price": "Price",
+
+  "mapColumns": "Map Columns",
+  "mapColumnsDescription": "Match your CSV columns with BusinessPulse fields.",
+  "selectColumn": "Select column",
+
+  "homeHeroLabel": "Business Analytics Platform",
+  "homeHeroTitle": "Turn Business Data Into",
+  "homeHeroTitleHighlight": "Better Decisions",
+  "homeHeroDescription": "Analyze your business data, track performance, identify data issues, and uncover insights to make better decisions.",
+  "exploreDashboard": "Explore Dashboard",
+
+  "analyze": "Analyze",
+  "businessAnalytics": "Business Analytics",
+  "businessAnalyticsDescription": "Explore revenue, orders, customers, categories, payments, and reviews.",
+  "exploreAnalytics": "Explore Analytics",
+
+  "monitor": "Monitor",
+  "currentDashboard": "Current Dashboard",
+  "currentDashboardDescription": "Track your most important business metrics in one place.",
+  "viewDashboard": "View Dashboard",
+
+  "understand": "Understand",
+  "businessInsights": "Business Insights",
+  "businessInsightsDescription": "Get clear insights from your data and identify important trends.",
+  "viewInsights": "View Insights",
+
+  "forecast": "Forecast",
+  "futurePredictions": "Future Predictions",
+  "futurePredictionsDescription": "Use machine learning to estimate future business performance.",
+  "viewForecast": "View Forecast",
+
+  "knowYourData": "Know Your Data Before You Analyze It",
+  "dataQualityDescription": "Check missing values, duplicates, invalid dates, and other data issues before making business decisions.",
+  "checkDataQuality": "Check Data Quality",
+
+  "onePlatform": "One Platform. Complete Insight.",
+  "fromDataToDecisions": "From Data to Decisions",
+  "aboutDescription": "BusinessPulse brings together analytics, data quality, insights, and forecasting in one place to help you understand performance and make better business decisions.",
+
+  "simpleWorkflow": "Simple Workflow",
+  "howBusinessPulseWorks": "How BusinessPulse Works",
+  "workflowDescription": "Upload your data, prepare it, check its quality, and turn it into useful business insights.",
+
+  "uploadData": "Upload Data",
+  "uploadDataDescription": "Upload your business or sales data as a CSV file.",
+
+  "mapColumnsHome": "Map Columns",
+  "mapColumnsDescriptionHome": "Match your dataset columns with the fields used by BusinessPulse.",
+
+  "checkData": "Check Data",
+  "checkDataDescription": "Review missing, duplicate, and invalid values before analyzing.",
+
+  "analyzeData": "Analyze",
+  "analyzeDataDescription": "Explore performance, insights, and forecasts from your data.",
+  "askYourData": "Ask Your Data",
+  "askYourDataDescription": "Ask natural-language questions and get answers from your selected business dataset.",
+
+  "readyToGetStarted": "Ready to Get Started?",
+  "startExploringData": "Start Exploring Your Business Data",
+  "finalCtaDescription": "Upload your dataset and use BusinessPulse to understand performance, discover insights, and plan ahead.",
+  "getStarted": "Get Started",
+
+  "historicalAnalytics": "Historical Analytics",
+  "historicalAnalyticsSubtitle": "Analyze historical sales, orders, and customer trends.",
+
+  "currentDashboardSubtitle": "Monitor important business KPIs in real time.",
+
+  "forecastPredictions": "Forecast & Predictions",
+  "forecastPredictionsSubtitle": "Predict future sales, orders, and business growth.",
+
+  "failedToLoadHistoricalData": "Failed to load historical data.",
+  "loadingHistoricalData": "Loading historical data...",
+
+  "monthlyRevenue": "Monthly Revenue",
+  "monthlyRevenueDescription": "Monthly revenue.",
+
+  "monthlyOrders": "Monthly Orders",
+  "monthlyOrdersDescription": "Monthly orders.",
+
+  "topCategories": "Top Categories",
+  "topCategoriesDescription": "Top categories by revenue.",
+
+  "revenueByCategory": "Revenue by Category",
+  "revenueByCategoryDescription": "Top 10 product categories by revenue.",
+
+  "customersByState": "Customers by State",
+  "customersByStateDescription": "Customer distribution by state.",
+
+  "reviewScores": "Review Scores",
+  "reviewScoresDescription": "Review score distribution.",
+
+  "paymentMethods": "Payment Methods",
+  "paymentMethodsDescription": "Payment method distribution.",
+
+  "priceDistribution": "Price Distribution",
+  "priceDistributionDescription": "Product price distribution.",
+
+  "revenueVsOrders": "Revenue vs Orders",
+  "revenueVsOrdersDescription": "Revenue compared with orders.",
+
+  "correlationHeatmap": "Correlation Heatmap",
+  "correlationHeatmapDescription": "Correlation between business metrics.",
+
+  "failedToLoadDashboardData": "Failed to load dashboard data.",
+  "loadingDashboardData": "Loading dashboard data...",
+
+  "totalRevenue": "Total Revenue",
+  "totalOrders": "Total Orders",
+  "totalCustomers": "Total Customers",
+  "totalProducts": "Total Products",
+  "averageReview": "Average Review",
+  "averagePayment": "Average Payment",
+  "topCategory": "Top Category",
+  "topProduct": "Top Product",
+
+  "recentOrders": "Recent Orders",
+  "recentOrdersDescription": "Recently placed orders.",
+  "orderId": "Order ID",
+  "amount": "Amount",
+  "status": "Status",
+
+  "failedToLoadForecastData": "Failed to load forecast data.",
+  "loadingForecastData": "Loading forecast data...",
+  "notEnoughHistoricalData": "Not enough historical data available for forecasting.",
+
+  "revenueForecast": "Revenue Forecast",
+  "revenueForecastDescription": "Revenue forecast for the next 4 months.",
+
+  "orderForecast": "Order Forecast",
+  "orderForecastDescription": "Order forecast for the next 4 months.",
+
+  "customerSatisfactionForecast": "Customer Satisfaction Forecast",
+  "customerSatisfactionForecastDescription": "Average customer review score forecast for the next 4 months.",
+
+  "forecastControls": "Forecast Controls",
+  "forecastControlsDescription": "Choose what you want to forecast and the machine learning model to use.",
+  "predictionType": "Prediction Type",
+  "selectModel": "Select Model",
+  "generateForecast": "Generate Forecast",
+  "modelUsed": "Model Used",
+  "modelPerformance": "Model Performance",
+  "modelPerformanceDescription": "Performance metrics calculated from the selected model.",
+  "meanAbsoluteError": "Mean Absolute Error",
+  "rootMeanSquaredError": "Root Mean Squared Error",
+  "coefficientOfDetermination": "Coefficient of Determination",
+
+  "customerSatisfaction": "Customer Satisfaction",
+  "linearRegression": "Linear Regression",
+  "randomForestRegression": "Random Forest Regression",
+  "polynomialRegression": "Polynomial Regression",
+
+  "businessIntelligence": "Business Intelligence",
+  "businessInsightsPageDescription": "Discover key patterns, trends, and opportunities from your business data.",
+  "dataSource": "Data Source",
+  "olistDataset": "Olist Dataset",
+  "customDataset": "Custom Dataset",
+  "keyFindings": "Key Findings",
+  "keyFindingsDescription": "Important patterns identified from the selected dataset.",
+  "noInsightsAvailable": "No insights are available for this dataset.",
+
+  "failedToLoadDataQuality": "Failed to load data quality information.",
+  "loadingDataQuality": "Loading data quality...",
+
+  "dataQualityPageSubtitle": "Review your data for missing, duplicate, or invalid values.",
+
+  "totalRows": "Total Rows",
+  "totalColumns": "Total Columns",
+  "missingValues": "Missing Values",
+  "duplicateRows": "Duplicate Rows",
+  "invalidDates": "Invalid Dates",
+  "negativeValues": "Negative Values",
+
+  "dataQualityScore": "Data Quality Score",
+  "dataQualityScoreDescription": "A quick look at how clean and reliable your data is.",
+
+  "excellent": "Excellent",
+  "good": "Good",
+  "worthChecking": "Worth Checking",
+  "needsReview": "Needs Review",
+  "outOf100": "out of 100",
+  "ofData": "of data",
+
+  "qualityExcellentMessage": "Your data looks clean and ready to use.",
+  "qualityGoodMessage": "Your data looks good, with a few things worth checking.",
+  "qualityNeedsReviewMessage": "There are a few data issues that should be reviewed.",
+
+  "qualityChecks": "Quality Checks",
+  "qualityChecksDescription": "A quick check for common data problems.",
+
+  "columnQuality": "Column Quality",
+  "columnQualityDescription": "See how each column looks at a glance.",
+
+  "column": "Column",
+  "type": "Type",
+  "missing": "Missing",
+  "unique": "Unique",
+
+  "revenueTrendTitle": "Revenue Trend",
+  "revenueIncreasedMessage": "Revenue increased by {{percentage}}% from the beginning to the end of the dataset.",
+  "revenueDecreasedMessage": "Revenue decreased by {{percentage}}% from the beginning to the end of the dataset.",
+  "revenueStableMessage": "Revenue remained stable from the beginning to the end of the dataset.",
+
+  "revenueGrowthAlertTitle": "Revenue Growth Alert",
+  "revenueGrowthAlertMessage": "Revenue increased by {{percentage}}%. The business is showing strong revenue growth.",
+
+  "revenueDeclineAlertTitle": "Revenue Decline Alert",
+  "revenueDeclineAlertMessage": "Revenue declined by {{percentage}}%. The business should review recent sales performance and identify factors contributing to the decline.",
+
+  "topPerformingCategoryTitle": "Top Performing Category",
+  "topPerformingCategoryMessage": "{{category}} generated the highest revenue with {{revenue}} in total sales.",
+
+  "customerActivityTitle": "Customer Activity",
+  "customerActivityMessage": "The dataset contains approximately {{customers}} customers.",
+
+  "customerSatisfactionTitle": "Customer Satisfaction",
+  "customerSatisfactionStrongMessage": "Customer satisfaction is strong with an average review score of {{score}} out of 5.",
+  "customerSatisfactionModerateMessage": "Customer satisfaction is moderate with an average review score of {{score}} out of 5.",
+  "customerSatisfactionAttentionMessage": "Customer satisfaction needs attention with an average review score of {{score}} out of 5.",
+
+  "businessRecommendationTitle": "Business Recommendation",
+  "businessRecommendationStrongMessage": "Maintain the current customer experience and continue focusing on service quality.",
+  "businessRecommendationModerateMessage": "Focus on improving customer experience to increase overall satisfaction.",
+  "businessRecommendationAttentionMessage": "Customer satisfaction requires attention. Review product and service quality to identify the main causes of low ratings.",
+
+  "totalBusinessRevenueTitle": "Total Business Revenue",
+  "totalBusinessRevenueMessage": "The dataset records a total revenue of {{revenue}}.",
+
+  "averageOrderValueTitle": "Average Order Value",
+  "averageOrderValueMessage": "The average order value is {{value}}.",
+
+  "mostUsedPaymentMethodTitle": "Most Used Payment Method",
+  "mostUsedPaymentMethodMessage": "{{paymentMethod}} is the most frequently used payment method in the dataset.",
+
+  "growthOpportunityTitle": "Growth Opportunity",
+  "growthOpportunityMessage": "{{category}} contributes {{percentage}}% of total revenue. This category may be a strong candidate for additional promotional focus.",
+
+  "businessAlertTitle": "Business Alert",
+  "businessAlertMessage": "{{category}} contributes {{percentage}}% of total revenue. The business is highly dependent on this category.",
+
+  "overallBusinessInterpretationTitle": "Overall Business Interpretation",
+  "interpretationTopCategory": "{{category}} is the leading revenue category, contributing {{percentage}}% of total revenue.",
+  "interpretationRevenueIncreased": "Revenue increased by {{percentage}}% from the beginning to the end of the dataset.",
+  "interpretationRevenueDeclined": "Revenue declined by {{percentage}}% from the beginning to the end of the dataset.",
+  "interpretationRevenueStable": "Revenue remained stable from the beginning to the end of the dataset.",
+  "interpretationSatisfactionStrong": "Customer satisfaction remains strong.",
+  "interpretationSatisfactionModerate": "Customer satisfaction is moderate and could be improved.",
+  "interpretationSatisfactionAttention": "Customer satisfaction requires attention.",
+
+  "failedToLoadProfile": "Failed to load profile information.",
+  "loadingProfile": "Loading profile...",
+
+  "profileSubtitle": "Manage your account and BusinessPulse activity.",
+  "profileCardDescription": "Your BusinessPulse account.",
+  "businessPulseUser": "BusinessPulse User",
+
+  "personalInformation": "Personal Information",
+  "accountDetails": "Your account details.",
+  "fullName": "Full Name",
+  "emailAddress": "Email Address",
+  "accountStatus": "Account Status",
+  "active": "Active",
+
+  "yourData": "Your Data",
+  "yourDataDescription": "Your datasets and current data source.",
+  "currentDataset": "Current Dataset",
+
+  "quickActions": "Quick Actions",
+  "quickActionsDescription": "Jump to the parts of BusinessPulse you use most.",
+  "manageDatasets": "Manage Datasets",
+
+  "welcomeBack": "Welcome Back",
+  "signInBusinessPulse": "Sign in to your BusinessPulse account",
+  "email": "Email",
+  "enterYourEmail": "Enter your email",
+  "password": "Password",
+  "enterYourPassword": "Enter your password",
+  "signingIn": "Signing In...",
+  "signIn": "Sign In",
+  "dontHaveAccount": "Don't have an account?",
+  "invalidEmailPassword": "Invalid email or password.",
+
+  "createAccount": "Create Account",
+  "createBusinessPulseAccount": "Create your BusinessPulse account",
+  "name": "Name",
+  "enterYourName": "Enter your name",
+  "createPassword": "Create a password",
+  "creatingAccount": "Creating Account...",
+  "alreadyHaveAccount": "Already have an account?",
+  "unableToCreateAccount": "Unable to create account.",
+  "averageReviewScore": "Average Review Score",
+
+  "aiAnalytics": "AI Analytics",
+  "querySelectedDataset": "Query your selected business dataset using natural language.",
+  "loadingDataset": "Loading dataset...",
+  "noDatasetSelected": "No dataset selected",
+  "selectedFromDataset": "Selected from Dataset",
+  "selectDatasetFirst": "Select a dataset from the Dataset page before using AI Analytics.",
+  "dataAnalysis": "Data Analysis",
+  "askQuestionsSelectedDataset": "Ask questions about the selected dataset.",
+  "startWithQuestion": "Start with a question",
+  "askAboutData": "Ask about totals, averages, counts, categories, or other values in your selected dataset.",
+  "howManyRecords": "How many rows are in the dataset?",
+  "totalRevenueQuestion": "What is the total revenue?",
+  "averageRevenueQuestion": "What is the average revenue?",
+  "topCategoryQuestion": "Which category generated the most revenue?",
+  "result": "Result",
+  "noMatchingData": "No matching data was found.",
+  "processingQuestion": "Processing your question...",
+  "askQuestionPlaceholder": "Ask a question about your data...",
+  "selectDatasetPlaceholder": "Select a dataset first",
+  "processing": "Processing",
+  "ask": "Ask",
+  "datasetUnavailable": "The selected dataset is no longer available. Please select a dataset from the Dataset page.",
+  "unableToLoadDataset": "Unable to load the selected dataset.",
+  "unableToProcessQuestion": "Unable to process your question.",
+  "validate": "Validate",
+  "viewDataQuality": "View Data Quality",
+  "aiAnalyticsDescription": "Ask questions about your business data using natural language.",
+  "exploreAIAnalytics": "Explore AI Analytics"
+}

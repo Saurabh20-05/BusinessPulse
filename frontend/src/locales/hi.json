@@ -1,0 +1,383 @@
+{
+  "home": "होम",
+  "dashboard": "डैशबोर्ड",
+  "dataset": "डेटासेट",
+  "insights": "अंतर्दृष्टियाँ",
+  "dataQuality": "डेटा गुणवत्ता",
+  "profile": "प्रोफ़ाइल",
+  "logout": "लॉग आउट",
+  "login": "लॉग इन",
+  "signup": "साइन अप",
+  "signUp": "साइन अप",
+
+  "datasetPage": "डेटासेट",
+  "datasetSubtitle": "वह डेटा स्रोत चुनें जिसका आप विश्लेषण करना चाहते हैं।",
+  "builtInDataset": "बिल्ट-इन बिज़नेस डेटासेट",
+  "builtInDescription": "BusinessPulse के एनालिटिक्स, वर्तमान KPI और पूर्वानुमान सुविधाओं के साथ बिल्ट-इन Olist ब्राज़ीलियन ई-कॉमर्स डेटासेट का विश्लेषण करें।",
+  "readyToAnalyze": "विश्लेषण के लिए तैयार",
+  "useOlistDataset": "Olist डेटासेट का उपयोग करें",
+
+  "uploadDataset": "डेटासेट अपलोड करें",
+  "uploadOwnData": "अपना बिज़नेस डेटा अपलोड करें",
+  "uploadDescription": "अपने बिज़नेस या बिक्री डेटा वाली CSV फ़ाइल अपलोड करें और उसके कॉलम को BusinessPulse फ़ील्ड से मैप करें।",
+  "uploadCsv": "CSV अपलोड करें",
+  "ready": "तैयार",
+  "using": "उपयोग में",
+
+  "datasetPreview": "डेटासेट पूर्वावलोकन",
+  "rows": "{{rows}} पंक्तियाँ",
+  "columns": "{{count}} कॉलम",
+  "saveMapping": "मैपिंग सहेजें",
+
+  "uploadedDatasets": "अपलोड किए गए डेटासेट",
+  "uploadedDatasetsDescription": "विश्लेषण करने के लिए पहले से अपलोड किए गए डेटासेट का चयन करें।",
+  "datasets": "{{count}} डेटासेट",
+  "noUploadedDatasets": "अभी तक कोई डेटासेट अपलोड नहीं किया गया है।",
+  "uploadCsvToGetStarted": "शुरू करने के लिए ऊपर CSV अपलोड करें।",
+
+  "selected": "चयनित",
+  "select": "चुनें",
+  "preview": "पूर्वावलोकन",
+  "delete": "हटाएँ",
+  "close": "बंद करें",
+
+  "deleteConfirmation": "क्या आप वाकई \"{{filename}}\" को हटाना चाहते हैं?",
+  "datasetDeleted": "डेटासेट सफलतापूर्वक हटा दिया गया।",
+  "failedToDeleteDataset": "डेटासेट हटाने में विफल।",
+  "failedToLoadPreview": "डेटासेट पूर्वावलोकन लोड करने में विफल।",
+  "datasetUploaded": "डेटासेट सफलतापूर्वक अपलोड हो गया।",
+  "datasetUploadFailed": "डेटासेट अपलोड विफल रहा।",
+  "columnMappingSaved": "कॉलम मैपिंग सफलतापूर्वक सहेजी गई।",
+  "failedToSaveMapping": "कॉलम मैपिंग सहेजने में विफल।",
+  "olistSelected": "Olist डेटासेट सफलतापूर्वक चयनित हो गया।",
+  "datasetSelected": "{{filename}} सफलतापूर्वक चयनित हो गया।",
+
+  "date": "तारीख",
+  "revenue": "राजस्व",
+  "orders": "ऑर्डर",
+  "customers": "ग्राहक",
+  "category": "श्रेणी",
+  "state": "राज्य",
+  "paymentMethod": "भुगतान विधि",
+  "reviewScore": "समीक्षा स्कोर",
+  "price": "कीमत",
+
+  "mapColumns": "कॉलम मैप करें",
+  "mapColumnsDescription": "अपने CSV कॉलम को BusinessPulse फ़ील्ड से मिलाएँ।",
+  "selectColumn": "कॉलम चुनें",
+
+  "homeHeroLabel": "बिज़नेस एनालिटिक्स प्लेटफ़ॉर्म",
+  "homeHeroTitle": "बिज़नेस डेटा को बदलें",
+  "homeHeroTitleHighlight": "बेहतर निर्णयों में",
+  "homeHeroDescription": "अपने बिज़नेस डेटा का विश्लेषण करें, प्रदर्शन पर नज़र रखें, डेटा समस्याओं की पहचान करें और बेहतर निर्णय लेने के लिए महत्वपूर्ण जानकारी प्राप्त करें।",
+  "exploreDashboard": "डैशबोर्ड देखें",
+
+  "analyze": "विश्लेषण करें",
+  "businessAnalytics": "बिज़नेस एनालिटिक्स",
+  "businessAnalyticsDescription": "राजस्व, ऑर्डर, ग्राहकों, श्रेणियों, भुगतानों और समीक्षाओं का विश्लेषण करें।",
+  "exploreAnalytics": "एनालिटिक्स देखें",
+
+  "monitor": "निगरानी करें",
+  "currentDashboard": "वर्तमान डैशबोर्ड",
+  "currentDashboardDescription": "अपने सबसे महत्वपूर्ण बिज़नेस मेट्रिक्स को एक ही जगह पर देखें।",
+  "viewDashboard": "डैशबोर्ड देखें",
+
+  "understand": "समझें",
+  "businessInsights": "बिज़नेस अंतर्दृष्टियाँ",
+  "businessInsightsDescription": "अपने डेटा से स्पष्ट जानकारी प्राप्त करें और महत्वपूर्ण रुझानों की पहचान करें।",
+  "viewInsights": "अंतर्दृष्टियाँ देखें",
+
+  "forecast": "पूर्वानुमान",
+  "futurePredictions": "भविष्य के पूर्वानुमान",
+  "futurePredictionsDescription": "भविष्य के बिज़नेस प्रदर्शन का अनुमान लगाने के लिए मशीन लर्निंग का उपयोग करें।",
+  "viewForecast": "पूर्वानुमान देखें",
+
+  "knowYourData": "विश्लेषण से पहले अपने डेटा को समझें",
+  "dataQualityDescription": "बिज़नेस निर्णय लेने से पहले गायब मानों, डुप्लिकेट, अमान्य तारीखों और अन्य डेटा समस्याओं की जाँच करें।",
+  "checkDataQuality": "डेटा गुणवत्ता जाँचें",
+
+  "onePlatform": "एक प्लेटफ़ॉर्म। पूरी जानकारी।",
+  "fromDataToDecisions": "डेटा से निर्णय तक",
+  "aboutDescription": "BusinessPulse एनालिटिक्स, डेटा गुणवत्ता, अंतर्दृष्टियों और पूर्वानुमान को एक ही जगह पर लाता है, ताकि आप प्रदर्शन को समझ सकें और बेहतर बिज़नेस निर्णय ले सकें।",
+
+  "simpleWorkflow": "सरल कार्यप्रवाह",
+  "howBusinessPulseWorks": "BusinessPulse कैसे काम करता है",
+  "workflowDescription": "अपना डेटा अपलोड करें, उसे तैयार करें, उसकी गुणवत्ता जाँचें और उसे उपयोगी बिज़नेस अंतर्दृष्टियों में बदलें।",
+
+  "uploadData": "डेटा अपलोड करें",
+  "uploadDataDescription": "अपना बिज़नेस या बिक्री डेटा CSV फ़ाइल के रूप में अपलोड करें.",
+
+  "mapColumnsHome": "कॉलम मैप करें",
+  "mapColumnsDescriptionHome": "अपने डेटासेट के कॉलम को BusinessPulse में उपयोग किए जाने वाले फ़ील्ड से मिलाएँ।",
+
+  "checkData": "डेटा जाँचें",
+  "checkDataDescription": "विश्लेषण से पहले गायब, डुप्लिकेट और अमान्य मानों की जाँच करें।",
+
+  "analyzeData": "विश्लेषण करें",
+  "analyzeDataDescription": "अपने डेटा से प्रदर्शन, अंतर्दृष्टियों और पूर्वानुमानों का विश्लेषण करें।",
+  "askYourData": "अपने डेटा से पूछें",
+  "askYourDataDescription": "अपने चुने हुए बिज़नेस डेटासेट के बारे में प्राकृतिक भाषा में सवाल पूछें और उत्तर प्राप्त करें.",
+
+  "readyToGetStarted": "शुरू करने के लिए तैयार हैं?",
+  "startExploringData": "अपने बिज़नेस डेटा का विश्लेषण शुरू करें",
+  "finalCtaDescription": "अपना डेटासेट अपलोड करें और BusinessPulse का उपयोग करके प्रदर्शन समझें, अंतर्दृष्टियाँ खोजें और आगे की योजना बनाएँ।",
+  "getStarted": "शुरू करें",
+
+  "historicalAnalytics": "ऐतिहासिक एनालिटिक्स",
+  "historicalAnalyticsSubtitle": "पिछली बिक्री, ऑर्डर और ग्राहक रुझानों का विश्लेषण करें।",
+
+  "currentDashboardSubtitle": "महत्वपूर्ण बिज़नेस KPI को रीयल टाइम में देखें.",
+
+  "forecastPredictions": "पूर्वानुमान और भविष्यवाणियाँ",
+  "forecastPredictionsSubtitle": "भविष्य की बिक्री, ऑर्डर और बिज़नेस वृद्धि का अनुमान लगाएँ।",
+
+  "failedToLoadHistoricalData": "ऐतिहासिक डेटा लोड करने में विफल।",
+  "loadingHistoricalData": "ऐतिहासिक डेटा लोड हो रहा है...",
+
+  "monthlyRevenue": "मासिक राजस्व",
+  "monthlyRevenueDescription": "मासिक राजस्व।",
+
+  "monthlyOrders": "मासिक ऑर्डर",
+  "monthlyOrdersDescription": "मासिक ऑर्डर।",
+
+  "topCategories": "शीर्ष श्रेणियाँ",
+  "topCategoriesDescription": "राजस्व के आधार पर शीर्ष श्रेणियाँ।",
+
+  "revenueByCategory": "श्रेणी के अनुसार राजस्व",
+  "revenueByCategoryDescription": "राजस्व के आधार पर शीर्ष 10 उत्पाद श्रेणियाँ।",
+
+  "customersByState": "राज्य के अनुसार ग्राहक",
+  "customersByStateDescription": "राज्य के अनुसार ग्राहकों का वितरण।",
+
+  "reviewScores": "समीक्षा स्कोर",
+  "reviewScoresDescription": "समीक्षा स्कोर का वितरण।",
+
+  "paymentMethods": "भुगतान विधियाँ",
+  "paymentMethodsDescription": "भुगतान विधियों का वितरण।",
+
+  "priceDistribution": "कीमत का वितरण",
+  "priceDistributionDescription": "उत्पाद की कीमतों का वितरण।",
+
+  "revenueVsOrders": "राजस्व बनाम ऑर्डर",
+  "revenueVsOrdersDescription": "ऑर्डर की तुलना में राजस्व।",
+
+  "correlationHeatmap": "सहसंबंध हीटमैप",
+  "correlationHeatmapDescription": "बिज़नेस मेट्रिक्स के बीच सहसंबंध।",
+
+  "failedToLoadDashboardData": "डैशबोर्ड डेटा लोड करने में विफल।",
+  "loadingDashboardData": "डैशबोर्ड डेटा लोड हो रहा है...",
+
+  "totalRevenue": "कुल राजस्व",
+  "totalOrders": "कुल ऑर्डर",
+  "totalCustomers": "कुल ग्राहक",
+  "totalProducts": "कुल उत्पाद",
+  "averageReview": "औसत समीक्षा",
+  "averagePayment": "औसत भुगतान",
+  "topCategory": "शीर्ष श्रेणी",
+  "topProduct": "शीर्ष उत्पाद",
+
+  "recentOrders": "हाल के ऑर्डर",
+  "recentOrdersDescription": "हाल ही में किए गए ऑर्डर।",
+  "orderId": "ऑर्डर आईडी",
+  "amount": "राशि",
+  "status": "स्थिति",
+
+  "failedToLoadForecastData": "पूर्वानुमान डेटा लोड करने में विफल।",
+  "loadingForecastData": "पूर्वानुमान डेटा लोड हो रहा है...",
+  "notEnoughHistoricalData": "पूर्वानुमान के लिए पर्याप्त ऐतिहासिक डेटा उपलब्ध नहीं है।",
+
+  "revenueForecast": "राजस्व पूर्वानुमान",
+  "revenueForecastDescription": "अगले 4 महीनों के लिए राजस्व का पूर्वानुमान।",
+
+  "orderForecast": "ऑर्डर पूर्वानुमान",
+  "orderForecastDescription": "अगले 4 महीनों के लिए ऑर्डर का पूर्वानुमान।",
+
+  "customerSatisfactionForecast": "ग्राहक संतुष्टि पूर्वानुमान",
+  "customerSatisfactionForecastDescription": "अगले 4 महीनों के लिए औसत ग्राहक समीक्षा स्कोर का पूर्वानुमान।",
+
+  "forecastControls": "पूर्वानुमान नियंत्रण",
+  "forecastControlsDescription": "चुनें कि आप किस चीज़ का पूर्वानुमान लगाना चाहते हैं और किस मशीन लर्निंग मॉडल का उपयोग करना चाहते हैं।",
+  "predictionType": "पूर्वानुमान प्रकार",
+  "selectModel": "मॉडल चुनें",
+  "generateForecast": "पूर्वानुमान तैयार करें",
+  "modelUsed": "उपयोग किया गया मॉडल",
+  "modelPerformance": "मॉडल प्रदर्शन",
+  "modelPerformanceDescription": "चयनित मॉडल से गणना किए गए प्रदर्शन मेट्रिक्स।",
+  "meanAbsoluteError": "मीन एब्सोल्यूट एरर",
+  "rootMeanSquaredError": "रूट मीन स्क्वेयर्ड एरर",
+  "coefficientOfDetermination": "कोएफ़िशिएंट ऑफ़ डिटरमिनेशन",
+
+  "customerSatisfaction": "ग्राहक संतुष्टि",
+  "linearRegression": "लीनियर रिग्रेशन",
+  "randomForestRegression": "रैंडम फ़ॉरेस्ट रिग्रेशन",
+  "polynomialRegression": "पॉलीनोमियल रिग्रेशन",
+
+  "businessIntelligence": "बिज़नेस इंटेलिजेंस",
+  "businessInsightsPageDescription": "अपने बिज़नेस डेटा से महत्वपूर्ण पैटर्न, रुझान और अवसर खोजें।",
+  "dataSource": "डेटा स्रोत",
+  "olistDataset": "Olist डेटासेट",
+  "customDataset": "कस्टम डेटासेट",
+  "keyFindings": "मुख्य निष्कर्ष",
+  "keyFindingsDescription": "चयनित डेटासेट से पहचाने गए महत्वपूर्ण पैटर्न।",
+  "noInsightsAvailable": "इस डेटासेट के लिए कोई अंतर्दृष्टि उपलब्ध नहीं है।",
+
+  "failedToLoadDataQuality": "डेटा गुणवत्ता की जानकारी लोड करने में विफल।",
+  "loadingDataQuality": "डेटा गुणवत्ता लोड हो रही है...",
+
+  "dataQualityPageSubtitle": "अपने डेटा में गायब, डुप्लिकेट या अमान्य मानों की जाँच करें।",
+
+  "totalRows": "कुल पंक्तियाँ",
+  "totalColumns": "कुल कॉलम",
+  "missingValues": "गायब मान",
+  "duplicateRows": "डुप्लिकेट पंक्तियाँ",
+  "invalidDates": "अमान्य तारीखें",
+  "negativeValues": "नकारात्मक मान",
+
+  "dataQualityScore": "डेटा गुणवत्ता स्कोर",
+  "dataQualityScoreDescription": "आपका डेटा कितना साफ़ और विश्वसनीय है, इसका एक त्वरित अवलोकन।",
+
+  "excellent": "उत्कृष्ट",
+  "good": "अच्छा",
+  "worthChecking": "जाँचने योग्य",
+  "needsReview": "समीक्षा आवश्यक",
+  "outOf100": "100 में से",
+  "ofData": "डेटा का",
+
+  "qualityExcellentMessage": "आपका डेटा साफ़ है और उपयोग के लिए तैयार है।",
+  "qualityGoodMessage": "आपका डेटा अच्छा है, लेकिन कुछ चीज़ें जाँचने योग्य हैं।",
+  "qualityNeedsReviewMessage": "आपके डेटा में कुछ समस्याएँ हैं जिनकी समीक्षा की जानी चाहिए।",
+
+  "qualityChecks": "गुणवत्ता जाँच",
+  "qualityChecksDescription": "सामान्य डेटा समस्याओं की एक त्वरित जाँच।",
+
+  "columnQuality": "कॉलम गुणवत्ता",
+  "columnQualityDescription": "एक नज़र में देखें कि प्रत्येक कॉलम कैसा है।",
+
+  "column": "कॉलम",
+  "type": "प्रकार",
+  "missing": "गायब",
+  "unique": "अद्वितीय",
+
+  "revenueTrendTitle": "राजस्व रुझान",
+  "revenueIncreasedMessage": "डेटासेट की शुरुआत से अंत तक राजस्व में {{percentage}}% की वृद्धि हुई।",
+  "revenueDecreasedMessage": "डेटासेट की शुरुआत से अंत तक राजस्व में {{percentage}}% की कमी हुई।",
+  "revenueStableMessage": "डेटासेट की शुरुआत से अंत तक राजस्व स्थिर रहा।",
+
+  "revenueGrowthAlertTitle": "राजस्व वृद्धि चेतावनी",
+  "revenueGrowthAlertMessage": "राजस्व में {{percentage}}% की वृद्धि हुई। बिज़नेस में मजबूत राजस्व वृद्धि दिखाई दे रही है।",
+
+  "revenueDeclineAlertTitle": "राजस्व गिरावट चेतावनी",
+  "revenueDeclineAlertMessage": "राजस्व में {{percentage}}% की कमी हुई। बिज़नेस को हाल के बिक्री प्रदर्शन की समीक्षा करनी चाहिए और गिरावट के कारणों की पहचान करनी चाहिए।",
+
+  "topPerformingCategoryTitle": "शीर्ष प्रदर्शन करने वाली श्रेणी",
+  "topPerformingCategoryMessage": "{{category}} ने {{revenue}} की कुल बिक्री के साथ सबसे अधिक राजस्व उत्पन्न किया।",
+
+  "customerActivityTitle": "ग्राहक गतिविधि",
+  "customerActivityMessage": "इस डेटासेट में लगभग {{customers}} ग्राहक हैं।",
+
+  "customerSatisfactionTitle": "ग्राहक संतुष्टि",
+  "customerSatisfactionStrongMessage": "ग्राहक संतुष्टि अच्छी है और औसत समीक्षा स्कोर {{score}} में से 5 है।",
+  "customerSatisfactionModerateMessage": "ग्राहक संतुष्टि मध्यम है और औसत समीक्षा स्कोर {{score}} में से 5 है।",
+  "customerSatisfactionAttentionMessage": "ग्राहक संतुष्टि पर ध्यान देने की आवश्यकता है और औसत समीक्षा स्कोर {{score}} में से 5 है।",
+
+  "businessRecommendationTitle": "बिज़नेस सुझाव",
+  "businessRecommendationStrongMessage": "वर्तमान ग्राहक अनुभव बनाए रखें और सेवा की गुणवत्ता पर ध्यान देना जारी रखें।",
+  "businessRecommendationModerateMessage": "ग्राहक अनुभव में सुधार पर ध्यान दें ताकि कुल संतुष्टि बढ़ाई जा सके।",
+  "businessRecommendationAttentionMessage": "ग्राहक संतुष्टि पर ध्यान देने की आवश्यकता है। कम रेटिंग के मुख्य कारणों की पहचान करने के लिए उत्पाद और सेवा की गुणवत्ता की समीक्षा करें।",
+
+  "totalBusinessRevenueTitle": "कुल बिज़नेस राजस्व",
+  "totalBusinessRevenueMessage": "इस डेटासेट में कुल {{revenue}} का राजस्व दर्ज है।",
+
+  "averageOrderValueTitle": "औसत ऑर्डर मूल्य",
+  "averageOrderValueMessage": "औसत ऑर्डर मूल्य {{value}} है।",
+
+  "mostUsedPaymentMethodTitle": "सबसे अधिक उपयोग की जाने वाली भुगतान विधि",
+  "mostUsedPaymentMethodMessage": "{{paymentMethod}} इस डेटासेट में सबसे अधिक उपयोग की जाने वाली भुगतान विधि है।",
+
+  "growthOpportunityTitle": "विकास का अवसर",
+  "growthOpportunityMessage": "{{category}} कुल राजस्व में {{percentage}}% का योगदान देती है। यह श्रेणी अतिरिक्त प्रचार के लिए एक अच्छा अवसर हो सकती है।",
+
+  "businessAlertTitle": "बिज़नेस चेतावनी",
+  "businessAlertMessage": "{{category}} कुल राजस्व में {{percentage}}% का योगदान देती है। बिज़नेस इस श्रेणी पर काफी निर्भर है।",
+
+  "overallBusinessInterpretationTitle": "समग्र बिज़नेस विश्लेषण",
+  "interpretationTopCategory": "{{category}} सबसे अधिक राजस्व देने वाली श्रेणी है और कुल राजस्व में {{percentage}}% का योगदान देती है।",
+  "interpretationRevenueIncreased": "डेटासेट की शुरुआत से अंत तक राजस्व में {{percentage}}% की वृद्धि हुई।",
+  "interpretationRevenueDeclined": "डेटासेट की शुरुआत से अंत तक राजस्व में {{percentage}}% की कमी हुई।",
+  "interpretationRevenueStable": "डेटासेट की शुरुआत से अंत तक राजस्व स्थिर रहा।",
+  "interpretationSatisfactionStrong": "ग्राहक संतुष्टि अच्छी बनी हुई है।",
+  "interpretationSatisfactionModerate": "ग्राहक संतुष्टि मध्यम है और इसमें सुधार किया जा सकता है।",
+  "interpretationSatisfactionAttention": "ग्राहक संतुष्टि पर ध्यान देने की आवश्यकता है।",
+
+  "failedToLoadProfile": "प्रोफ़ाइल जानकारी लोड करने में विफल।",
+  "loadingProfile": "प्रोफ़ाइल लोड हो रही है...",
+
+  "profileSubtitle": "अपने अकाउंट और BusinessPulse गतिविधि को प्रबंधित करें।",
+  "profileCardDescription": "आपका BusinessPulse अकाउंट।",
+  "businessPulseUser": "BusinessPulse उपयोगकर्ता",
+
+  "personalInformation": "व्यक्तिगत जानकारी",
+  "accountDetails": "आपके अकाउंट का विवरण।",
+  "fullName": "पूरा नाम",
+  "emailAddress": "ईमेल पता",
+  "accountStatus": "अकाउंट स्थिति",
+  "active": "सक्रिय",
+
+  "yourData": "आपका डेटा",
+  "yourDataDescription": "आपके डेटासेट और वर्तमान डेटा स्रोत।",
+  "currentDataset": "वर्तमान डेटासेट",
+
+  "quickActions": "त्वरित कार्रवाइयाँ",
+  "quickActionsDescription": "BusinessPulse के उन हिस्सों पर जल्दी जाएँ जिनका आप सबसे अधिक उपयोग करते हैं।",
+  "manageDatasets": "डेटासेट प्रबंधित करें",
+
+  "welcomeBack": "वापसी पर स्वागत है",
+  "signInBusinessPulse": "अपने BusinessPulse अकाउंट में लॉग इन करें",
+  "email": "ईमेल",
+  "enterYourEmail": "अपना ईमेल दर्ज करें",
+  "password": "पासवर्ड",
+  "enterYourPassword": "अपना पासवर्ड दर्ज करें",
+  "signingIn": "लॉग इन हो रहा है...",
+  "signIn": "लॉग इन करें",
+  "dontHaveAccount": "क्या आपका अकाउंट नहीं है?",
+  "invalidEmailPassword": "अमान्य ईमेल या पासवर्ड।",
+
+  "createAccount": "अकाउंट बनाएँ",
+  "createBusinessPulseAccount": "अपना BusinessPulse अकाउंट बनाएँ",
+  "name": "नाम",
+  "enterYourName": "अपना नाम दर्ज करें",
+  "createPassword": "पासवर्ड बनाएँ",
+  "creatingAccount": "अकाउंट बनाया जा रहा है...",
+  "alreadyHaveAccount": "क्या आपका पहले से अकाउंट है?",
+  "unableToCreateAccount": "अकाउंट बनाने में असमर्थ।",
+  "averageReviewScore": "औसत समीक्षा स्कोर",
+
+  "aiAnalytics": "AI विश्लेषण",
+  "querySelectedDataset": "अपने चुने हुए बिज़नेस डेटासेट के बारे में सवाल पूछें।",
+  "loadingDataset": "डेटासेट लोड हो रहा है...",
+  "noDatasetSelected": "कोई डेटासेट नहीं चुना गया",
+  "selectedFromDataset": "डेटासेट से चुना गया",
+  "selectDatasetFirst": "AI विश्लेषण का उपयोग करने से पहले डेटासेट पेज से एक डेटासेट चुनें।",
+  "dataAnalysis": "डेटा विश्लेषण",
+  "askQuestionsSelectedDataset": "चुने हुए डेटासेट के बारे में सवाल पूछें।",
+  "startWithQuestion": "एक सवाल से शुरुआत करें",
+  "askAboutData": "अपने डेटासेट में कुल, औसत, संख्या, श्रेणी या अन्य जानकारी के बारे में पूछें।",
+  "howManyRecords": "डेटासेट में कितने रिकॉर्ड हैं?",
+  "totalRevenueQuestion": "कुल राजस्व कितना है?",
+  "averageRevenueQuestion": "औसत राजस्व कितना है?",
+  "topCategoryQuestion": "किस श्रेणी का राजस्व सबसे अधिक है?",
+  "result": "परिणाम",
+  "noMatchingData": "कोई मिलान डेटा नहीं मिला।",
+  "processingQuestion": "आपके सवाल को प्रोसेस किया जा रहा है...",
+  "askQuestionPlaceholder": "अपने डेटा के बारे में सवाल पूछें...",
+  "selectDatasetPlaceholder": "पहले एक डेटासेट चुनें",
+  "processing": "प्रोसेस हो रहा है",
+  "ask": "पूछें",
+  "datasetUnavailable": "चुना गया डेटासेट अब उपलब्ध नहीं है। कृपया डेटासेट पेज से एक डेटासेट चुनें।",
+  "unableToLoadDataset": "डेटासेट लोड नहीं हो सका।",
+  "unableToProcessQuestion": "सवाल को प्रोसेस नहीं किया जा सका।",
+  "validate": "जांचें",
+  "viewDataQuality": "डेटा गुणवत्ता देखें",
+  "aiAnalyticsDescription": "प्राकृतिक भाषा में अपने बिज़नेस डेटा के बारे में सवाल पूछें।",
+  "exploreAIAnalytics": "AI विश्लेषण देखें"
+}

@@ -20,3 +20,4 @@ async def business_insights(
         dataset_id,
         current_user["id"],
     )
+

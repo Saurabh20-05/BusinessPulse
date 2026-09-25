@@ -1,0 +1,383 @@
+{
+  "home": "Accueil",
+  "dashboard": "Tableau de bord",
+  "dataset": "Jeu de données",
+  "insights": "Analyses",
+  "dataQuality": "Qualité des données",
+  "profile": "Profil",
+  "logout": "Déconnexion",
+  "login": "Connexion",
+  "signup": "Créer un compte",
+  "signUp": "S’inscrire",
+
+  "datasetPage": "Jeu de données",
+  "datasetSubtitle": "Choisissez la source de données que vous souhaitez analyser.",
+  "builtInDataset": "Jeu de données commercial intégré",
+  "builtInDescription": "Analysez le jeu de données intégré du commerce électronique brésilien Olist avec les fonctionnalités d'analyse, de KPI actuels et de prévision de BusinessPulse.",
+  "readyToAnalyze": "Prêt à être analysé",
+  "useOlistDataset": "Utiliser le jeu de données Olist",
+
+  "uploadDataset": "Importer un jeu de données",
+  "uploadOwnData": "Importez vos propres données commerciales",
+  "uploadDescription": "Importez un fichier CSV contenant vos données commerciales ou de vente et associez ses colonnes aux champs BusinessPulse.",
+  "uploadCsv": "Importer un CSV",
+  "ready": "Prêt",
+  "using": "Utilisé",
+
+  "datasetPreview": "Aperçu du jeu de données",
+  "rows": "{{rows}} lignes",
+  "columns": "{{count}} colonnes",
+  "saveMapping": "Enregistrer la correspondance",
+
+  "uploadedDatasets": "Jeux de données importés",
+  "uploadedDatasetsDescription": "Sélectionnez un jeu de données précédemment importé pour l'analyser.",
+  "datasets": "{{count}} jeux de données",
+  "noUploadedDatasets": "Aucun jeu de données importé pour le moment.",
+  "uploadCsvToGetStarted": "Importez un CSV ci-dessus pour commencer.",
+
+  "selected": "Sélectionné",
+  "select": "Sélectionner",
+  "preview": "Aperçu",
+  "delete": "Supprimer",
+  "close": "Fermer",
+
+  "deleteConfirmation": "Voulez-vous vraiment supprimer \"{{filename}}\" ?",
+  "datasetDeleted": "Jeu de données supprimé avec succès.",
+  "failedToDeleteDataset": "Échec de la suppression du jeu de données.",
+  "failedToLoadPreview": "Échec du chargement de l'aperçu du jeu de données.",
+  "datasetUploaded": "Jeu de données importé avec succès.",
+  "datasetUploadFailed": "Échec de l'importation du jeu de données.",
+  "columnMappingSaved": "Correspondance des colonnes enregistrée avec succès.",
+  "failedToSaveMapping": "Échec de l'enregistrement de la correspondance des colonnes.",
+  "olistSelected": "Jeu de données Olist sélectionné avec succès.",
+  "datasetSelected": "{{filename}} sélectionné avec succès.",
+
+  "date": "Date",
+  "revenue": "Revenus",
+  "orders": "Commandes",
+  "customers": "Clients",
+  "category": "Catégorie",
+  "state": "État",
+  "paymentMethod": "Mode de paiement",
+  "reviewScore": "Note des avis",
+  "price": "Prix",
+
+  "mapColumns": "Mapper les colonnes",
+  "mapColumnsDescription": "Associez les colonnes de votre CSV aux champs BusinessPulse.",
+  "selectColumn": "Sélectionner une colonne",
+
+  "homeHeroLabel": "Plateforme d’analytique d’entreprise",
+  "homeHeroTitle": "Transformez vos données commerciales en",
+  "homeHeroTitleHighlight": "Meilleures décisions",
+  "homeHeroDescription": "Analysez vos données commerciales, suivez les performances, identifiez les problèmes de données et découvrez des informations utiles pour prendre de meilleures décisions.",
+  "exploreDashboard": "Explorer le tableau de bord",
+
+  "analyze": "Analyser",
+  "businessAnalytics": "Analytique d’entreprise",
+  "businessAnalyticsDescription": "Explorez les revenus, les commandes, les clients, les catégories, les paiements et les avis.",
+  "exploreAnalytics": "Explorer les analyses",
+
+  "monitor": "Suivre",
+  "currentDashboard": "Tableau de bord actuel",
+  "currentDashboardDescription": "Suivez vos indicateurs commerciaux les plus importants au même endroit.",
+  "viewDashboard": "Voir le tableau de bord",
+
+  "understand": "Comprendre",
+  "businessInsights": "Analyses commerciales",
+  "businessInsightsDescription": "Obtenez des informations claires à partir de vos données et identifiez les tendances importantes.",
+  "viewInsights": "Voir les analyses",
+
+  "forecast": "Prévoir",
+  "futurePredictions": "Prévisions futures",
+  "futurePredictionsDescription": "Utilisez l’apprentissage automatique pour estimer les performances commerciales futures.",
+  "viewForecast": "Voir les prévisions",
+
+  "knowYourData": "Comprenez vos données avant de les analyser",
+  "dataQualityDescription": "Vérifiez les valeurs manquantes, les doublons, les dates invalides et autres problèmes de données avant de prendre des décisions commerciales.",
+  "checkDataQuality": "Vérifier la qualité des données",
+
+  "onePlatform": "Une plateforme. Une vision complète.",
+  "fromDataToDecisions": "Des données aux décisions",
+  "aboutDescription": "BusinessPulse réunit l’analytique, la qualité des données, les analyses et les prévisions en un seul endroit pour vous aider à comprendre les performances et à prendre de meilleures décisions commerciales.",
+
+  "simpleWorkflow": "Processus simple",
+  "howBusinessPulseWorks": "Comment fonctionne BusinessPulse",
+  "workflowDescription": "Importez vos données, préparez-les, vérifiez leur qualité et transformez-les en informations commerciales utiles.",
+
+  "uploadData": "Importer les données",
+  "uploadDataDescription": "Importez vos données commerciales ou de vente au format CSV.",
+
+  "mapColumnsHome": "Mapper les colonnes",
+  "mapColumnsDescriptionHome": "Associez les colonnes de votre jeu de données aux champs utilisés par BusinessPulse.",
+
+  "checkData": "Vérifier les données",
+  "checkDataDescription": "Vérifiez les valeurs manquantes, les doublons et les valeurs invalides avant l’analyse.",
+
+  "analyzeData": "Analyser",
+  "analyzeDataDescription": "Explorez les performances, les analyses et les prévisions à partir de vos données.",
+  "askYourData": "Interrogez vos données",
+  "askYourDataDescription": "Posez des questions en langage naturel sur votre jeu de données commercial sélectionné et obtenez des réponses claires.",
+
+  "readyToGetStarted": "Prêt à commencer ?",
+  "startExploringData": "Commencez à explorer vos données commerciales",
+  "finalCtaDescription": "Importez votre jeu de données et utilisez BusinessPulse pour comprendre les performances, découvrir des informations utiles et planifier la suite.",
+  "getStarted": "Commencer",
+
+  "historicalAnalytics": "Analyses historiques",
+  "historicalAnalyticsSubtitle": "Analysez les ventes, les commandes et les tendances des clients passées.",
+
+  "currentDashboardSubtitle": "Suivez les KPI commerciaux importants en temps réel.",
+
+  "forecastPredictions": "Prévisions et prédictions",
+  "forecastPredictionsSubtitle": "Prévoyez les ventes futures, les commandes et la croissance de l'entreprise.",
+
+  "failedToLoadHistoricalData": "Échec du chargement des données historiques.",
+  "loadingHistoricalData": "Chargement des données historiques...",
+
+  "monthlyRevenue": "Revenus mensuels",
+  "monthlyRevenueDescription": "Revenus mensuels.",
+
+  "monthlyOrders": "Commandes mensuelles",
+  "monthlyOrdersDescription": "Commandes mensuelles.",
+
+  "topCategories": "Meilleures catégories",
+  "topCategoriesDescription": "Principales catégories par revenus.",
+
+  "revenueByCategory": "Revenus par catégorie",
+  "revenueByCategoryDescription": "Top 10 des catégories de produits par revenus.",
+
+  "customersByState": "Clients par État",
+  "customersByStateDescription": "Répartition des clients par État.",
+
+  "reviewScores": "Notes des avis",
+  "reviewScoresDescription": "Répartition des notes des avis.",
+
+  "paymentMethods": "Modes de paiement",
+  "paymentMethodsDescription": "Répartition des modes de paiement.",
+
+  "priceDistribution": "Répartition des prix",
+  "priceDistributionDescription": "Répartition des prix des produits.",
+
+  "revenueVsOrders": "Revenus vs commandes",
+  "revenueVsOrdersDescription": "Comparaison des revenus avec les commandes.",
+
+  "correlationHeatmap": "Carte de corrélation",
+  "correlationHeatmapDescription": "Corrélation entre les indicateurs commerciaux.",
+
+  "failedToLoadDashboardData": "Échec du chargement des données du tableau de bord.",
+  "loadingDashboardData": "Chargement des données du tableau de bord...",
+
+  "totalRevenue": "Revenus totaux",
+  "totalOrders": "Commandes totales",
+  "totalCustomers": "Nombre total de clients",
+  "totalProducts": "Nombre total de produits",
+  "averageReview": "Note moyenne",
+  "averagePayment": "Paiement moyen",
+  "topCategory": "Catégorie principale",
+  "topProduct": "Produit principal",
+
+  "recentOrders": "Commandes récentes",
+  "recentOrdersDescription": "Commandes passées récemment.",
+  "orderId": "ID de commande",
+  "amount": "Montant",
+  "status": "Statut",
+
+  "failedToLoadForecastData": "Échec du chargement des données de prévision.",
+  "loadingForecastData": "Chargement des données de prévision...",
+  "notEnoughHistoricalData": "Pas suffisamment de données historiques disponibles pour effectuer des prévisions.",
+
+  "revenueForecast": "Prévision des revenus",
+  "revenueForecastDescription": "Prévision des revenus pour les 4 prochains mois.",
+
+  "orderForecast": "Prévision des commandes",
+  "orderForecastDescription": "Prévision des commandes pour les 4 prochains mois.",
+
+  "customerSatisfactionForecast": "Prévision de la satisfaction client",
+  "customerSatisfactionForecastDescription": "Prévision de la note moyenne des avis clients pour les 4 prochains mois.",
+
+  "forecastControls": "Paramètres des prévisions",
+  "forecastControlsDescription": "Choisissez ce que vous souhaitez prévoir et le modèle d’apprentissage automatique à utiliser.",
+  "predictionType": "Type de prévision",
+  "selectModel": "Sélectionner le modèle",
+  "generateForecast": "Générer la prévision",
+  "modelUsed": "Modèle utilisé",
+  "modelPerformance": "Performance du modèle",
+  "modelPerformanceDescription": "Métriques de performance calculées à partir du modèle sélectionné.",
+  "meanAbsoluteError": "Erreur absolue moyenne",
+  "rootMeanSquaredError": "Racine de l’erreur quadratique moyenne",
+  "coefficientOfDetermination": "Coefficient de détermination",
+
+  "customerSatisfaction": "Satisfaction client",
+  "linearRegression": "Régression linéaire",
+  "randomForestRegression": "Régression par forêt aléatoire",
+  "polynomialRegression": "Régression polynomiale",
+
+  "businessIntelligence": "Intelligence d’entreprise",
+  "businessInsightsPageDescription": "Découvrez les principaux modèles, tendances et opportunités à partir de vos données commerciales.",
+  "dataSource": "Source de données",
+  "olistDataset": "Jeu de données Olist",
+  "customDataset": "Jeu de données personnalisé",
+  "keyFindings": "Principales conclusions",
+  "keyFindingsDescription": "Principaux modèles identifiés dans le jeu de données sélectionné.",
+  "noInsightsAvailable": "Aucune analyse n’est disponible pour ce jeu de données.",
+
+  "failedToLoadDataQuality": "Échec du chargement des informations sur la qualité des données.",
+  "loadingDataQuality": "Chargement de la qualité des données...",
+
+  "dataQualityPageSubtitle": "Vérifiez vos données pour détecter les valeurs manquantes, les doublons ou les valeurs invalides.",
+
+  "totalRows": "Nombre total de lignes",
+  "totalColumns": "Nombre total de colonnes",
+  "missingValues": "Valeurs manquantes",
+  "duplicateRows": "Lignes en double",
+  "invalidDates": "Dates invalides",
+  "negativeValues": "Valeurs négatives",
+
+  "dataQualityScore": "Score de qualité des données",
+  "dataQualityScoreDescription": "Un aperçu rapide de la propreté et de la fiabilité de vos données.",
+
+  "excellent": "Excellent",
+  "good": "Bon",
+  "worthChecking": "À vérifier",
+  "needsReview": "À examiner",
+  "outOf100": "sur 100",
+  "ofData": "des données",
+
+  "qualityExcellentMessage": "Vos données semblent propres et prêtes à être utilisées.",
+  "qualityGoodMessage": "Vos données semblent bonnes, mais certains éléments méritent d’être vérifiés.",
+  "qualityNeedsReviewMessage": "Quelques problèmes dans vos données doivent être examinés.",
+
+  "qualityChecks": "Contrôles de qualité",
+  "qualityChecksDescription": "Une vérification rapide des problèmes courants liés aux données.",
+
+  "columnQuality": "Qualité des colonnes",
+  "columnQualityDescription": "Consultez rapidement l’état de chaque colonne.",
+
+  "column": "Colonne",
+  "type": "Type",
+  "missing": "Manquantes",
+  "unique": "Uniques",
+
+  "revenueTrendTitle": "Tendance des revenus",
+  "revenueIncreasedMessage": "Les revenus ont augmenté de {{percentage}} % entre le début et la fin du jeu de données.",
+  "revenueDecreasedMessage": "Les revenus ont diminué de {{percentage}} % entre le début et la fin du jeu de données.",
+  "revenueStableMessage": "Les revenus sont restés stables entre le début et la fin du jeu de données.",
+
+  "revenueGrowthAlertTitle": "Alerte de croissance des revenus",
+  "revenueGrowthAlertMessage": "Les revenus ont augmenté de {{percentage}} %. L’activité affiche une forte croissance des revenus.",
+
+  "revenueDeclineAlertTitle": "Alerte de baisse des revenus",
+  "revenueDeclineAlertMessage": "Les revenus ont diminué de {{percentage}} %. L’activité devrait examiner les performances récentes des ventes et identifier les facteurs contribuant à cette baisse.",
+
+  "topPerformingCategoryTitle": "Catégorie la plus performante",
+  "topPerformingCategoryMessage": "{{category}} a généré les revenus les plus élevés avec {{revenue}} de ventes totales.",
+
+  "customerActivityTitle": "Activité des clients",
+  "customerActivityMessage": "Le jeu de données contient environ {{customers}} clients.",
+
+  "customerSatisfactionTitle": "Satisfaction client",
+  "customerSatisfactionStrongMessage": "La satisfaction client est élevée, avec une note moyenne de {{score}} sur 5.",
+  "customerSatisfactionModerateMessage": "La satisfaction client est modérée, avec une note moyenne de {{score}} sur 5.",
+  "customerSatisfactionAttentionMessage": "La satisfaction client nécessite une attention particulière, avec une note moyenne de {{score}} sur 5.",
+
+  "businessRecommendationTitle": "Recommandation commerciale",
+  "businessRecommendationStrongMessage": "Maintenez l’expérience client actuelle et continuez à vous concentrer sur la qualité du service.",
+  "businessRecommendationModerateMessage": "Concentrez-vous sur l’amélioration de l’expérience client afin d’augmenter la satisfaction globale.",
+  "businessRecommendationAttentionMessage": "La satisfaction client nécessite une attention particulière. Examinez la qualité des produits et des services afin d’identifier les principales causes des faibles évaluations.",
+
+  "totalBusinessRevenueTitle": "Revenus totaux de l’activité",
+  "totalBusinessRevenueMessage": "Le jeu de données enregistre un revenu total de {{revenue}}.",
+
+  "averageOrderValueTitle": "Valeur moyenne des commandes",
+  "averageOrderValueMessage": "La valeur moyenne d’une commande est de {{value}}.",
+
+  "mostUsedPaymentMethodTitle": "Mode de paiement le plus utilisé",
+  "mostUsedPaymentMethodMessage": "{{paymentMethod}} est le mode de paiement le plus fréquemment utilisé dans le jeu de données.",
+
+  "growthOpportunityTitle": "Opportunité de croissance",
+  "growthOpportunityMessage": "{{category}} représente {{percentage}} % des revenus totaux. Cette catégorie pourrait être intéressante pour renforcer les actions promotionnelles.",
+
+  "businessAlertTitle": "Alerte commerciale",
+  "businessAlertMessage": "{{category}} représente {{percentage}} % des revenus totaux. L’activité dépend fortement de cette catégorie.",
+
+  "overallBusinessInterpretationTitle": "Interprétation globale de l’activité",
+  "interpretationTopCategory": "{{category}} est la principale catégorie en termes de revenus et représente {{percentage}} % des revenus totaux.",
+  "interpretationRevenueIncreased": "Les revenus ont augmenté de {{percentage}} % entre le début et la fin du jeu de données.",
+  "interpretationRevenueDeclined": "Les revenus ont diminué de {{percentage}} % entre le début et la fin du jeu de données.",
+  "interpretationRevenueStable": "Les revenus sont restés stables entre le début et la fin du jeu de données.",
+  "interpretationSatisfactionStrong": "La satisfaction client reste élevée.",
+  "interpretationSatisfactionModerate": "La satisfaction client est modérée et pourrait être améliorée.",
+  "interpretationSatisfactionAttention": "La satisfaction client nécessite une attention particulière.",
+
+  "failedToLoadProfile": "Échec du chargement des informations du profil.",
+  "loadingProfile": "Chargement du profil...",
+
+  "profileSubtitle": "Gérez votre compte et votre activité BusinessPulse.",
+  "profileCardDescription": "Votre compte BusinessPulse.",
+  "businessPulseUser": "Utilisateur BusinessPulse",
+
+  "personalInformation": "Informations personnelles",
+  "accountDetails": "Détails de votre compte.",
+  "fullName": "Nom complet",
+  "emailAddress": "Adresse e-mail",
+  "accountStatus": "Statut du compte",
+  "active": "Actif",
+
+  "yourData": "Vos données",
+  "yourDataDescription": "Vos jeux de données et votre source de données actuelle.",
+  "currentDataset": "Jeu de données actuel",
+
+  "quickActions": "Actions rapides",
+  "quickActionsDescription": "Accédez rapidement aux sections de BusinessPulse que vous utilisez le plus.",
+  "manageDatasets": "Gérer les jeux de données",
+
+  "welcomeBack": "Bon retour",
+  "signInBusinessPulse": "Connectez-vous à votre compte BusinessPulse",
+  "email": "E-mail",
+  "enterYourEmail": "Saisissez votre adresse e-mail",
+  "password": "Mot de passe",
+  "enterYourPassword": "Saisissez votre mot de passe",
+  "signingIn": "Connexion en cours...",
+  "signIn": "Se connecter",
+  "dontHaveAccount": "Vous n’avez pas de compte ?",
+  "invalidEmailPassword": "E-mail ou mot de passe invalide.",
+
+  "createAccount": "Créer un compte",
+  "createBusinessPulseAccount": "Créez votre compte BusinessPulse",
+  "name": "Nom",
+  "enterYourName": "Saisissez votre nom",
+  "createPassword": "Créez un mot de passe",
+  "creatingAccount": "Création du compte...",
+  "alreadyHaveAccount": "Vous avez déjà un compte ?",
+  "unableToCreateAccount": "Impossible de créer le compte.",
+  "averageReviewScore": "Note moyenne des avis",
+
+  "aiAnalytics": "Analyse avec IA",
+  "querySelectedDataset": "Posez des questions sur votre jeu de données sélectionné en langage naturel.",
+  "loadingDataset": "Chargement du jeu de données...",
+  "noDatasetSelected": "Aucun jeu de données sélectionné",
+  "selectedFromDataset": "Sélectionné depuis les données",
+  "selectDatasetFirst": "Sélectionnez un jeu de données sur la page des données avant d'utiliser l'analyse avec IA.",
+  "dataAnalysis": "Analyse des données",
+  "askQuestionsSelectedDataset": "Posez des questions sur le jeu de données sélectionné.",
+  "startWithQuestion": "Commencez par une question",
+  "askAboutData": "Posez des questions sur les totaux, les moyennes, les nombres, les catégories ou d'autres données.",
+  "howManyRecords": "Combien d'enregistrements contient le jeu de données ?",
+  "totalRevenueQuestion": "Quels sont les revenus totaux ?",
+  "averageRevenueQuestion": "Quel est le revenu moyen ?",
+  "topCategoryQuestion": "Quelle catégorie a généré le plus de revenus ?",
+  "result": "Résultat",
+  "noMatchingData": "Aucune donnée correspondante trouvée.",
+  "processingQuestion": "Traitement de votre question...",
+  "askQuestionPlaceholder": "Posez une question sur vos données...",
+  "selectDatasetPlaceholder": "Sélectionnez d'abord un jeu de données",
+  "processing": "Traitement en cours",
+  "ask": "Demander",
+  "datasetUnavailable": "Le jeu de données sélectionné n'est plus disponible. Sélectionnez un autre jeu de données depuis la page des données.",
+  "unableToLoadDataset": "Impossible de charger le jeu de données.",
+  "unableToProcessQuestion": "Impossible de traiter la question.",
+  "validate": "Valider",
+  "viewDataQuality": "Vérifier la qualité des données",
+  "aiAnalyticsDescription": "Posez des questions sur vos données commerciales en langage naturel.",
+  "exploreAIAnalytics": "Explorer l’analyse avec IA"
+}

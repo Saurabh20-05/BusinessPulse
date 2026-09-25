@@ -1,25 +1,26 @@
 // import { Link, useLocation, useNavigate } from "react-router-dom";
-// import { useEffect, useState } from "react";
+// import { useEffect, useRef, useState } from "react";
+// import { useTranslation } from "react-i18next";
 
 // import { getCurrentUser } from "../services/api";
 
-// // const navigationLinks = [
-// //   { label: "Home", path: "/" },
-// //   { label: "Dashboard", path: "/dashboard" },
-// // ];
 // const navigationLinks = [
-//   { label: "Home", path: "/" },
-//   { label: "Dashboard", path: "/dashboard" },
-//   { label: "Dataset", path: "/dataset" },
-//   { label: "Insights", path: "/insights" },
-//   { label: "Data Quality", path: "/data-quality" },
+//   { key: "home", path: "/" },
+//   { key: "dashboard", path: "/dashboard" },
+//   { key: "dataset", path: "/dataset" },
+//   { key: "insights", path: "/insights" },
+//   { key: "dataQuality", path: "/data-quality" },
 // ];
 
 // function Navbar() {
 //   const location = useLocation();
 //   const navigate = useNavigate();
+//   const { t, i18n } = useTranslation();
 
 //   const [user, setUser] = useState(null);
+//   const [profileOpen, setProfileOpen] = useState(false);
+
+//   const profileRef = useRef(null);
 
 //   useEffect(() => {
 //     const token = localStorage.getItem("access_token");
@@ -41,118 +42,156 @@
 //       });
 //   }, [location.pathname]);
 
+//   useEffect(() => {
+//     const handleClickOutside = (event) => {
+//       if (!profileRef.current?.contains(event.target)) {
+//         setProfileOpen(false);
+//       }
+//     };
+
+//     if (profileOpen) {
+//       document.addEventListener("click", handleClickOutside);
+//     }
+
+//     return () => {
+//       document.removeEventListener("click", handleClickOutside);
+//     };
+//   }, [profileOpen]);
+
+//   const handleProfileClick = () => {
+//     setProfileOpen((open) => !open);
+//   };
+
 //   const handleLogout = () => {
 //     // Clear the saved login before sending the user to the login page
 //     localStorage.removeItem("access_token");
 
 //     setUser(null);
+//     setProfileOpen(false);
 
 //     navigate("/login");
 //   };
 
 //   return (
-//     <header className="sticky top-0 z-30 border-b border-blue-100 bg-white shadow-md">
-//       <div className="w-full px-6 h-16 flex items-center justify-between">
+//     <header className="sticky top-0 z-30 border-b border-slate-200 bg-white shadow-sm">
+//       <div className="grid h-16 w-full grid-cols-[1fr_auto_1fr] items-center px-6">
 //         {/* Logo */}
-
-//         <Link to="/" className="text-2xl font-bold">
-//           BusinessPulse
-//         </Link>
+//         <div className="flex items-center">
+//           <Link
+//             to="/"
+//             className="text-2xl font-bold tracking-tight text-slate-800"
+//           >
+//             BusinessPulse
+//           </Link>
+//         </div>
 
 //         {/* Navigation */}
-
-//         <nav className="hidden sm:flex items-center gap-3">
+//         <nav className="hidden items-center justify-center gap-2 sm:flex">
 //           {navigationLinks.map((link) => {
-//             const isActive = location.pathname === link.path;
+//             const isActive =
+//               link.path === "/"
+//                 ? location.pathname === "/"
+//                 : location.pathname === link.path ||
+//                   location.pathname.startsWith(`${link.path}/`);
 
 //             return (
 //               <Link
 //                 key={link.path}
 //                 to={link.path}
-//                 className={`px-4 py-1.5 rounded-lg text-sm font-semibold border transition-colors ${
+//                 className={`rounded-lg border px-4 py-2 text-sm font-semibold transition-colors ${
 //                   isActive
 //                     ? "border-primary-500 bg-primary-50 text-primary-700"
-//                     : "border-slate-400 text-slate-600 hover:bg-slate-100"
+//                     : "border-slate-300 bg-white text-slate-600 hover:bg-slate-50 hover:text-slate-800"
 //                 }`}
 //               >
-//                 {link.label}
+//                 {t(link.key)}
 //               </Link>
 //             );
 //           })}
 //         </nav>
 
-//         {/* Authentication */}
+//         {/* Language + Profile */}
+//         <div className="flex items-center justify-end gap-3">
+//           <select
+//             value={i18n.language}
+//             onChange={(e) => i18n.changeLanguage(e.target.value)}
+//             className="rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm font-medium text-slate-600 outline-none transition focus:border-primary-400"
+//           >
+//             <option value="en">English</option>
+//             <option value="hi">Hindi</option>
+//             <option value="es">Spanish</option>
+//             <option value="fr">French</option>
+//             <option value="de">German</option>
+//           </select>
 
-//         // </div>{user ? (
-//           // <div className="flex items-center gap-3">
-//           //   {/* <span className="text-sm font-semibold text-slate-700">
-//           //     {user.name || user.email}
-//           //   </span> */}
+//           {user ? (
+//             <div ref={profileRef} className="relative">
+//               <button
+//                 type="button"
+//                 onClick={handleProfileClick}
+//                 className="flex items-center gap-2 rounded-lg px-2 py-1.5 text-sm font-semibold text-slate-700 transition-colors hover:bg-slate-100"
+//               >
+//                 <div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary-50 text-sm font-semibold text-primary-700">
+//                   {user.name?.charAt(0)?.toUpperCase() ||
+//                     user.email?.charAt(0)?.toUpperCase()}
+//                 </div>
 
-//           //   <Link
-//           //     to="/profile"
-//           //     className="text-sm font-semibold text-slate-700 hover:text-primary-700"
-//           //   >
-//           //     {user.name || user.email}
-//           //   </Link>
+//                 <span className="max-w-28 truncate">
+//                   {user.name || user.email}
+//                 </span>
 
-//           //   <button
-//           //     onClick={handleLogout}
-//           //     className="rounded-lg border border-slate-400 px-4 py-1.5 text-sm font-semibold text-slate-700 hover:bg-slate-200"
-//           //   >
-//           //     Logout
-//           //   </button>
-//           // </div>
+//                 <span
+//                   className={`text-xs text-slate-400 transition-transform ${
+//                     profileOpen ? "rotate-180" : ""
+//                   }`}
+//                 >
+//                   ▼
+//                 </span>
+//               </button>
 
-//         //   <div className="flex items-center gap-4">
-//         //     <Link
-//         //       to="/profile"
-//         //       className="flex items-center gap-1.5 text-sm font-semibold text-slate-700 hover:text-primary-700"
-//         //     >
-//         //       {user.name || user.email}
-//         //       <span className="text-xs text-slate-400">▼</span>
-//         //     </Link>
+//               {profileOpen && (
+//                 <div className="absolute right-0 top-full mt-2 w-64 overflow-hidden rounded-xl border border-slate-200 bg-white shadow-lg">
+//                   <div className="px-4 py-3">
+//                     <p className="truncate text-sm font-semibold text-slate-800">
+//                       {user.name}
+//                     </p>
 
-//         //     <button
-//         //       onClick={handleLogout}
-//         //       className="rounded-lg border border-slate-400 px-4 py-1.5 text-sm font-semibold text-slate-700 hover:bg-slate-200"
-//         //     >
-//         //       Logout
-//         //     </button>
-//         //   </div>
-//         // ) : (
-//         //   <Link
-//         //     to="/login"
-//         //     className="rounded-lg border border-slate-400 px-5 py-1.5 text-sm font-semibold text-slate-700 hover:bg-slate-200"
-//         //   >
-//         //     Sign In
-//         //   </Link>
+//                     <p className="mt-1 truncate text-xs text-slate-500">
+//                       {user.email}
+//                     </p>
+//                   </div>
 
-//         {user ? (
-//   <div className="relative">
-//     <Link
-//       to="/profile"
-//       className="flex items-center gap-2 rounded-lg px-2 py-1.5 text-sm font-semibold text-slate-700 hover:bg-slate-100"
-//     >
-//       <div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary-50 text-sm font-semibold text-primary-700">
-//         {user.name?.charAt(0)?.toUpperCase() ||
-//           user.email?.charAt(0)?.toUpperCase()}
-//       </div>
+//                   <div className="border-t border-slate-100" />
 
-//       <span>{user.name || user.email}</span>
+//                   <Link
+//                     to="/profile"
+//                     onClick={() => setProfileOpen(false)}
+//                     className="block px-4 py-2.5 text-sm font-medium text-slate-700 transition-colors hover:bg-slate-50"
+//                   >
+//                     {t("profile")}
+//                   </Link>
 
-//       <span className="text-xs text-slate-400">▼</span>
-//     </Link>
-//   </div>
-// ) : (
-//   <Link
-//     to="/login"
-//     className="rounded-lg border border-slate-400 px-5 py-1.5 text-sm font-semibold text-slate-700 hover:bg-slate-200"
-//   >
-//     Sign In
-//   </Link>
-// )}
-//         )}
+//                   <div className="border-t border-slate-100" />
+
+//                   <button
+//                     type="button"
+//                     onClick={handleLogout}
+//                     className="block w-full px-4 py-2.5 text-left text-sm font-medium text-rose-600 transition-colors hover:bg-rose-50"
+//                   >
+//                     {t("logout")}
+//                   </button>
+//                 </div>
+//               )}
+//             </div>
+//           ) : (
+//             <Link
+//               to="/login"
+//               className="rounded-lg border border-slate-300 bg-white px-5 py-2 text-sm font-semibold text-slate-600 transition-colors hover:bg-slate-50 hover:text-slate-800"
+//             >
+//               {t("login")}
+//             </Link>
+//           )}
+//         </div>
 //       </div>
 //     </header>
 //   );
@@ -162,35 +201,32 @@
 
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 import { getCurrentUser } from "../services/api";
 
-// Navigation links shown in the navbar
-// const navigationLinks = [
-//   { label: "Home", path: "/" },
-//   { label: "Dashboard", path: "/dashboard" },
-// ];
-
 const navigationLinks = [
-  { label: "Home", path: "/" },
-  { label: "Dashboard", path: "/dashboard" },
-  { label: "Dataset", path: "/dataset" },
-  { label: "Insights", path: "/insights" },
-  { label: "Data Quality", path: "/data-quality" },
+  { key: "home", path: "/" },
+  { key: "dashboard", path: "/dashboard" },
+  { key: "dataset", path: "/dataset" },
+  { key: "insights", path: "/insights" },
+  { key: "dataQuality", path: "/data-quality" },
+  { key: "aiAnalytics", path: "/ai-analytics" },
 ];
 
 function Navbar() {
   const location = useLocation();
   const navigate = useNavigate();
+  const { t, i18n } = useTranslation();
 
   const [user, setUser] = useState(null);
   const [profileOpen, setProfileOpen] = useState(false);
+
   const profileRef = useRef(null);
 
   useEffect(() => {
     const token = localStorage.getItem("access_token");
 
-    // Check for a saved token before loading the user
     if (!token) {
       setUser(null);
       return;
@@ -201,213 +237,157 @@ function Navbar() {
         setUser(data);
       })
       .catch(() => {
-        // Remove the token if it is no longer valid
         localStorage.removeItem("access_token");
         setUser(null);
       });
   }, [location.pathname]);
 
-
   useEffect(() => {
-  const handleClickOutside = (event) => {
-    if (!profileRef.current?.contains(event.target)) {
-      setProfileOpen(false);
+    const handleClickOutside = (event) => {
+      if (!profileRef.current?.contains(event.target)) {
+        setProfileOpen(false);
+      }
+    };
+
+    if (profileOpen) {
+      document.addEventListener("click", handleClickOutside);
     }
-  };
 
-  if (profileOpen) {
-    document.addEventListener("click", handleClickOutside);
-  }
-
-  return () => {
-    document.removeEventListener("click", handleClickOutside);
-  };
-}, [profileOpen]);
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+    };
+  }, [profileOpen]);
 
   const handleProfileClick = () => {
     setProfileOpen((open) => !open);
   };
 
   const handleLogout = () => {
-    // Clear the saved login before sending the user to the login page
     localStorage.removeItem("access_token");
 
     setUser(null);
+    setProfileOpen(false);
 
     navigate("/login");
   };
 
   return (
-    <header className="sticky top-0 z-30 border-b border-blue-100 bg-white shadow-md">
-      <div className="w-full px-6 h-16 flex items-center justify-between">
-        {/* Logo */}
+    <header className="sticky top-0 z-30 border-b border-slate-200 bg-white shadow-sm">
+      <div className="grid h-16 w-full grid-cols-[1fr_auto_1fr] items-center px-6">
+        <div className="flex items-center">
+          <Link
+            to="/"
+            className="text-2xl font-bold tracking-tight text-slate-800"
+          >
+            BusinessPulse
+          </Link>
+        </div>
 
-        <Link to="/" className="text-2xl font-bold">
-          BusinessPulse
-        </Link>
-
-        {/* Navigation */}
-
-        <nav className="hidden sm:flex items-center gap-3">
+        <nav className="hidden items-center justify-center gap-2 sm:flex">
           {navigationLinks.map((link) => {
-            const isActive = location.pathname === link.path;
+            const isActive =
+              link.path === "/"
+                ? location.pathname === "/"
+                : location.pathname === link.path ||
+                  location.pathname.startsWith(`${link.path}/`);
 
             return (
               <Link
                 key={link.path}
                 to={link.path}
-                className={`px-4 py-1.5 rounded-lg text-sm font-semibold border transition-colors ${
+                className={`rounded-lg border px-4 py-2 text-sm font-semibold transition-colors ${
                   isActive
                     ? "border-primary-500 bg-primary-50 text-primary-700"
-                    : "border-slate-400 text-slate-600 hover:bg-slate-100"
+                    : "border-slate-300 bg-white text-slate-600 hover:bg-slate-50 hover:text-slate-800"
                 }`}
               >
-                {link.label}
+                {t(link.key)}
               </Link>
             );
           })}
         </nav>
 
-        {/* Authentication */}
-
-        {/* Previous authentication layout */}
-        {/*
-        {user ? (
-          <div className="flex items-center gap-3">
-            <Link
-              to="/profile"
-              className="text-sm font-semibold text-slate-700 hover:text-primary-700"
-            >
-              {user.name || user.email}
-            </Link>
-
-            <button
-              onClick={handleLogout}
-              className="rounded-lg border border-slate-400 px-4 py-1.5 text-sm font-semibold text-slate-700 hover:bg-slate-200"
-            >
-              Logout
-            </button>
-          </div>
-        ) : (
-          <Link
-            to="/login"
-            className="rounded-lg border border-slate-400 px-5 py-1.5 text-sm font-semibold text-slate-700 hover:bg-slate-200"
+        <div className="flex items-center justify-end gap-3">
+          <select
+            value={i18n.language}
+            onChange={(e) => i18n.changeLanguage(e.target.value)}
+            className="rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm font-medium text-slate-600 outline-none transition focus:border-primary-400"
           >
-            Sign In
-          </Link>
-        )}
-        */}
+            <option value="en">English</option>
+            <option value="hi">Hindi</option>
+            <option value="es">Spanish</option>
+            <option value="fr">French</option>
+            <option value="de">German</option>
+          </select>
 
-        {/* Previous authentication layout with dropdown indicator */}
-        {/*
-        {user ? (
-          <div className="flex items-center gap-4">
-            <Link
-              to="/profile"
-              className="flex items-center gap-1.5 text-sm font-semibold text-slate-700 hover:text-primary-700"
-            >
-              {user.name || user.email}
-              <span className="text-xs text-slate-400">▼</span>
-            </Link>
-
-            <button
-              onClick={handleLogout}
-              className="rounded-lg border border-slate-400 px-4 py-1.5 text-sm font-semibold text-slate-700 hover:bg-slate-200"
-            >
-              Logout
-            </button>
-          </div>
-        ) : (
-          <Link
-            to="/login"
-            className="rounded-lg border border-slate-400 px-5 py-1.5 text-sm font-semibold text-slate-700 hover:bg-slate-200"
-          >
-            Sign In
-          </Link>
-        )}
-        */}
-
-        {/* Current authentication layout */}
-        {user ? (
-          // <div className="relative">
-          //   <Link
-          //     to="/profile"
-          //     className="flex items-center gap-2 rounded-lg px-2 py-1.5 text-sm font-semibold text-slate-700 hover:bg-slate-100"
-          //   >
-          //     {/* User avatar */}
-          //     <div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary-50 text-sm font-semibold text-primary-700">
-          //       {user.name?.charAt(0)?.toUpperCase() ||
-          //         user.email?.charAt(0)?.toUpperCase()}
-          //     </div>
-
-          //     {/* User name or email */}
-          //     <span>{user.name || user.email}</span>
-
-          //     {/* Profile indicator */}
-          //     <span className="text-xs text-slate-400">▼</span>
-          //   </Link>
-          // </div>
-
-          <div ref={profileRef} className="relative">
-            <button
-              onClick={handleProfileClick}
-              className="flex items-center gap-2 rounded-lg px-2 py-1.5 text-sm font-semibold text-slate-700 hover:bg-slate-100"
-            >
-              <div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary-50 text-sm font-semibold text-primary-700">
-                {user.name?.charAt(0)?.toUpperCase() ||
-                  user.email?.charAt(0)?.toUpperCase()}
-              </div>
-
-              <span>{user.name || user.email}</span>
-
-              <span
-                className={`text-xs text-slate-400 transition-transform ${
-                  profileOpen ? "rotate-180" : ""
-                }`}
+          {user ? (
+            <div ref={profileRef} className="relative">
+              <button
+                type="button"
+                onClick={handleProfileClick}
+                className="flex items-center gap-2 rounded-lg px-2 py-1.5 text-sm font-semibold text-slate-700 transition-colors hover:bg-slate-100"
               >
-                ▼
-              </span>
-            </button>
-
-            {profileOpen && (
-              <div className="absolute right-0 top-full mt-2 w-64 overflow-hidden rounded-xl border border-slate-200 bg-white shadow-lg">
-                <div className="px-4 py-3">
-                  <p className="text-sm font-semibold text-slate-800">
-                    {user.name}
-                  </p>
-
-                  <p className="mt-1 text-xs text-slate-500">{user.email}</p>
+                <div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary-50 text-sm font-semibold text-primary-700">
+                  {user.name?.charAt(0)?.toUpperCase() ||
+                    user.email?.charAt(0)?.toUpperCase()}
                 </div>
 
-                <div className="border-t border-slate-100" />
+                <span className="max-w-28 truncate">
+                  {user.name || user.email}
+                </span>
 
-                <Link
-                  to="/profile"
-                  onClick={() => setProfileOpen(false)}
-                  className="block px-4 py-2.5 text-sm font-medium text-slate-700 hover:bg-slate-50"
+                <span
+                  className={`text-xs text-slate-400 transition-transform ${
+                    profileOpen ? "rotate-180" : ""
+                  }`}
                 >
-                  Profile
-                </Link>
+                  ▼
+                </span>
+              </button>
 
-                <div className="border-t border-slate-100" />
+              {profileOpen && (
+                <div className="absolute right-0 top-full mt-2 w-64 overflow-hidden rounded-xl border border-slate-200 bg-white shadow-lg">
+                  <div className="px-4 py-3">
+                    <p className="truncate text-sm font-semibold text-slate-800">
+                      {user.name}
+                    </p>
 
-                <button
-                  onClick={handleLogout}
-                  className="block w-full px-4 py-2.5 text-left text-sm font-medium text-rose-600 hover:bg-rose-50"
-                >
-                  Logout
-                </button>
-              </div>
-            )}
-          </div>
-        ) : (
-          <Link
-            to="/login"
-            className="rounded-lg border border-slate-400 px-5 py-1.5 text-sm font-semibold text-slate-700 hover:bg-slate-200"
-          >
-            Sign In
-          </Link>
-        )}
+                    <p className="mt-1 truncate text-xs text-slate-500">
+                      {user.email}
+                    </p>
+                  </div>
+
+                  <div className="border-t border-slate-100" />
+
+                  <Link
+                    to="/profile"
+                    onClick={() => setProfileOpen(false)}
+                    className="block px-4 py-2.5 text-sm font-medium text-slate-700 transition-colors hover:bg-slate-50"
+                  >
+                    {t("profile")}
+                  </Link>
+
+                  <div className="border-t border-slate-100" />
+
+                  <button
+                    type="button"
+                    onClick={handleLogout}
+                    className="block w-full px-4 py-2.5 text-left text-sm font-medium text-rose-600 transition-colors hover:bg-rose-50"
+                  >
+                    {t("logout")}
+                  </button>
+                </div>
+              )}
+            </div>
+          ) : (
+            <Link
+              to="/login"
+              className="rounded-lg border border-slate-300 bg-white px-5 py-2 text-sm font-semibold text-slate-600 transition-colors hover:bg-slate-50 hover:text-slate-800"
+            >
+              {t("login")}
+            </Link>
+          )}
+        </div>
       </div>
     </header>
   );

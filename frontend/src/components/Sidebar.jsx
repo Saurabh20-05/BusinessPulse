@@ -1,29 +1,32 @@
 import { BarChart3, Activity, TrendingUp } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 const sidebarItems = [
   {
     key: "historical",
-    label: "Historical Analytics",
+    labelKey: "historicalAnalytics",
     icon: BarChart3,
   },
   {
     key: "current",
-    label: "Current Dashboard",
+    labelKey: "currentDashboard",
     icon: Activity,
   },
   {
     key: "forecast",
-    label: "Forecast & Predictions",
+    labelKey: "forecastPredictions",
     icon: TrendingUp,
   },
 ];
 
 function Sidebar({ activeTab, onSelect }) {
+  const { t } = useTranslation();
+
   return (
-    <aside className="hidden lg:block w-60 shrink-0">
+    <aside className="hidden w-60 shrink-0 lg:block">
       <div className="sticky top-24 rounded-xl border border-slate-200 bg-white p-4 shadow-md">
         <p className="mb-3 text-xs font-bold uppercase tracking-wide text-slate-400">
-          Dashboard
+          {t("dashboard")}
         </p>
 
         <nav className="flex flex-col gap-2">
@@ -37,12 +40,12 @@ function Sidebar({ activeTab, onSelect }) {
                 className={`flex items-center gap-3 rounded-lg border px-3 py-3 text-left text-sm font-semibold transition-all duration-200 ${
                   activeTab === item.key
                     ? "border-primary-600 bg-primary-600 text-white shadow-md"
-                    : "border-slate-300 bg-white text-slate-700 hover:bg-slate-100 hover:border-slate-400"
+                    : "border-slate-300 bg-white text-slate-700 hover:border-slate-400 hover:bg-slate-100"
                 }`}
               >
                 <Icon size={18} />
 
-                <span>{item.label}</span>
+                <span>{t(item.labelKey)}</span>
               </button>
             );
           })}

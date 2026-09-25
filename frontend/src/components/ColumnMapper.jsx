@@ -1,16 +1,18 @@
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 function ColumnMapper({ columns, onMappingChange }) {
+  const { t } = useTranslation();
   const fields = [
-    { key: "date", label: "Date", required: true },
-    { key: "revenue", label: "Revenue", required: false },
-    { key: "orders", label: "Orders", required: false },
-    { key: "customers", label: "Customers", required: false },
-    { key: "category", label: "Category", required: false },
-    { key: "state", label: "State", required: false },
-    { key: "payment_method", label: "Payment Method", required: false },
-    { key: "review_score", label: "Review Score", required: false },
-    { key: "price", label: "Price", required: false },
+    { key: "date", label: t("date"), required: true },
+    { key: "revenue", label: t("revenue"), required: false },
+    { key: "orders", label: t("orders"), required: false },
+    { key: "customers", label: t("customers"), required: false },
+    { key: "category", label: t("category"), required: false },
+    { key: "state", label: t("state"), required: false },
+    { key: "payment_method", label: t("paymentMethod"), required: false },
+    { key: "review_score", label: t("reviewScore"), required: false },
+    { key: "price", label: t("price"), required: false },
   ];
 
   const [mapping, setMapping] = useState({});
@@ -27,17 +29,15 @@ function ColumnMapper({ columns, onMappingChange }) {
 
   return (
     <div className="rounded-xl border border-slate-200 bg-white p-6 shadow-card">
-
       <h2 className="text-lg font-semibold text-slate-900">
-        Map Columns
+        {t("mapColumns")}
       </h2>
 
       <p className="mt-1 text-sm text-slate-500">
-        Match your CSV columns with BusinessPulse fields.
+        {t("mapColumnsDescription")}
       </p>
 
       <div className="mt-5 space-y-4">
-
         {fields.map((field) => (
           <div
             key={field.key}
@@ -45,21 +45,15 @@ function ColumnMapper({ columns, onMappingChange }) {
           >
             <label className="text-sm font-medium text-slate-700">
               {field.label}
-              {field.required && (
-                <span className="ml-1 text-red-500">*</span>
-              )}
+              {field.required && <span className="ml-1 text-red-500">*</span>}
             </label>
 
             <select
               value={mapping[field.key] || ""}
-              onChange={(e) =>
-                handleChange(field.key, e.target.value)
-              }
+              onChange={(e) => handleChange(field.key, e.target.value)}
               className="w-64 rounded-lg border border-slate-300 px-3 py-2 text-sm"
             >
-              <option value="">
-                Select column
-              </option>
+              <option value="">{t("selectColumn")}</option>
 
               {columns.map((column) => (
                 <option key={column} value={column}>
@@ -69,9 +63,7 @@ function ColumnMapper({ columns, onMappingChange }) {
             </select>
           </div>
         ))}
-
       </div>
-
     </div>
   );
 }

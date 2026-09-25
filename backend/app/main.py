@@ -5,11 +5,14 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.database.mongodb import client
-from app.routes import historical, current, forecast, auth, insights, data_quality
+from app.routes import insights
 from app.exceptions import register_exception_handlers
 
 
-from app.routes import dataset
+from app.routes import dataset, forecast, historical
+from app.routes import auth, current, data_quality
+
+from app.routes import ai_analytics
 
 
 @asynccontextmanager
@@ -116,6 +119,8 @@ app.include_router(insights.router)
 
 app.include_router(data_quality.router)
 
+app.include_router(ai_analytics.router)
+
 
 @app.get(
     "/",
@@ -129,3 +134,4 @@ def root():
         "version": "1.0.0",
         "docs": "/docs",
     }
+
