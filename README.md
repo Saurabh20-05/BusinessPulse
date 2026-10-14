@@ -2,34 +2,44 @@
 
 ### Business Analytics & Forecasting Platform
 
-BusinessPulse is a full-stack business analytics platform that transforms e-commerce data into actionable insights through **historical analytics, current KPI monitoring, data quality analysis, business insights, and machine-learning-based forecasting**.
+BusinessPulse is a full-stack business analytics platform that
+transforms e-commerce data into actionable insights through **historical
+analytics, current KPI monitoring, data quality analysis, automated
+business insights, machine-learning-based forecasting, and
+natural-language AI Analytics**.
 
-The platform supports both the built-in **Olist Brazilian E-Commerce dataset** and **user-uploaded CSV datasets**, allowing users to upload, map, analyze, and forecast their own business data.
+The platform supports both the built-in **Olist Brazilian E-Commerce
+dataset** and **user-uploaded CSV datasets**, allowing users to upload,
+map, analyze, and forecast their own business data.
 
-Built with **React, FastAPI, Python, MongoDB, Pandas, Scikit-Learn, JWT, and Tailwind CSS**, BusinessPulse follows a modular architecture with separate routes, services, repositories, schemas, utilities, database, and machine-learning layers.
+Built with **React, FastAPI, Python, MongoDB, Pandas, Scikit-Learn, JWT,
+Tailwind CSS, and an LLM-powered AI Analytics workflow**, BusinessPulse
+follows a modular architecture with separate routes, services,
+repositories, schemas, utilities, database, and machine-learning layers.
 
----
+------------------------------------------------------------------------
 
 ## 🚀 Key Features
 
 ### 📊 Historical Analytics
 
-Analyze historical business performance through interactive visualizations.
+Analyze historical business performance through interactive
+visualizations.
 
-- Monthly revenue trends
-- Monthly order trends
-- Revenue by product category
-- Top-performing categories
-- Payment method distribution
-- Customers by state
-- Review score distribution
-- Product price distribution
-- Revenue vs. orders analysis
-- Correlation heatmap
-- Historical business trends
-- Interactive charts and tables
+-   Monthly revenue trends
+-   Monthly order trends
+-   Revenue by product category
+-   Top-performing categories
+-   Payment method distribution
+-   Customers by state
+-   Review score distribution
+-   Product price distribution
+-   Revenue vs. orders analysis
+-   Correlation heatmap
+-   Historical business trends
+-   Interactive charts and tables
 
----
+------------------------------------------------------------------------
 
 ### 📈 Current Dashboard
 
@@ -37,112 +47,206 @@ Monitor important business KPIs through a centralized dashboard.
 
 #### Key Performance Indicators
 
-- Total Revenue
-- Total Orders
-- Total Customers
-- Total Products
-- Average Review Score
-- Average Payment Value
-- Top-Selling Category
-- Top Seller
-- Most Used Payment Method
+-   Total Revenue
+-   Total Orders
+-   Total Customers
+-   Total Products
+-   Average Review Score
+-   Average Payment Value
+-   Top-Selling Category
+-   Top Seller
+-   Most Used Payment Method
 
 #### Additional Insights
 
-- Recent orders
-- Top categories
-- Business performance summaries
-- Interactive KPI cards
-- Charts and data tables
+-   Recent orders
+-   Top categories
+-   Business performance summaries
+-   Interactive KPI cards
+-   Charts and data tables
 
----
+------------------------------------------------------------------------
 
 ### 🧹 Data Quality
 
-Review the selected dataset for common data-quality issues before relying on its results.
+Review the selected dataset for common data-quality issues before
+relying on its results.
 
-- Overall data quality score
-- Missing value checks
-- Duplicate row checks
-- Invalid date checks
-- Negative value checks
-- Column-level quality details
-- Quality status for each check
-- Dataset-specific quality analysis
+-   Overall data quality score
+-   Missing value checks
+-   Duplicate row checks
+-   Invalid date checks
+-   Negative value checks
+-   Column-level quality details
+-   Quality status for each check
+-   Dataset-specific quality analysis
 
----
+------------------------------------------------------------------------
 
 ### 💡 Business Insights
 
-BusinessPulse generates automated, human-readable observations from the selected business dataset.
+BusinessPulse generates automated, human-readable observations from the
+selected business dataset.
 
 Insights can highlight:
 
-- Business performance patterns
-- Revenue trends
-- Order trends
-- Category performance
-- Customer-related patterns
-- Review-related observations
-- Important business changes
-- Dataset-aware business observations
+-   Business performance patterns
+-   Revenue trends
+-   Order trends
+-   Category performance
+-   Customer-related patterns
+-   Review-related observations
+-   Important business changes
+-   Dataset-aware business observations
 
----
+------------------------------------------------------------------------
+
+### 🤖 AI Analytics
+
+Ask questions about a selected dataset in natural language instead of
+manually writing queries.
+
+-   Natural-language question answering for dataset metadata and
+    business analytics
+-   AI-based routing to the appropriate tool for each question
+-   Metadata questions such as row counts, column names, data types, and
+    missing values
+-   Analytical operations such as sums, averages, counts, minimums,
+    maximums, grouping, and top-performing values
+-   Forecast questions routed to the forecasting service
+-   Retrieval-Augmented Generation (RAG) over uploaded knowledge PDFs
+-   General questions handled separately from dataset-specific queries
+-   Final answers generated from backend results
+-   Dataset-scoped knowledge retrieval
+-   PDF text extraction, chunking, embeddings, and retrieval
+-   Duplicate PDF upload protection for the selected dataset
+
+#### AI Analytics Tool Routing
+
+The AI Planner in `llm_service.py` selects the appropriate route based
+on the user's question:
+
+  -----------------------------------------------------------------------
+  Tool                    Purpose                 Example question
+  ----------------------- ----------------------- -----------------------
+  `metadata_tool`         Inspect dataset         How many rows are
+                          structure and values    there?
+
+  `analytics_tool`        Calculate metrics from  What is the total
+                          existing data           revenue?
+
+  `forecast_tool`         Request future business What will revenue be
+                          predictions             next month?
+
+  `rag_tool`              Retrieve relevant       What does the profit
+                          information from        field represent?
+                          uploaded knowledge      
+                          documents               
+
+  `general_tool`          Answer questions        What is Python?
+                          unrelated to the        
+                          selected dataset        
+  -----------------------------------------------------------------------
+
+#### AI Analytics Request Flow
+
+``` text
+React AI Analytics page
+        ↓
+POST /ai-analytics/ask
+        ↓
+FastAPI route and dataset loading
+        ↓
+AI Planner selects a tool and creates a structured plan
+        ↓
+Backend executes the calculation, forecast, or retrieval
+        ↓
+Final answer generation
+        ↓
+Response displayed in the React interface
+```
+
+The LLM plans and routes the question; backend services perform data
+calculations, forecasting, and knowledge retrieval. This separates
+planning from execution and keeps numeric answers grounded in actual
+backend operations.
+
+#### Knowledge PDF Workflow
+
+``` text
+PDF upload
+    ↓
+Knowledge API and service
+    ↓
+PDF text extraction and chunking
+    ↓
+Text embeddings
+    ↓
+MongoDB storage
+    ↓
+Question-time retrieval of relevant chunks
+    ↓
+Final answer generation
+```
+
+------------------------------------------------------------------------
 
 ### 👤 Profile
 
 The profile area provides account and dataset information in one place.
 
-- User name and email
-- Account status
-- Uploaded dataset count
-- Currently selected dataset
-- Quick access to Dashboard
-- Quick access to Insights
-- Quick access to Dataset Management
+-   User name and email
+-   Account status
+-   Uploaded dataset count
+-   Currently selected dataset
+-   Quick access to Dashboard
+-   Quick access to Insights
+-   Quick access to Dataset Management
 
----
+------------------------------------------------------------------------
 
 ### 🔮 Forecast & Predictions
 
-Predict future business performance and customer satisfaction using multiple machine-learning models.
+Predict future business performance and customer satisfaction using
+multiple machine-learning models.
 
 Forecasting is available for:
 
-- Revenue
-- Orders
-- Customers
+-   Revenue
+-   Orders
+-   Customers
 
 #### Machine Learning Models
 
-- Linear Regression
-- Polynomial Regression
-- Random Forest Regression
+-   Linear Regression
+-   Polynomial Regression
+-   Random Forest Regression
 
 #### Forecasting Capabilities
 
-- Historical vs. predicted trends
-- Future business projections
-- Model-based predictions
-- Forecast visualizations
-- Model evaluation metrics
+-   Historical vs. predicted trends
+-   Future business projections
+-   Model-based predictions
+-   Forecast visualizations
+-   Model evaluation metrics
 
 #### Evaluation Metrics
 
-- Mean Absolute Error (MAE)
-- R² Score
+-   Mean Absolute Error (MAE)
+-   R² Score
 
----
+------------------------------------------------------------------------
 
 ## 📂 Custom Dataset Management
 
 BusinessPulse is not limited to the built-in Olist dataset.
 
-Users can upload their own CSV business or sales data and configure it for analysis.
+Users can upload their own CSV business or sales data and configure it
+for analysis.
 
 ### Custom Dataset Workflow
 
-```text
+``` text
 Upload CSV
     ↓
 Validate File
@@ -170,31 +274,33 @@ Forecasting
 
 ### Dataset Features
 
-- CSV file upload
-- File validation
-- Dataset preview
-- Column mapping
-- Data normalization
-- Dataset selection
-- Dataset deletion
-- Multiple uploaded datasets
-- User-specific dataset access
-- Built-in Olist dataset
-- Custom dataset analysis
-- Dataset-aware forecasting
-- Data quality analysis
-- Business insights
-- User-specific dataset access
+-   CSV file upload
+-   File validation
+-   Dataset preview
+-   Column mapping
+-   Data normalization
+-   Dataset selection
+-   Dataset deletion
+-   Multiple uploaded datasets
+-   User-specific dataset access
+-   Built-in Olist dataset
+-   Custom dataset analysis
+-   Dataset-aware forecasting
+-   Data quality analysis
+-   Business insights
+-   User-specific dataset access
 
 Each authenticated user can access their own uploaded datasets.
 
----
+------------------------------------------------------------------------
 
 # 🏗️ System Architecture
 
-BusinessPulse follows a layered full-stack architecture that separates presentation, API handling, business logic, data access, persistence, and machine learning.
+BusinessPulse follows a layered full-stack architecture that separates
+presentation, API handling, business logic, data access, persistence,
+and machine learning.
 
-```text
+``` text
                          ┌──────────────────────┐
                          │      React UI        │
                          │      Frontend        │
@@ -228,13 +334,13 @@ BusinessPulse follows a layered full-stack architecture that separates presentat
               Data Processing
 ```
 
----
+------------------------------------------------------------------------
 
 # 🔄 Backend Architecture
 
 The backend follows a modular layered architecture:
 
-```text
+``` text
 Client
   │
   ▼
@@ -256,7 +362,7 @@ Database / Data Sources
 
 The route layer handles HTTP requests and API endpoints.
 
-```text
+``` text
 routes/
 ├── auth.py
 ├── current.py
@@ -264,24 +370,26 @@ routes/
 ├── dataset.py
 ├── forecast.py
 ├── historical.py
-└── insights.py
+├── insights.py
+├── ai_analytics.py
+└── knowledge.py
 ```
 
 Responsibilities:
 
-- Receive HTTP requests
-- Validate request data
-- Authenticate users
-- Invoke services
-- Return API responses
+-   Receive HTTP requests
+-   Validate request data
+-   Authenticate users
+-   Invoke services
+-   Return API responses
 
----
+------------------------------------------------------------------------
 
 ## Services
 
 The service layer contains business logic.
 
-```text
+``` text
 services/
 ├── auth_service.py
 ├── category_service.py
@@ -300,15 +408,17 @@ services/
 └── review_service.py
 ```
 
-Each service focuses on a specific business responsibility, improving maintainability and separation of concerns.
+Each service focuses on a specific business responsibility, improving
+maintainability and separation of concerns.
 
----
+------------------------------------------------------------------------
 
 ## Repositories
 
-The repository layer isolates data-access operations from business logic.
+The repository layer isolates data-access operations from business
+logic.
 
-```text
+``` text
 repositories/
 ├── dataset_repository.py
 ├── sales_repository.py
@@ -317,13 +427,13 @@ repositories/
 
 Responsibilities include:
 
-- User data access
-- Dataset persistence
-- Dataset retrieval
-- Dataset deletion
-- Business data access
+-   User data access
+-   Dataset persistence
+-   Dataset retrieval
+-   Dataset deletion
+-   Business data access
 
----
+------------------------------------------------------------------------
 
 ## Schemas
 
@@ -331,13 +441,13 @@ Pydantic schemas provide structured request and response models.
 
 They help provide:
 
-- Input validation
-- Response validation
-- Consistent API contracts
-- Structured data models
-- Type-safe request and response handling
+-   Input validation
+-   Response validation
+-   Consistent API contracts
+-   Structured data models
+-   Type-safe request and response handling
 
----
+------------------------------------------------------------------------
 
 ## Database
 
@@ -345,31 +455,32 @@ MongoDB is used for application-level persistence.
 
 The database layer manages:
 
-- User records
-- Uploaded datasets
-- Dataset metadata
-- Normalized dataset information
-- User-specific dataset records
+-   User records
+-   Uploaded datasets
+-   Dataset metadata
+-   Normalized dataset information
+-   User-specific dataset records
 
----
+------------------------------------------------------------------------
 
 # 🔐 Authentication & Authorization
 
-BusinessPulse implements JWT-based authentication and protected resources.
+BusinessPulse implements JWT-based authentication and protected
+resources.
 
 ### Authentication Features
 
-- User registration
-- User login
-- Password hashing
-- JWT access tokens
-- Authenticated API requests
-- Protected frontend routes
-- Protected backend routes
+-   User registration
+-   User login
+-   Password hashing
+-   JWT access tokens
+-   Authenticated API requests
+-   Protected frontend routes
+-   Protected backend routes
 
 ### Frontend Protection
 
-```text
+``` text
 ProtectedRoute.jsx
 PublicRoute.jsx
 ```
@@ -378,13 +489,14 @@ Protected pages require authentication before access.
 
 ### Backend Protection
 
-Protected FastAPI routes validate the authenticated user before allowing access to application resources.
+Protected FastAPI routes validate the authenticated user before allowing
+access to application resources.
 
----
+------------------------------------------------------------------------
 
 # 🔑 JWT Authentication Flow
 
-```text
+``` text
 User
  │
  ▼
@@ -415,15 +527,16 @@ Authentication Validation
 Service Layer
 ```
 
-The Axios interceptor automatically attaches the JWT access token to protected API requests.
+The Axios interceptor automatically attaches the JWT access token to
+protected API requests.
 
----
+------------------------------------------------------------------------
 
 # 🛡️ User Data Isolation
 
 Uploaded datasets are associated with the authenticated user.
 
-```text
+``` text
 User A
  │
  ├── Dataset A1
@@ -435,17 +548,18 @@ User B
  └── Dataset B2
 ```
 
-A user can only access, select, or delete datasets belonging to their account.
+A user can only access, select, or delete datasets belonging to their
+account.
 
 This prevents unauthorized cross-user dataset access.
 
----
+------------------------------------------------------------------------
 
 # 🧠 Machine Learning Architecture
 
 Forecasting logic is separated into a dedicated machine-learning module.
 
-```text
+``` text
 ml/
 ├── forecast_models.py
 ├── linear_forecast.py
@@ -455,7 +569,7 @@ ml/
 
 The forecasting workflow is:
 
-```text
+``` text
 Forecast API
      │
      ▼
@@ -469,25 +583,27 @@ Forecast Models
      └── Random Forest Regression
 ```
 
----
+------------------------------------------------------------------------
 
 ## Linear Regression
 
-Used for modeling approximately linear historical business trends and generating future predictions.
+Used for modeling approximately linear historical business trends and
+generating future predictions.
 
----
+------------------------------------------------------------------------
 
 ## Polynomial Regression
 
 Used to model non-linear relationships in historical business trends.
 
----
+------------------------------------------------------------------------
 
 ## Random Forest Regression
 
-Used to model more complex non-linear relationships and business patterns.
+Used to model more complex non-linear relationships and business
+patterns.
 
----
+------------------------------------------------------------------------
 
 # 🗃️ Data Sources
 
@@ -499,23 +615,24 @@ The platform includes the **Olist Brazilian E-Commerce Public Dataset**.
 
 The dataset contains information related to:
 
-- Customers
-- Orders
-- Order Items
-- Payments
-- Products
-- Reviews
-- Sellers
+-   Customers
+-   Orders
+-   Order Items
+-   Payments
+-   Products
+-   Reviews
+-   Sellers
 
 ### Custom Dataset
 
-Users can upload their own CSV files and map their columns to BusinessPulse fields.
+Users can upload their own CSV files and map their columns to
+BusinessPulse fields.
 
----
+------------------------------------------------------------------------
 
 # ⚙️ Data Processing Pipeline
 
-```text
+``` text
 CSV Dataset
      │
      ▼
@@ -543,23 +660,24 @@ Business Metrics
 
 The data-processing layer handles tasks such as:
 
-- Loading CSV data
-- Validating uploaded files
-- Mapping user-defined columns
-- Renaming fields into standardized fields
-- Data transformation
-- Data quality analysis
-- Preparing business metrics
-- Preparing business insights
-- Preparing forecasting data
+-   Loading CSV data
+-   Validating uploaded files
+-   Mapping user-defined columns
+-   Renaming fields into standardized fields
+-   Data transformation
+-   Data quality analysis
+-   Preparing business metrics
+-   Preparing business insights
+-   Preparing forecasting data
 
----
+------------------------------------------------------------------------
 
 # 🌐 API Architecture
 
-BusinessPulse exposes its functionality through REST APIs built using FastAPI.
+BusinessPulse exposes its functionality through REST APIs built using
+FastAPI.
 
-```text
+``` text
 React Frontend
       │
       ▼
@@ -578,33 +696,35 @@ FastAPI
           Services
 ```
 
----
+------------------------------------------------------------------------
 
 # 📚 API Documentation
 
-FastAPI automatically generates API documentation using **Swagger/OpenAPI**.
+FastAPI automatically generates API documentation using
+**Swagger/OpenAPI**.
 
 The documentation allows developers to:
 
-- View available endpoints
-- Inspect request parameters
-- Inspect response schemas
-- Test APIs directly
-- Understand API contracts
+-   View available endpoints
+-   Inspect request parameters
+-   Inspect response schemas
+-   Test APIs directly
+-   Understand API contracts
 
 When the backend is running, open:
 
-```text
+``` text
 http://127.0.0.1:8000/docs
 ```
 
----
+------------------------------------------------------------------------
 
 # 🖥️ Frontend Architecture
 
-The frontend is developed using React with a component-based architecture.
+The frontend is developed using React with a component-based
+architecture.
 
-```text
+``` text
 frontend/
 └── src/
     ├── components/
@@ -619,21 +739,21 @@ frontend/
 
 The frontend contains reusable components for:
 
-- Navigation
-- Sidebar
-- Tabs
-- Page headers
-- Charts
-- Tables
-- KPI cards
-- Tooltips
-- Loaders
-- Route protection
-- Dataset mapping
+-   Navigation
+-   Sidebar
+-   Tabs
+-   Page headers
+-   Charts
+-   Tables
+-   KPI cards
+-   Tooltips
+-   Loaders
+-   Route protection
+-   Dataset mapping
 
 This reduces duplication and improves maintainability.
 
----
+------------------------------------------------------------------------
 
 # 📄 Application Pages
 
@@ -653,13 +773,13 @@ Allows users to create an account.
 
 Provides:
 
-- Olist dataset selection
-- CSV upload
-- Dataset preview
-- Column mapping
-- Uploaded dataset management
-- Dataset selection
-- Dataset deletion
+-   Olist dataset selection
+-   CSV upload
+-   Dataset preview
+-   Column mapping
+-   Uploaded dataset management
+-   Dataset selection
+-   Dataset deletion
 
 ### Dashboard
 
@@ -667,9 +787,9 @@ Acts as the main analytics area.
 
 It contains:
 
-- Historical Analytics
-- Current Dashboard
-- Forecast & Predictions
+-   Historical Analytics
+-   Current Dashboard
+-   Forecast & Predictions
 
 ### Historical Analytics
 
@@ -677,54 +797,68 @@ Provides detailed analysis of historical business performance.
 
 ### Current Dashboard
 
-Displays business KPIs, recent orders, categories, and operational metrics.
+Displays business KPIs, recent orders, categories, and operational
+metrics.
 
 ### Data Quality
 
-Reviews the selected dataset for missing values, duplicate rows, invalid dates, negative values, and column-level quality issues.
+Reviews the selected dataset for missing values, duplicate rows, invalid
+dates, negative values, and column-level quality issues.
 
 ### Business Insights
 
-Provides automated business observations based on the selected dataset and its performance metrics.
+Provides automated business observations based on the selected dataset
+and its performance metrics.
 
 ### Profile
 
-Displays account information, uploaded dataset count, the currently selected dataset, and quick access to key areas of the platform.
+Displays account information, uploaded dataset count, the currently
+selected dataset, and quick access to key areas of the platform.
+
+### AI Analytics
+
+Provides a natural-language interface for asking dataset questions,
+running backend analytics, requesting forecasts, and retrieving
+information from uploaded knowledge PDFs. The AI Planner routes each
+question to metadata, analytics, forecast, RAG, or general handling.
 
 ### Forecast Predictions
 
-Displays machine-learning-based predictions for future business trends and customer satisfaction.
+Displays machine-learning-based predictions for future business trends
+and customer satisfaction.
 
----
+------------------------------------------------------------------------
 
 # 📊 Dashboard Visualizations
 
-BusinessPulse uses interactive visualizations to make business data easier to understand.
+BusinessPulse uses interactive visualizations to make business data
+easier to understand.
 
 The platform includes:
 
-- Line charts
-- Bar charts
-- Pie charts
-- Scatter charts
-- Correlation heatmaps
-- KPI cards
-- Data tables
-- Historical vs. predicted charts
-- Data quality summaries
-- Business insight cards
+-   Line charts
+-   Bar charts
+-   Pie charts
+-   Scatter charts
+-   Correlation heatmaps
+-   KPI cards
+-   Data tables
+-   Historical vs. predicted charts
+-   Data quality summaries
+-   Business insight cards
 
----
+------------------------------------------------------------------------
 
 # 🧩 SOLID Principles
 
-The backend is structured around the **SOLID principles** to improve maintainability, modularity, and separation of responsibilities.
+The backend is structured around the **SOLID principles** to improve
+maintainability, modularity, and separation of responsibilities.
 
 ### Single Responsibility Principle
 
 Each layer has a focused responsibility:
 
-```text
+``` text
 Routes        → HTTP/API handling
 Services      → Business logic
 Repositories  → Data access
@@ -736,101 +870,107 @@ Database      → Persistence
 
 ### Open/Closed Principle
 
-New business services, endpoints, and forecasting models can be added without significantly modifying unrelated modules.
+New business services, endpoints, and forecasting models can be added
+without significantly modifying unrelated modules.
 
 ### Liskov Substitution Principle
 
-Forecasting components are structured so that different prediction models can participate in the forecasting workflow.
+Forecasting components are structured so that different prediction
+models can participate in the forecasting workflow.
 
 ### Interface Segregation Principle
 
-The application is divided into focused modules rather than large, tightly coupled interfaces.
+The application is divided into focused modules rather than large,
+tightly coupled interfaces.
 
 ### Dependency Inversion Principle
 
-Business logic is separated from lower-level data-access and implementation details through service and repository layers.
+Business logic is separated from lower-level data-access and
+implementation details through service and repository layers.
 
----
+------------------------------------------------------------------------
 
 # 🛡️ Error Handling
 
 The backend provides centralized exception handling through:
 
-```text
+``` text
 app/exceptions.py
 ```
 
-This helps maintain consistent API error responses and keeps business logic separated from HTTP-specific error handling.
+This helps maintain consistent API error responses and keeps business
+logic separated from HTTP-specific error handling.
 
-The frontend also provides user-facing notifications for operations such as:
+The frontend also provides user-facing notifications for operations such
+as:
 
-- Dataset upload
-- Dataset deletion
-- Dataset selection
-- Column mapping
-- Authentication failures
+-   Dataset upload
+-   Dataset deletion
+-   Dataset selection
+-   Column mapping
+-   Authentication failures
 
----
+------------------------------------------------------------------------
 
 # 🛠️ Technology Stack
 
 ## Frontend
 
-- React
-- Vite
-- React Router
-- Axios
-- Tailwind CSS
-- Recharts
-- Lucide React
+-   React
+-   Vite
+-   React Router
+-   Axios
+-   Tailwind CSS
+-   Recharts
+-   Lucide React
 
 ## Backend
 
-- Python
-- FastAPI
-- Uvicorn
-- Pandas
-- NumPy
-- Pydantic
-- Scikit-Learn
+-   Python
+-   FastAPI
+-   Uvicorn
+-   Pandas
+-   NumPy
+-   Pydantic
+-   Scikit-Learn
 
 ## Database
 
-- MongoDB
-- PyMongo
+-   MongoDB
+-   PyMongo
 
 ## Authentication & Security
 
-- JWT
-- Password hashing
-- Authorization
-- Protected frontend routes
-- Protected backend routes
-- Axios interceptors
-- User-specific dataset access
+-   JWT
+-   Password hashing
+-   Authorization
+-   Protected frontend routes
+-   Protected backend routes
+-   Axios interceptors
+-   User-specific dataset access
 
 ## Machine Learning
 
-- Linear Regression
-- Polynomial Regression
-- Random Forest Regression
-- MAE
-- R² Score
+-   Linear Regression
+-   Polynomial Regression
+-   Random Forest Regression
+-   MAE
+-   R² Score
 
 ## API Documentation
 
-- Swagger UI
-- OpenAPI
+-   Swagger UI
+-   OpenAPI
 
 ## Dataset
 
-- Olist Brazilian E-Commerce Public Dataset
+-   Olist Brazilian E-Commerce Public Dataset
 
----
+------------------------------------------------------------------------
 
 # 📁 Project Structure
 
-```text
+``` text
 BusinessPulse/
 │
 ├── backend/
@@ -959,65 +1099,66 @@ BusinessPulse/
 └── README.md
 ```
 
----
+------------------------------------------------------------------------
 
 # 🌐 Deployment
 
 BusinessPulse is deployed as a full-stack application.
 
-- Frontend: Vercel
-- Backend: Render
-- Database: MongoDB
-- Production source: GitHub `main` branch
-- Frontend and backend deployments are connected to the GitHub repository
+-   Frontend: Vercel
+-   Backend: Render
+-   Database: MongoDB
+-   Production source: GitHub `main` branch
+-   Frontend and backend deployments are connected to the GitHub
+    repository
 
----
+------------------------------------------------------------------------
 
 # 🚀 Installation & Setup
 
 ## 1. Clone the Repository
 
-```bash
+``` bash
 git clone https://github.com/Saurabh20-05/BusinessPulse.git
 
 cd BusinessPulse
 ```
 
----
+------------------------------------------------------------------------
 
 ## 2. Backend Setup
 
 Navigate to the backend:
 
-```bash
+``` bash
 cd backend
 ```
 
 Create a virtual environment:
 
-```bash
+``` bash
 python -m venv venv
 ```
 
 ### Windows
 
-```bash
+``` bash
 venv\Scripts\activate
 ```
 
 ### Linux / macOS
 
-```bash
+``` bash
 source venv/bin/activate
 ```
 
 Install dependencies:
 
-```bash
+``` bash
 pip install -r requirements.txt
 ```
 
----
+------------------------------------------------------------------------
 
 ## 3. Configure Environment Variables
 
@@ -1025,7 +1166,7 @@ Create a `.env` file inside the `backend` directory.
 
 Example:
 
-```env
+``` env
 MONGODB_URL=your_mongodb_connection_string
 MONGODB_DATABASE=BusinessPulse
 
@@ -1036,57 +1177,57 @@ JWT_EXPIRE_MINUTES=60
 
 Use your own secure values for production environments.
 
----
+------------------------------------------------------------------------
 
 ## 4. Start the Backend
 
 From the `backend` directory:
 
-```bash
+``` bash
 uvicorn app.main:app --reload
 ```
 
 The backend will run on:
 
-```text
+``` text
 http://127.0.0.1:8000
 ```
 
 Swagger documentation:
 
-```text
+``` text
 http://127.0.0.1:8000/docs
 ```
 
----
+------------------------------------------------------------------------
 
 ## 5. Frontend Setup
 
 Open another terminal:
 
-```bash
+``` bash
 cd frontend
 ```
 
 Install dependencies:
 
-```bash
+``` bash
 npm install
 ```
 
 Start the development server:
 
-```bash
+``` bash
 npm run dev
 ```
 
 The frontend will be available through the Vite development server.
 
----
+------------------------------------------------------------------------
 
 # 🔁 Complete Application Workflow
 
-```text
+``` text
                          USER
                            │
                            ▼
@@ -1135,96 +1276,102 @@ The frontend will be available through the Vite development server.
                   React Dashboard
 ```
 
----
+------------------------------------------------------------------------
 
 # 🎯 Project Objective
 
 BusinessPulse provides a single platform where users can:
 
-1. Analyze historical business performance.
-2. Monitor important business KPIs.
-3. Explore business patterns and relationships.
-4. Upload and analyze custom datasets.
-5. Map and normalize uploaded CSV data.
-6. Check dataset quality before relying on analytics.
-7. Generate automated business insights.
-8. Forecast future revenue, orders, and customer satisfaction.
-9. Compare historical and predicted trends.
-10. Access functionality through structured REST APIs.
-11. Secure application resources using authentication and authorization.
-12. Maintain a modular and scalable codebase.
+1.  Analyze historical business performance.
+2.  Monitor important business KPIs.
+3.  Explore business patterns and relationships.
+4.  Upload and analyze custom datasets.
+5.  Map and normalize uploaded CSV data.
+6.  Check dataset quality before relying on analytics.
+7.  Generate automated business insights.
+8.  Forecast future revenue, orders, and customer satisfaction.
+9.  Compare historical and predicted trends.
+10. Ask natural-language questions about datasets through AI Analytics.
+11. Retrieve relevant information from uploaded knowledge PDFs using
+    RAG.
+12. Access functionality through structured REST APIs.
+13. Secure application resources using authentication and authorization.
+14. Maintain a modular and scalable codebase.
 
----
+------------------------------------------------------------------------
 
 # ⭐ Key Engineering Highlights
 
 ### Full-Stack Development
 
-- React frontend
-- FastAPI backend
-- MongoDB persistence
-- REST API architecture
-- Axios API integration
+-   React frontend
+-   FastAPI backend
+-   MongoDB persistence
+-   REST API architecture
+-   Axios API integration
 
 ### Software Architecture
 
-- Layered backend architecture
-- Route-service-repository separation
-- Reusable frontend components
-- Dedicated ML layer
-- Pydantic schemas
-- Centralized exception handling
-- SOLID-oriented design
+-   Layered backend architecture
+-   Route-service-repository separation
+-   Reusable frontend components
+-   Dedicated ML layer
+-   Pydantic schemas
+-   Centralized exception handling
+-   SOLID-oriented design
 
 ### Authentication & Security
 
-- JWT authentication
-- Password hashing
-- Protected frontend routes
-- Protected backend endpoints
-- Axios authorization interceptor
-- User-specific dataset access
+-   JWT authentication
+-   Password hashing
+-   Protected frontend routes
+-   Protected backend endpoints
+-   Axios authorization interceptor
+-   User-specific dataset access
 
 ### Data Engineering
 
-- CSV ingestion
-- Dataset validation
-- Dataset preview
-- Column mapping
-- Data normalization
-- Data quality analysis
-- Multiple dataset management
+-   CSV ingestion
+-   Dataset validation
+-   Dataset preview
+-   Column mapping
+-   Data normalization
+-   Data quality analysis
+-   Multiple dataset management
 
 ### Analytics
 
-- Historical business analytics
-- KPI monitoring
-- Data quality analysis
-- Automated business insights
-- Interactive charts
-- Data tables
-- Correlation analysis
+-   Historical business analytics
+-   KPI monitoring
+-   Data quality analysis
+-   Automated business insights
+-   Interactive charts
+-   Data tables
+-   Correlation analysis
 
 ### Machine Learning
 
-- Linear Regression
-- Polynomial Regression
-- Random Forest Regression
-- Revenue forecasting
-- Order forecasting
-- Customer satisfaction forecasting
-- MAE
-- R² Score
+-   Linear Regression
+-   Polynomial Regression
+-   Random Forest Regression
+-   Revenue forecasting
+-   Order forecasting
+-   Customer satisfaction forecasting
+-   MAE
+-   R² Score
 
----
+------------------------------------------------------------------------
 
 # 📌 Why BusinessPulse?
 
-BusinessPulse combines **software engineering, data analytics, database management, authentication, and machine learning** into one end-to-end application.
+BusinessPulse combines **software engineering, data analytics, database
+management, authentication, and machine learning** into one end-to-end
+application.
 
-Instead of simply displaying preprocessed charts, the platform allows users to:
+Instead of simply displaying preprocessed charts, the platform allows
+users to:
 
-```text
+``` text
 Bring Business Data
         ↓
 Process & Normalize It
@@ -1242,24 +1389,25 @@ Generate Future Predictions
 Make Data-Driven Decisions
 ```
 
----
+------------------------------------------------------------------------
 
 # 🔮 Future Enhancements
 
 Potential future improvements include:
 
-- Automated model selection
-- Advanced forecasting models
-- Role-based access control
-- Automated data-quality reports
-- Scheduled forecasting
-- Exportable analytics reports
-- Additional business datasets
-- Advanced anomaly detection
-- Model comparison dashboards
+-   Automated model selection
+-   Advanced forecasting models
+-   Role-based access control
+-   Automated data-quality reports
+-   Scheduled forecasting
+-   Exportable analytics reports
+-   Additional business datasets
+-   Advanced anomaly detection
+-   Model comparison dashboards
 
----
+------------------------------------------------------------------------
 
 # 📜 License
 
-This project is intended for educational, portfolio, and learning purposes.
+This project is intended for educational, portfolio, and learning
+purposes.
