@@ -2,20 +2,11 @@
 
 ### Business Analytics & Forecasting Platform
 
-BusinessPulse is a full-stack business analytics platform that
-transforms e-commerce data into actionable insights through **historical
-analytics, current KPI monitoring, data quality analysis, automated
-business insights, machine-learning-based forecasting, and
-natural-language AI Analytics**.
+BusinessPulse is a full-stack **business analytics, forecasting, and AI Analytics platform** that turns e-commerce and business data into actionable information. It combines historical analytics, KPI monitoring, data-quality checks, automated business insights, machine-learning forecasting, natural-language question answering, and Retrieval-Augmented Generation (RAG) over uploaded PDF knowledge documents.
 
-The platform supports both the built-in **Olist Brazilian E-Commerce
-dataset** and **user-uploaded CSV datasets**, allowing users to upload,
-map, analyze, and forecast their own business data.
+The platform supports the built-in **Olist Brazilian E-Commerce dataset** as well as **user-uploaded CSV datasets**. Users can upload data, preview it, map source columns to standardized fields, save and select datasets, explore charts and KPIs, inspect common quality issues, generate forecasts, and ask questions about data through the AI Analytics interface.
 
-Built with **React, FastAPI, Python, MongoDB, Pandas, Scikit-Learn, JWT,
-Tailwind CSS, and an LLM-powered AI Analytics workflow**, BusinessPulse
-follows a modular architecture with separate routes, services,
-repositories, schemas, utilities, database, and machine-learning layers.
+The application uses **React, Vite, Tailwind CSS, Axios, Recharts, FastAPI, Python, Pandas, NumPy, Scikit-learn, MongoDB, GridFS, JWT authentication, the Groq API, and Sentence Transformers**. The backend is organized into routes, Pydantic schemas, services, repositories, utilities, database access, machine-learning modules, and AI/RAG services.
 
 ------------------------------------------------------------------------
 
@@ -123,30 +114,15 @@ manually writing queries.
 
 #### AI Analytics Tool Routing
 
-The AI Planner in `llm_service.py` selects the appropriate route based
-on the user's question:
+The AI Planner in `llm_service.py` selects the appropriate tool based on the user's question.
 
-  -----------------------------------------------------------------------
-  Tool                    Purpose                 Example question
-  ----------------------- ----------------------- -----------------------
-  `metadata_tool`         Inspect dataset         How many rows are
-                          structure and values    there?
-
-  `analytics_tool`        Calculate metrics from  What is the total
-                          existing data           revenue?
-
-  `forecast_tool`         Request future business What will revenue be
-                          predictions             next month?
-
-  `rag_tool`              Retrieve relevant       What does the profit
-                          information from        field represent?
-                          uploaded knowledge      
-                          documents               
-
-  `general_tool`          Answer questions        What is Python?
-                          unrelated to the        
-                          selected dataset        
-  -----------------------------------------------------------------------
+| Tool | Purpose | Example question |
+|---|---|---|
+| `metadata_tool` | Inspects dataset structure and values. | “How many rows are there?” |
+| `analytics_tool` | Calculates metrics from existing data. | “What is the total revenue?” |
+| `forecast_tool` | Requests future business predictions. | “Forecast revenue for the next few months.” |
+| `rag_tool` | Retrieves relevant information from uploaded knowledge documents. | “What does this field mean according to my PDF?” |
+| `general_tool` | Handles questions unrelated to the selected dataset. | “What is Python?” |
 
 #### AI Analytics Request Flow
 
@@ -171,9 +147,44 @@ calculations, forecasting, and knowledge retrieval. This separates
 planning from execution and keeps numeric answers grounded in actual
 backend operations.
 
+#### AI Analytics Implementation Details
+
+The AI Analytics page sends the selected `dataset_id` and user's question to `POST /ai-analytics/ask`. The FastAPI route authenticates the request, loads the selected dataset for the current user, asks the planner for a structured plan, executes the selected tool (except for the separate general-question path), and builds a response for the frontend.
+
+**Planner and answer generation**
+
+- `generate_agent_plan()` in `services/llm_service.py` interprets the question and produces a structured plan, rather than directly performing all numeric calculations.
+- The plan is validated using Pydantic schemas and a structured JSON format before execution.
+- `execute_agent_plan()` in `services/ai_query_service.py` dispatches the plan to the appropriate backend operation.
+- `generate_final_answer()` turns the backend result into a natural-language answer for the user.
+- The API response can include the question, parsed query/plan, answer, result, visualization type, and optional table/chart data for rendering in React.
+- General questions are handled separately from dataset-specific execution.
+- The route includes timing logs for dataset loading, tool execution, and total request duration, which help with debugging slow queries.
+
+**Tool responsibilities**
+
+| Tool | Role | Example |
+|---|---|---|
+| `metadata_tool` | Inspects dataset structure, row/column information, data types, values, and missing values. | “How many rows are there?” |
+| `analytics_tool` | Computes dataset operations such as counts, sums, averages, minima/maxima, grouping, filters, and top-N results. | “What is the total revenue?” |
+| `forecast_tool` | Routes a supported future-prediction question to the forecasting service. | “Forecast revenue for the next few months.” |
+| `rag_tool` | Retrieves relevant text from PDF knowledge documents associated with the user and selected dataset. | “What does this field mean according to my document?” |
+| `general_tool` | Handles general questions that do not need an operation on the selected dataset. | “What is Python?” |
+
+The system is designed so that the LLM identifies intent and selects a tool, while deterministic backend code performs data calculations and existing ML services generate forecasts. For simple questions such as row counts, the implementation can return a deterministic answer without depending on a second LLM answer-generation call.
+
+Key files:
+
+- `frontend/src/pages/AIAnalytics.jsx` — question input, dataset selection, knowledge PDF upload, and answer display.
+- `backend/app/routes/ai_analytics.py` — `POST /ai-analytics/ask` orchestration.
+- `backend/app/services/llm_service.py` — structured plan generation and final answer generation.
+- `backend/app/services/ai_query_service.py` — tool execution, analytics operations, forecasting/RAG dispatch, and result formatting.
+- `backend/app/schemas/ai_analytics.py` — structured request, plan/query, and response models.
+- `backend/app/routes/knowledge.py` and `backend/app/services/knowledge_service.py` — PDF knowledge ingestion.
+
 #### Knowledge PDF Workflow
 
-``` text
+```text
 PDF upload
     ↓
 Knowledge API and service
@@ -182,12 +193,32 @@ PDF text extraction and chunking
     ↓
 Text embeddings
     ↓
-MongoDB storage
+PDF file and chunk metadata stored in MongoDB/GridFS
     ↓
-Question-time retrieval of relevant chunks
+Question-time retrieval of relevant chunks for the same user and dataset
     ↓
-Final answer generation
+Relevant text passed to answer generation
 ```
+
+The implementation accepts **PDF files**. It uses `pypdf` to extract selectable text, then normalizes whitespace and splits the text into **1,200-character chunks with 200 characters of overlap**. Embeddings are produced by Sentence Transformers using **`all-MiniLM-L6-v2`** with normalized embeddings. The PDF itself is stored in the MongoDB GridFS `knowledge_files` bucket; document metadata and text chunks with embeddings are stored in MongoDB collections.
+
+At query time, the question is embedded using the same model. Retrieval only searches chunks associated with the authenticated user's `user_id` and selected `dataset_id`. Because the vectors are normalized, the implementation uses their dot product as cosine similarity, ranks matching chunks in application code, and returns the **top three** relevant chunks by default. Duplicate PDF contents are detected using a SHA-256 file hash within the same user/dataset scope.
+
+Limitations to be aware of: scanned/image-only PDFs may not yield text because OCR is not part of this pipeline. The current retrieval code loads matching chunks from MongoDB and ranks them in Python; it does not use a dedicated MongoDB vector-search index.
+
+------------------------------------------------------------------------
+
+### 🌍 Multilingual Interface
+
+The frontend is configured with `i18next` and `react-i18next` and includes locale files for:
+
+- English (`en`)
+- Hindi (`hi`)
+- German (`de`)
+- Spanish (`es`)
+- French (`fr`)
+
+The translation files provide a localization foundation for the interface. This is frontend localization; it does not mean uploaded dataset values or user-provided documents are automatically translated.
 
 ------------------------------------------------------------------------
 
@@ -210,11 +241,13 @@ The profile area provides account and dataset information in one place.
 Predict future business performance and customer satisfaction using
 multiple machine-learning models.
 
-Forecasting is available for:
+The forecast page offers three targets:
 
--   Revenue
--   Orders
--   Customers
+-   **Revenue** — monthly revenue totals.
+-   **Orders** — monthly order counts.
+-   **Customer satisfaction** — monthly average customer review score.
+
+**Important implementation detail:** the API internally uses `prediction_type="customers"` for the third target, but the active frontend labels it **Customer Satisfaction Forecast** and describes it as the average review-score forecast. It should not be described as predicting the number of customers.
 
 #### Machine Learning Models
 
@@ -224,16 +257,22 @@ Forecasting is available for:
 
 #### Forecasting Capabilities
 
--   Historical vs. predicted trends
--   Future business projections
--   Model-based predictions
--   Forecast visualizations
--   Model evaluation metrics
+-   User-selectable prediction target and regression model
+-   Monthly historical series and four future monthly predictions
+-   Historical-versus-predicted line chart
+-   Selected model displayed with forecast results
+-   Model performance cards for MAE, RMSE, and R²
+-   Non-negative clipping for revenue/order-style forecasts
+-   Customer-satisfaction predictions constrained to the 1–5 review-score range
+-   Basic input check requiring at least two monthly observations
 
 #### Evaluation Metrics
 
--   Mean Absolute Error (MAE)
--   R² Score
+-   **Mean Absolute Error (MAE)** — average absolute difference between actual and fitted historical values.
+-   **Root Mean Squared Error (RMSE)** — gives a larger penalty to larger prediction errors.
+-   **R² Score** — coefficient of determination for the fitted historical series.
+
+**Evaluation caveat:** the current model code calculates these metrics against predictions on the same historical observations used to fit the model. They are in-sample fit metrics, not metrics from an independent chronological test set. A holdout period or rolling time-series validation would be needed to estimate out-of-sample forecasting performance more reliably.
 
 ------------------------------------------------------------------------
 
@@ -285,10 +324,10 @@ Forecasting
 -   User-specific dataset access
 -   Built-in Olist dataset
 -   Custom dataset analysis
--   Dataset-aware forecasting
+-   Dataset-aware forecasting where the required normalized fields are available
 -   Data quality analysis
 -   Business insights
--   User-specific dataset access
+-   Use of the selected dataset in AI Analytics
 
 Each authenticated user can access their own uploaded datasets.
 
@@ -585,10 +624,27 @@ Forecast Models
 
 ------------------------------------------------------------------------
 
+### Forecast Series and Model Behavior
+
+The forecasting service prepares a monthly series before fitting a selected model:
+
+| Forecast target | Built-in Olist series | Required normalized fields for custom CSVs |
+|---|---|---|
+| Revenue | Sum of item totals by order month (with fallback based on order timestamp and price where applicable). | `date` and `revenue` |
+| Orders | Number of unique orders by purchase month. | `date` and `orders` |
+| Customer satisfaction | Mean `review_score` by order purchase month. | `date` and `review_score` |
+
+The active frontend lets the user select one of the three targets and one of the three models: `linear`, `polynomial`, and `random_forest`. All three models can be used for a selected target.
+
+The models use the sequential monthly position as the predictor input. Linear Regression fits a straight-line trend. Polynomial Regression expands the input with a degree-two polynomial feature before fitting Linear Regression. Random Forest Regression uses `RandomForestRegressor` with 100 trees and `random_state=42`. Each generates the next four monthly predictions. The code clips negative forecast outputs to zero and additionally constrains customer-satisfaction predictions to the review-score scale of 1 to 5.
+
+The reported metrics are computed on fitted historical values. They are useful for understanding in-sample fit, but because no separate chronological test set is used by this code path, they should not be represented as independent out-of-sample forecast accuracy.
+
+------------------------------------------------------------------------
+
 ## Linear Regression
 
-Used for modeling approximately linear historical business trends and
-generating future predictions.
+Used for modeling approximately linear historical business trends and generating future predictions.
 
 ------------------------------------------------------------------------
 
@@ -934,10 +990,26 @@ as:
 -   Pydantic
 -   Scikit-Learn
 
-## Database
+## Database and File Storage
 
 -   MongoDB
--   PyMongo
+-   PyMongo asynchronous client
+-   MongoDB GridFS for uploaded CSV and PDF file storage
+
+## AI Analytics and RAG
+
+-   Groq API
+-   `openai/gpt-oss-20b` model
+-   Structured LLM planning and tool routing
+-   `pypdf` for PDF text extraction
+-   Sentence Transformers with `all-MiniLM-L6-v2` embeddings
+-   Application-level cosine-similarity ranking of document chunks
+
+## Frontend Localization
+
+-   `i18next`
+-   `react-i18next`
+-   Locale files for English, Hindi, German, Spanish, and French
 
 ## Authentication & Security
 
@@ -954,7 +1026,8 @@ as:
 -   Linear Regression
 -   Polynomial Regression
 -   Random Forest Regression
--   MAE
+-   Mean Absolute Error (MAE)
+-   Root Mean Squared Error (RMSE)
 -   R² Score
 
 ## API Documentation
@@ -970,444 +1043,359 @@ as:
 
 # 📁 Project Structure
 
-``` text
+The key project folders and implementation files are summarized below. Some helper or generated files are omitted for readability.
+
+```text
 BusinessPulse/
-│
 ├── backend/
-│   │
 │   ├── app/
-│   │   │
-│   │   ├── data/
-│   │   │   ├── olist_customers.csv
-│   │   │   ├── olist_order_items.csv
-│   │   │   ├── olist_orders.csv
-│   │   │   ├── olist_payments.csv
-│   │   │   ├── olist_products.csv
-│   │   │   ├── olist_reviews.csv
-│   │   │   └── olist_sellers.csv
-│   │   │
+│   │   ├── data/                         # Built-in Olist CSV tables
 │   │   ├── database/
-│   │   │   ├── __init__.py
-│   │   │   └── mongodb.py
-│   │   │
+│   │   │   └── mongodb.py                # MongoDB client, collections, GridFS buckets
 │   │   ├── ml/
-│   │   │   ├── __init__.py
-│   │   │   ├── forecast_models.py
-│   │   │   ├── linear_forecast.py
-│   │   │   ├── polynomial_forecast.py
-│   │   │   └── random_forest_forecast.py
-│   │   │
+│   │   │   ├── forecast_models.py         # Monthly target-series preparation and metrics
+│   │   │   ├── linear_forecast.py         # Linear Regression
+│   │   │   ├── polynomial_forecast.py     # Polynomial Regression, degree 2
+│   │   │   └── random_forest_forecast.py  # Random Forest Regression
 │   │   ├── repositories/
-│   │   │   ├── __init__.py
-│   │   │   ├── dataset_repository.py
-│   │   │   ├── sales_repository.py
-│   │   │   └── user_repository.py
-│   │   │
+│   │   │   ├── dataset_repository.py      # Dataset persistence and user-scoped access
+│   │   │   ├── sales_repository.py        # Business/sales data access
+│   │   │   └── user_repository.py         # User record access
 │   │   ├── routes/
-│   │   │   ├── __init__.py
-│   │   │   ├── auth.py
-│   │   │   ├── current.py
-│   │   │   ├── dataset.py
-│   │   │   ├── forecast.py
-│   │   │   └── historical.py
-│   │   │
-│   │   ├── schemas/
-│   │   │   ├── __init__.py
-│   │   │   ├── auth.py
-│   │   │   ├── category.py
-│   │   │   ├── customer.py
-│   │   │   ├── dataset.py
-│   │   │   ├── forecast.py
-│   │   │   ├── heatmap.py
-│   │   │   ├── kpi.py
-│   │   │   ├── order.py
-│   │   │   ├── payment.py
-│   │   │   ├── price.py
-│   │   │   ├── revenue.py
-│   │   │   └── review.py
-│   │   │
+│   │   │   ├── auth.py                   # Signup/login
+│   │   │   ├── dataset.py                # CSV upload, mapping and dataset management
+│   │   │   ├── current.py                # Current KPI dashboard
+│   │   │   ├── historical.py             # Historical analytics
+│   │   │   ├── data_quality.py           # Quality checks
+│   │   │   ├── insights.py               # Business insights
+│   │   │   ├── forecast.py               # Forecast API endpoints
+│   │   │   ├── ai_analytics.py           # Natural-language analytics endpoint
+│   │   │   └── knowledge.py              # PDF knowledge-base endpoints
+│   │   ├── schemas/                      # Pydantic request/response models
 │   │   ├── services/
-│   │   │   ├── __init__.py
 │   │   │   ├── auth_service.py
-│   │   │   ├── category_service.py
-│   │   │   ├── customer_service.py
-│   │   │   ├── dataset_data_service.py
 │   │   │   ├── dataset_service.py
-│   │   │   ├── forecast_service.py
-│   │   │   ├── heatmap_service.py
+│   │   │   ├── dataset_data_service.py
 │   │   │   ├── kpi_service.py
-│   │   │   ├── order_service.py
-│   │   │   ├── payment_service.py
-│   │   │   ├── price_service.py
-│   │   │   ├── revenue_service.py
-│   │   │   └── review_service.py
-│   │   │
+│   │   │   ├── data_quality_service.py
+│   │   │   ├── insights_service.py
+│   │   │   ├── forecast_service.py
+│   │   │   ├── llm_service.py            # AI plan + final answer
+│   │   │   ├── ai_query_service.py       # Executes planned AI operations
+│   │   │   ├── knowledge_service.py      # PDF ingestion and duplicate detection
+│   │   │   ├── pdf_processor.py          # PDF extraction and chunking
+│   │   │   ├── embedding_service.py      # Sentence Transformer embeddings
+│   │   │   └── retrieval_service.py     # User/dataset-scoped semantic retrieval
 │   │   ├── utils/
-│   │   │   ├── __init__.py
-│   │   │   ├── auth.py
-│   │   │   ├── data_loader.py
-│   │   │   ├── data_validation.py
-│   │   │   └── security.py
-│   │   │
-│   │   ├── __init__.py
-│   │   ├── exceptions.py
-│   │   └── main.py
-│   │
-│   ├── .gitignore
-│   └── requirements.txt
+│   │   │   ├── auth.py                   # Authenticated-user dependency
+│   │   │   ├── security.py               # Password hashing and JWT functions
+│   │   │   ├── data_loader.py            # Built-in/custom dataset loading
+│   │   │   └── data_validation.py        # CSV/data validation helpers
+│   │   ├── exceptions.py                 # Centralized API exception handling
+│   │   └── main.py                       # FastAPI app and router registration
+│   ├── requirements.txt
+│   └── .env                              # Local secrets; do not commit
 │
 ├── frontend/
-│   │
 │   ├── src/
-│   │   ├── components/
-│   │   │   ├── ChartCard.jsx
-│   │   │   ├── ColumnMapper.jsx
-│   │   │   ├── CustomTooltip.jsx
-│   │   │   ├── DataTable.jsx
-│   │   │   ├── Footer.jsx
-│   │   │   ├── Loader.jsx
-│   │   │   ├── Navbar.jsx
-│   │   │   ├── PageHeader.jsx
-│   │   │   ├── ProtectedRoute.jsx
-│   │   │   ├── PublicRoute.jsx
-│   │   │   ├── Sidebar.jsx
-│   │   │   ├── StatCard.jsx
-│   │   │   └── Tabs.jsx
-│   │   │
+│   │   ├── components/                   # Reusable charts, tables, cards, routes, UI
 │   │   ├── pages/
-│   │   │   ├── CurrentDashboard.jsx
-│   │   │   ├── Dashboard.jsx
-│   │   │   ├── Dataset.jsx
-│   │   │   ├── ForecastPredictions.jsx
-│   │   │   ├── HistoricalAnalytics.jsx
 │   │   │   ├── Home.jsx
 │   │   │   ├── Login.jsx
-│   │   │   └── Signup.jsx
-│   │   │
-│   │   ├── services/
-│   │   │   └── api.js
-│   │   │
+│   │   │   ├── Signup.jsx
+│   │   │   ├── Dataset.jsx
+│   │   │   ├── Dashboard.jsx
+│   │   │   ├── CurrentDashboard.jsx
+│   │   │   ├── HistoricalAnalytics.jsx
+│   │   │   ├── DataQuality.jsx
+│   │   │   ├── Insights.jsx
+│   │   │   ├── ForecastPredictions.jsx
+│   │   │   ├── AIAnalytics.jsx
+│   │   │   └── Profile.jsx
+│   │   ├── services/api.js               # Axios client and API functions
+│   │   ├── locales/                      # English, Hindi, German, Spanish, French
+│   │   ├── i18n.js                       # i18next configuration
 │   │   ├── App.jsx
 │   │   ├── index.css
 │   │   └── main.jsx
-│   │
 │   ├── package.json
 │   ├── vite.config.js
-│   ├── tailwind.config.js
-│   └── postcss.config.js
+│   └── tailwind.config.js
 │
 └── README.md
 ```
 
 ------------------------------------------------------------------------
 
+------------------------------------------------------------------------
+
 # 🌐 Deployment
 
-BusinessPulse is deployed as a full-stack application.
+The deployment configuration documented for BusinessPulse is:
 
--   Frontend: Vercel
--   Backend: Render
--   Database: MongoDB
--   Production source: GitHub `main` branch
--   Frontend and backend deployments are connected to the GitHub
-    repository
+- **Frontend:** Vercel
+- **Backend:** Render
+- **Database and file storage:** MongoDB, including GridFS buckets
+- **Source repository:** GitHub
+
+For a deployed environment, configure backend secrets in the hosting provider's environment-variable settings. Configure the frontend's `VITE_API_URL` to point to the deployed backend and ensure the backend's CORS policy allows the deployed frontend origin. The Render service must be able to connect to the configured MongoDB database.
+
+**Security:** never commit `.env` files, MongoDB connection strings, JWT secrets, or Groq API keys. Keep secrets in the local environment or hosting provider's secret configuration. If a credential has already been included in a shared archive or repository, rotate it.
 
 ------------------------------------------------------------------------
 
 # 🚀 Installation & Setup
 
-## 1. Clone the Repository
+## Prerequisites
 
-``` bash
+- Python compatible with the pinned backend dependencies
+- Node.js and npm
+- A MongoDB instance or MongoDB Atlas database
+- A Groq API key for AI Analytics
+
+## 1. Clone the repository
+
+```bash
 git clone https://github.com/Saurabh20-05/BusinessPulse.git
-
 cd BusinessPulse
 ```
 
-------------------------------------------------------------------------
+## 2. Configure backend environment variables
 
-## 2. Backend Setup
+Create `backend/.env` locally. Use your own values; do not copy credentials from another environment or commit this file.
 
-Navigate to the backend:
-
-``` bash
-cd backend
-```
-
-Create a virtual environment:
-
-``` bash
-python -m venv venv
-```
-
-### Windows
-
-``` bash
-venv\Scripts\activate
-```
-
-### Linux / macOS
-
-``` bash
-source venv/bin/activate
-```
-
-Install dependencies:
-
-``` bash
-pip install -r requirements.txt
-```
-
-------------------------------------------------------------------------
-
-## 3. Configure Environment Variables
-
-Create a `.env` file inside the `backend` directory.
-
-Example:
-
-``` env
+```dotenv
 MONGODB_URL=your_mongodb_connection_string
-MONGODB_DATABASE=BusinessPulse
-
-JWT_SECRET_KEY=your_secret_key
+MONGODB_DATABASE=businesspulse
+JWT_SECRET_KEY=replace_with_a_long_random_secret
 JWT_ALGORITHM=HS256
 JWT_EXPIRE_MINUTES=60
+GROQ_API_KEY=your_groq_api_key
 ```
 
-Use your own secure values for production environments.
+The code reads `MONGODB_URL`, `GROQ_API_KEY`, and `JWT_SECRET_KEY`. `MONGODB_DATABASE` defaults to `businesspulse`; the JWT algorithm and token lifetime also have code defaults, but they may be set explicitly as shown.
 
-------------------------------------------------------------------------
+## 3. Install and start the backend
 
-## 4. Start the Backend
+```bash
+cd backend
+python -m venv .venv
+```
 
-From the `backend` directory:
+Activate the environment.
 
-``` bash
+**Windows PowerShell:**
+
+```powershell
+.venv\Scripts\Activate.ps1
+```
+
+**Linux/macOS:**
+
+```bash
+source .venv/bin/activate
+```
+
+Install the backend dependencies and the multipart support used by file uploads:
+
+```bash
+python -m pip install -r requirements.txt
+python -m pip install python-multipart
+```
+
+Then start FastAPI from the `backend` directory:
+
+```bash
 uvicorn app.main:app --reload
 ```
 
-The backend will run on:
+The local API runs at `http://127.0.0.1:8000` and Swagger UI is available at `http://127.0.0.1:8000/docs`.
 
-``` text
-http://127.0.0.1:8000
-```
+**Dependency-file note for the supplied archive:** `backend/requirements.txt` is encoded as UTF-16 and does not list `python-multipart`. If pip reports null characters or malformed requirement lines, convert the file to UTF-8 before installing. The project dependencies also include `fastapi`, `uvicorn`, `python-dotenv`, `PyJWT`, `numpy`, `pandas`, `pwdlib[argon2]`, `pydantic`, `pymongo`, `scikit-learn`, `groq`, `pypdf`, and `sentence-transformers`.
 
-Swagger documentation:
+## 4. Configure and start the frontend
 
-``` text
-http://127.0.0.1:8000/docs
-```
+Open a second terminal:
 
-------------------------------------------------------------------------
-
-## 5. Frontend Setup
-
-Open another terminal:
-
-``` bash
+```bash
 cd frontend
-```
-
-Install dependencies:
-
-``` bash
 npm install
 ```
 
-Start the development server:
+The frontend uses `VITE_API_URL` for the backend base URL and falls back to `http://127.0.0.1:8000` if it is not configured. To set it explicitly, create `frontend/.env.local`:
 
-``` bash
+```dotenv
+VITE_API_URL=http://127.0.0.1:8000
+```
+
+Start the Vite development server:
+
+```bash
 npm run dev
 ```
 
-The frontend will be available through the Vite development server.
+Open the local URL printed by Vite in the terminal.
+
+------------------------------------------------------------------------
+
+# 📚 API Documentation
+
+FastAPI generates interactive API documentation from the registered routes and Pydantic models.
+
+- **Swagger UI:** `http://127.0.0.1:8000/docs`
+- **OpenAPI schema:** `http://127.0.0.1:8000/openapi.json`
+
+The backend includes route groups for authentication, dataset management, current dashboard KPIs, historical analytics, data quality, business insights, forecasting, AI Analytics, and PDF knowledge documents. Swagger UI can be used to inspect endpoint contracts and manually try API requests during development.
 
 ------------------------------------------------------------------------
 
 # 🔁 Complete Application Workflow
 
-``` text
-                         USER
-                           │
-                           ▼
-                    React Frontend
-                           │
-              ┌────────────┴────────────┐
-              │                         │
-         Login / Signup             Dashboard
-              │                         │
-              ▼                         ▼
-          JWT Auth                Axios API Client
-                                        │
-                                        ▼
-                                  FastAPI Routes
-                                        │
-                     ┌──────────────────┼──────────────────┐
-                     │                  │                  │
-                     ▼                  ▼                  ▼
-                Dataset            Historical          Current
-                Management         Analytics          Dashboard
-                     │                  │                  │
-                     └──────────────────┼──────────────────┘
-                                        │
-                                        ▼
-                                   Forecasting
-                                        │
-                                        ▼
-                                    Services
-                                        │
-                         ┌──────────────┴──────────────┐
-                         │                             │
-                         ▼                             ▼
-                   Repositories                  ML Models
-                         │                    ┌────────┼────────┐
-                         ▼                    ▼        ▼        ▼
-                     MongoDB              Linear  Polynomial Random
-                                                           Forest
-                         │
-                         ▼
-                    Business Data
-                         │
-                         ▼
-                 Analytics & KPIs
-                         │
-                         ▼
-                  React Dashboard
+```text
+User
+ │
+ ├── Signup / Login ──> Authentication API ──> JWT access token
+ │                                             │
+ │                                             ▼
+ │                                      Axios bearer token
+ │
+ ▼
+React frontend ──> FastAPI routes ──> authenticated user / selected dataset
+                                       │
+             ┌─────────────────────────┼──────────────────────────┐
+             ▼                         ▼                          ▼
+      Dataset management       KPI / historical analytics       Data quality
+             │                         │                          │
+             └─────────────────────────┼──────────────────────────┘
+                                       ▼
+                              Business insights / forecasting
+                                       │
+                                       ▼
+                                 React visualizations
+
+AI Analytics path:
+Question -> planner -> structured tool plan -> backend calculation / forecast / RAG
+         -> final-answer generation -> answer plus optional chart/table data
+
+PDF RAG path:
+PDF -> extracted text -> overlapping chunks -> embeddings -> MongoDB/GridFS
+    -> retrieve top matching chunks for the user and dataset -> final answer
 ```
 
 ------------------------------------------------------------------------
 
 # 🎯 Project Objective
 
-BusinessPulse provides a single platform where users can:
+BusinessPulse aims to provide one application where users can:
 
-1.  Analyze historical business performance.
-2.  Monitor important business KPIs.
-3.  Explore business patterns and relationships.
-4.  Upload and analyze custom datasets.
-5.  Map and normalize uploaded CSV data.
-6.  Check dataset quality before relying on analytics.
-7.  Generate automated business insights.
-8.  Forecast future revenue, orders, and customer satisfaction.
-9.  Compare historical and predicted trends.
-10. Ask natural-language questions about datasets through AI Analytics.
-11. Retrieve relevant information from uploaded knowledge PDFs using
-    RAG.
-12. Access functionality through structured REST APIs.
-13. Secure application resources using authentication and authorization.
-14. Maintain a modular and scalable codebase.
+1. Analyze historical business performance.
+2. Monitor key performance indicators.
+3. Explore patterns across product categories, customers, reviews, payments, and time.
+4. Upload and analyze custom CSV datasets.
+5. Preview files and map incoming fields to standardized fields.
+6. Inspect common data-quality issues before relying on analytics.
+7. Generate dataset-aware business observations.
+8. Forecast revenue, orders, and customer satisfaction.
+9. Compare historical observations with future predictions.
+10. Ask natural-language questions about a selected dataset through AI Analytics.
+11. Ask document-grounded questions using uploaded PDF knowledge sources.
+12. Access features through REST APIs.
+13. Protect endpoints and scope user datasets/knowledge documents to the authenticated account.
 
 ------------------------------------------------------------------------
 
 # ⭐ Key Engineering Highlights
 
-### Full-Stack Development
+### Full-stack development
 
--   React frontend
--   FastAPI backend
--   MongoDB persistence
--   REST API architecture
--   Axios API integration
+- React and Vite frontend
+- FastAPI REST API backend
+- MongoDB and GridFS persistence
+- Axios frontend/backend communication
+- Interactive visualizations using Recharts
 
-### Software Architecture
+### Software architecture
 
--   Layered backend architecture
--   Route-service-repository separation
--   Reusable frontend components
--   Dedicated ML layer
--   Pydantic schemas
--   Centralized exception handling
--   SOLID-oriented design
+- Route/service/repository separation
+- Pydantic request and response schemas
+- Dedicated machine-learning modules
+- Reusable frontend components
+- Shared utility functions
+- Centralized backend exception handling
 
-### Authentication & Security
+### Data engineering and analytics
 
--   JWT authentication
--   Password hashing
--   Protected frontend routes
--   Protected backend endpoints
--   Axios authorization interceptor
--   User-specific dataset access
+- CSV ingestion and file validation
+- Preview and column mapping
+- Standardized field names and dataset selection
+- Missing-value, duplicate-row, date, and negative-value checks
+- KPI calculations, historical trends, category/payment/review analysis
+- Data-aware business insights
 
-### Data Engineering
+### Machine learning
 
--   CSV ingestion
--   Dataset validation
--   Dataset preview
--   Column mapping
--   Data normalization
--   Data quality analysis
--   Multiple dataset management
+- Linear Regression
+- Polynomial Regression (degree 2)
+- Random Forest Regression
+- Four-month monthly forecasts
+- MAE, RMSE, and R² metrics
+- Historical-versus-predicted charts
 
-### Analytics
+### AI and RAG
 
--   Historical business analytics
--   KPI monitoring
--   Data quality analysis
--   Automated business insights
--   Interactive charts
--   Data tables
--   Correlation analysis
+- Groq API using `openai/gpt-oss-20b`
+- LLM-generated structured tool plans
+- Metadata and analytical tool execution on backend data
+- Forecasting tool routing
+- PDF text extraction and overlapping chunking
+- Sentence Transformer embeddings using `all-MiniLM-L6-v2`
+- Similarity-based retrieval scoped by user and dataset
+- Natural-language final-answer generation based on backend results
 
-### Machine Learning
+### Authentication and security
 
--   Linear Regression
--   Polynomial Regression
--   Random Forest Regression
--   Revenue forecasting
--   Order forecasting
--   Customer satisfaction forecasting
--   MAE
--   R² Score
+- Password hashing and verification
+- JWT access tokens with expiration
+- Protected frontend routes
+- Protected backend endpoints
+- Axios bearer-token interceptor
+- User-scoped dataset and knowledge retrieval
+- Environment-based secrets
 
 ------------------------------------------------------------------------
 
-# 📌 Why BusinessPulse?
+# ⚠️ Implementation Notes and Limitations
 
-BusinessPulse combines **software engineering, data analytics, database
-management, authentication, and machine learning** into one end-to-end
-application.
-
-Instead of simply displaying preprocessed charts, the platform allows
-users to:
-
-``` text
-Bring Business Data
-        ↓
-Process & Normalize It
-        ↓
-Check Data Quality
-        ↓
-Analyze Historical Performance
-        ↓
-Monitor Current KPIs
-        ↓
-Generate Business Insights
-        ↓
-Generate Future Predictions
-        ↓
-Make Data-Driven Decisions
-```
+- **Custom CSV assumptions:** column mapping renames mapped fields; it does not infer units or prove that differently named columns have identical business meaning. Features need the expected standardized fields to be present.
+- **Forecast input requirements:** at least two monthly observations are required. Custom revenue forecasting expects `date` and `revenue`; order forecasting expects `date` and `orders`; the customer-satisfaction forecast expects `date` and `review_score`.
+- **Forecast target terminology:** the active UI calls the third target “Customer Satisfaction Forecast.” The API key remains `customers`, but for the built-in Olist data the series is the monthly mean `review_score`, not the number of customers.
+- **Forecast evaluation:** current MAE, RMSE, and R² metrics are calculated on the fitted historical series. They should not be interpreted as independent test-set accuracy.
+- **PDF text extraction:** the RAG pipeline extracts embedded/selectable PDF text. Scanned pages may not work because OCR is not part of the current pipeline.
+- **RAG performance:** retrieval ranks the user's/dataset's stored chunks in application code. It is not backed by a dedicated MongoDB vector-search index.
+- **AI dependency:** AI Analytics requires a working Groq API key and is affected by network availability, model service availability, prompt size, and API rate limits.
+- **Automated testing:** a `backend/test_retrieval.py` helper is present in the supplied project. A comprehensive automated unit/integration test suite was not evident in the archive; validate local configuration and perform API/manual checks before treating a deployment as production-hardened.
+- **Environment file:** do not commit `.env` or include real credentials in shared ZIP files. Rotate any credentials that have already been exposed.
 
 ------------------------------------------------------------------------
 
-# 🔮 Future Enhancements
+# 🔮 Potential Future Enhancements
 
 Potential future improvements include:
 
--   Automated model selection
--   Advanced forecasting models
--   Role-based access control
--   Automated data-quality reports
--   Scheduled forecasting
--   Exportable analytics reports
--   Additional business datasets
--   Advanced anomaly detection
--   Model comparison dashboards
+- Chronological holdout or rolling evaluation for forecasting models
+- Forecast model comparisons using a consistent validation window
+- Automated model selection
+- Advanced forecasting and anomaly-detection methods
+- Cached or optimized LLM planning for faster AI Analytics responses
+- Dedicated vector search for larger knowledge bases
+- Expanded data-quality rules and downloadable quality reports
+- Exportable analytics reports
+- Additional built-in dataset templates
+- More extensive automated unit and integration tests
+- Role-based access control if multi-role permissions are needed
 
 ------------------------------------------------------------------------
 
 # 📜 License
 
-This project is intended for educational, portfolio, and learning
-purposes.
+This project is intended for educational, portfolio, and learning purposes. Add or update a formal license file if you plan to distribute the source under a specific open-source license.
