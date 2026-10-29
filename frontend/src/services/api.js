@@ -497,6 +497,59 @@ export const askAIAnalytics = (datasetId, question) => {
       question,
     })
     .then((response) => response.data);
+
+
 };
+
+
+
+
+
+
+
+
+// Upload a PDF that will be used as a knowledge source for the selected dataset
+export const uploadKnowledgeDocument = (
+  datasetId,
+  file,
+) => {
+  const formData = new FormData();
+
+  formData.append(
+    "dataset_id",
+    datasetId,
+  );
+
+  formData.append(
+    "file",
+    file,
+  );
+
+  return api
+    .post(
+      "/knowledge/upload",
+      formData,
+    )
+    .then((response) => response.data);
+};
+
+
+
+
+
+// Get the uploaded knowledge document status for the selected dataset
+
+export const getKnowledgeStatus = (
+  datasetId,
+) => {
+  return api
+    .get(`/knowledge/status/${datasetId}`)
+    .then((response) => response.data);
+};
+
+
+
+
+
 
 export default api;
